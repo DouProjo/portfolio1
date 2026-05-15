@@ -18,6 +18,8 @@ gem "base64"
 # Note: We do NOT use the `github-pages` metagem, which bundles Jekyll with
 # pinned versions of all plugins and dependencies. Instead, we manage
 # dependencies manually for the following reasons:
+
+# gem "jekyll-nbconvert"
 #
 # 1. Ruby 4.0+ Compatibility
 #    The `github-pages` gem uses older versions of Jekyll and Liquid that
