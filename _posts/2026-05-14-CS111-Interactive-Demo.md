@@ -147,7 +147,16 @@ body {
 
 .concept-mermaid-wrap {
   overflow-x: auto;
-  padding-top: 6px;
+  padding-top: 10px;
+}
+
+.concept-mermaid-wrap .mermaid {
+  min-width: 1400px;
+}
+
+.concept-mermaid-wrap .mermaid svg {
+  min-width: 1400px;
+  height: auto;
 }
 
 .lesson-table-card {
@@ -437,57 +446,39 @@ code {
 </div>
 
 <div class="concept-mermaid-card">
-  <h3>How The Concepts Connect</h3>
-  <p>
-    This Mermaid diagram gives a quick visual map of how each CS111 concept shows up in the boss fight lesson before you open the summary buttons below.
-  </p>
+  <h3>Enemy Death Cycle Flowchart</h3>
   <div class="concept-mermaid-wrap">
     <div class="mermaid">
+{% raw %}
 %%{init: {'theme': 'dark'}}%%
-flowchart TD
-    A["CS111 Boss Fight Lesson"]
+flowchart LR
+    hit[Player hits enemy with sword]
+    check[Collision check passes]
+    guard{Already dying?}
+    start[Start enemy death animation]
+    red[Enemy turns red]
+    burst[Grey particle explosion]
+    remove[enemyDefeated true and enemy moves offscreen]
+    skip[Next draw skips enemy]
 
-    A --> B["Object-Oriented Programming"]
-    B --> B1["Classes<br/>boss class and level class"]
-    B --> B2["Inheritance<br/>extends Character and super()"]
-    B --> B3["Objects<br/>this.classes builds the scene"]
+    hit --> check
+    check --> guard
+    guard -- No --> start
+    guard -- Yes --> skip
+    start --> red
+    red --> burst
+    burst --> remove
+    remove --> skip
 
-    A --> C["Control Structures"]
-    C --> C1["Loops<br/>update bullets and cannonballs"]
-    C --> C2["Conditionals<br/>phases, menu, win and lose"]
-    C --> C3["Nested Checks<br/>collision and damage rules"]
-
-    A --> D["Data Types"]
-    D --> D1["Numbers<br/>HP, speed, timers, positions"]
-    D --> D2["Strings<br/>state names and messages"]
-    D --> D3["Arrays and Flags<br/>bullets, queue, booleans"]
-    D --> D4["Objects<br/>config data and grouped values"]
-
-    A --> E["Operators"]
-    E --> E1["Math<br/>orbiting and bullet spread"]
-    E --> E2["Strings<br/>template text for the UI"]
-    E --> E3["Boolean Logic<br/>compound checks"]
-
-    A --> F["Input and Output"]
-    F --> F1["Keyboard Input<br/>keydown and key maps"]
-    F --> F2["Canvas Output<br/>drawImage, bars, bullets"]
-    F --> F3["GameEnv Setup<br/>canvas size and space"]
-    F --> F4["API and JSON<br/>fetch, await, response.json()"]
-
-    A --> G["Documentation"]
-    G --> G1["Comments<br/>JSDoc and lesson notes"]
-    G --> G2["Mini-Lesson<br/>portfolio explanation page"]
-    G --> G3["Highlights<br/>snippets with context"]
-
-    A --> H["Debugging"]
-    H --> H1["Console Logs<br/>state and failure checks"]
-    H --> H2["Visual Inspection<br/>canvas and hitbox clues"]
-    H --> H3["Network and Storage<br/>API and localStorage checks"]
-
-    A --> I["Testing and Verification"]
-    I --> I1["Gameplay Tests<br/>play through the fight"]
-    I --> I2["Integration Tests<br/>frontend and backend"]
-    I --> I3["Error Handling<br/>safe fallback on failure"]
+    style hit fill:green,stroke:black,color:black
+    style check fill:white,stroke:#f66,color:black
+    style guard fill:orange,stroke:white,color:black
+    style start fill:#66f,stroke:#f6f,stroke-width:3px,color:white
+    style red fill:red,stroke:yellow,color:white
+    style burst fill:yellow,stroke:blue,color:black
+    style remove fill:brown,stroke:blue,color:white
+    style skip fill:#1f7a1f,stroke:white,color:white
+{% endraw %}
     </div>
   </div>
 </div>
