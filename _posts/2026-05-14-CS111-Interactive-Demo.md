@@ -2,14 +2,14 @@
 layout: post
 codemirror: true
 title: CS111 Interactive Concept Demonstrator
-description: Interactive buttons and animations showing how CS111 concepts are used in the Pirate Boss game
+description: Interactive buttons and animations showing how CS111 concepts are used in the boss fight game
 permalink: /CSSE/Interactive
 author: Me
 ---
 
 # CS111 Interactive Concept Demonstrator
 
-Click a lesson below to see how the Pirate Boss fight actually uses each CS111 concept. Each popup is meant to help you read the level like a programmer, not just memorize a definition.
+Click a lesson below to see how the boss fight actually uses each CS111 concept. Each popup is meant to help you read the level like a programmer, not just memorize a definition.
 
 <style>
 body {
@@ -34,6 +34,13 @@ body {
   flex-wrap: wrap;
   gap: 10px;
   margin: 18px 0 22px;
+}
+
+.concept-link-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
 }
 .concept-btn:hover {
   background: #45a049;
@@ -122,6 +129,105 @@ body {
   font-size: 13px;
 }
 
+.concept-mermaid-card {
+  background: linear-gradient(180deg, rgba(18, 18, 18, 0.98), rgba(9, 9, 9, 0.98));
+  border-radius: 18px;
+  padding: 20px 22px;
+  margin: 20px 0 24px;
+}
+
+.concept-mermaid-card h3 {
+  margin-top: 0;
+}
+
+.concept-mermaid-card p {
+  margin: 0 0 12px;
+  color: #ddd5c6;
+}
+
+.concept-mermaid-wrap {
+  overflow-x: auto;
+  padding-top: 6px;
+}
+
+.lesson-table-card {
+  background: linear-gradient(180deg, rgba(18, 18, 18, 0.98), rgba(9, 9, 9, 0.98));
+  border-radius: 18px;
+  padding: 20px 22px;
+  margin: 20px 0 24px;
+}
+
+.lesson-table-card h3 {
+  margin-top: 0;
+}
+
+.lesson-table-card p {
+  margin: 0 0 12px;
+  color: #ddd5c6;
+}
+
+.lesson-table-wrap {
+  overflow-x: auto;
+}
+
+.lesson-accordion {
+  display: grid;
+  gap: 12px;
+}
+
+.lesson-details {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  overflow: hidden;
+}
+
+.lesson-details summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-weight: 700;
+  color: #ffffff;
+  background: rgba(76, 175, 80, 0.14);
+}
+
+.lesson-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.lesson-details[open] summary {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.lesson-details-body {
+  padding: 14px;
+}
+
+.lesson-table {
+  width: 100%;
+  min-width: 920px;
+  border-collapse: collapse;
+}
+
+.lesson-table th,
+.lesson-table td {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 12px 14px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.lesson-table th {
+  background: rgba(76, 175, 80, 0.2);
+  color: #ffffff;
+}
+
+.lesson-table td:first-child {
+  color: #8fffa2;
+  font-weight: 700;
+  width: 220px;
+}
+
 h3 {
   color: #4CAF50;
 }
@@ -151,15 +257,251 @@ code {
 
 </style>
 
+<div class="lesson-table-card">
+  <h3>Lessons About To Be Taught</h3>
+  <p>
+    Each section below collapses by category and follows the same format: Learning Objective, Project Evidence Required, and Assessment Method.
+  </p>
+  <div class="lesson-accordion">
+    <details class="lesson-details" open>
+      <summary>Object-Oriented Programming</summary>
+      <div class="lesson-details-body lesson-table-wrap">
+        <table class="lesson-table">
+          <thead>
+            <tr>
+              <th>Learning Objective</th>
+              <th>Project Evidence Required</th>
+              <th>Assessment Method</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Writing Classes</td><td>Create minimum 2 custom character classes extending base classes</td><td>Code review: Player.js, NPC.js, Enemy.js</td></tr>
+            <tr><td>Methods &amp; Parameters</td><td>Implement methods with parameters such as <code>collisionHandler(other, direction)</code></td><td>Code review: Method signatures with 2+ parameters</td></tr>
+            <tr><td>Instantiation &amp; Objects</td><td>Instantiate game objects in GameLevel configuration</td><td>Code review: GameLevel setup objects</td></tr>
+            <tr><td>Inheritance (Basic)</td><td>Create class hierarchy with 2+ levels such as GameObject to Character to Player</td><td>Code review: <code>extends</code> keyword, inheritance chain</td></tr>
+            <tr><td>Method Overriding</td><td>Override parent methods such as <code>update()</code>, <code>draw()</code>, and <code>handleCollision()</code></td><td>Code review: Polymorphic implementations</td></tr>
+            <tr><td>Constructor Chaining</td><td>Use <code>super()</code> to chain constructors</td><td>Code review: <code>super(data, gameEnv)</code> calls</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details class="lesson-details">
+      <summary>Control Structures</summary>
+      <div class="lesson-details-body lesson-table-wrap">
+        <table class="lesson-table">
+          <thead>
+            <tr>
+              <th>Learning Objective</th>
+              <th>Project Evidence Required</th>
+              <th>Assessment Method</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Iteration</td><td>Use loops for game object arrays and animation frames</td><td>Code review: <code>for</code>, <code>forEach</code>, <code>while</code> loops</td></tr>
+            <tr><td>Conditionals</td><td>Implement collision detection and state transitions</td><td>Code review: <code>if/else</code>, nested conditions</td></tr>
+            <tr><td>Nested Conditions</td><td>Complex game logic such as power-up plus collision plus direction</td><td>Code review: Multi-level conditionals</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details class="lesson-details">
+      <summary>Data Types</summary>
+      <div class="lesson-details-body lesson-table-wrap">
+        <table class="lesson-table">
+          <thead>
+            <tr>
+              <th>Learning Objective</th>
+              <th>Project Evidence Required</th>
+              <th>Assessment Method</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Numbers</td><td>Position, velocity, score tracking</td><td>Code review: Numeric properties</td></tr>
+            <tr><td>Strings</td><td>Character names, sprite paths, game states</td><td>Code review: String manipulation</td></tr>
+            <tr><td>Booleans</td><td>Flags such as <code>isJumping</code>, <code>isPaused</code>, <code>isVulnerable</code></td><td>Code review: Boolean logic</td></tr>
+            <tr><td>Arrays</td><td>Game object collections, level data</td><td>Code review: Array operations</td></tr>
+            <tr><td>Objects (JSON)</td><td>Configuration objects, sprite data</td><td>Code review: Object literals</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details class="lesson-details">
+      <summary>Operators</summary>
+      <div class="lesson-details-body lesson-table-wrap">
+        <table class="lesson-table">
+          <thead>
+            <tr>
+              <th>Learning Objective</th>
+              <th>Project Evidence Required</th>
+              <th>Assessment Method</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Mathematical</td><td>Physics calculations such as gravity, velocity, collision</td><td>Code review: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code> in physics</td></tr>
+            <tr><td>String Operations</td><td>Path concatenation, text display</td><td>Code review: Template literals, concatenation</td></tr>
+            <tr><td>Boolean Expressions</td><td>Compound conditions in game logic</td><td>Code review: <code>&amp;&amp;</code>, <code>||</code>, <code>!</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details class="lesson-details">
+      <summary>Input/Output</summary>
+      <div class="lesson-details-body lesson-table-wrap">
+        <table class="lesson-table">
+          <thead>
+            <tr>
+              <th>Learning Objective</th>
+              <th>Project Evidence Required</th>
+              <th>Assessment Method</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Keyboard Input</td><td>Arrow keys, space, WASD controls using event listeners</td><td>Testing: Key event handlers respond correctly</td></tr>
+            <tr><td>Canvas Rendering</td><td>Draw sprites, backgrounds, platforms using Canvas API</td><td>Code review: <code>draw()</code> method implementations</td></tr>
+            <tr><td>GameEnv Configuration</td><td>Set canvas size, difficulty levels, game settings</td><td>Code review: <code>GameEnv.create()</code> and <code>GameSetup.js</code></td></tr>
+            <tr><td>API Integration</td><td>Implement Leaderboard API (POST/GET scores)</td><td>Code review: Fetch calls with error handling</td></tr>
+            <tr><td>Asynchronous I/O</td><td>Use <code>async/await</code> or promises for API calls</td><td>Code review: <code>async/await</code> or <code>.then()</code> chains</td></tr>
+            <tr><td>JSON Parsing</td><td>Parse API responses such as leaderboard data or AI responses</td><td>Code review: <code>JSON.parse()</code>, object destructuring</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details class="lesson-details">
+      <summary>Documentation</summary>
+      <div class="lesson-details-body lesson-table-wrap">
+        <table class="lesson-table">
+          <thead>
+            <tr>
+              <th>Learning Objective</th>
+              <th>Project Evidence Required</th>
+              <th>Assessment Method</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Code Comments</td><td>JSDoc comments for classes and methods</td><td>Code review: Comment density &gt;10%</td></tr>
+            <tr><td>Mini-Lesson Documentation</td><td>Create comic or visual post with embedded runtime game demo</td><td>Portfolio review: Mini-lesson in personal portfolio</td></tr>
+            <tr><td>Code Highlights</td><td>Annotate key code snippets in documentation such as OOP, APIs, and collision</td><td>Portfolio review: Highlighted code examples with explanations</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details class="lesson-details">
+      <summary>Debugging</summary>
+      <div class="lesson-details-body lesson-table-wrap">
+        <table class="lesson-table">
+          <thead>
+            <tr>
+              <th>Learning Objective</th>
+              <th>Project Evidence Required</th>
+              <th>Assessment Method</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Console Debugging</td><td>Use <code>console.log</code> to track game state, variables, and method calls</td><td>Code review: Strategic logging in update/collision methods</td></tr>
+            <tr><td>Hit Box Visualization</td><td>Draw or visualize collision boundaries to refine detection</td><td>Demo: Toggle hit box display, adjust collision rectangles</td></tr>
+            <tr><td>Source-Level Debugging</td><td>Set breakpoints in DevTools and step through code execution</td><td>Demo: Use Sources tab to pause and inspect code flow</td></tr>
+            <tr><td>Network Debugging</td><td>Examine Network tab for API calls, CORS errors, and response status</td><td>Demo: Inspect fetch requests, response data, error messages</td></tr>
+            <tr><td>Application Debugging</td><td>Examine cookies, localStorage, and session data for login/state</td><td>Demo: Application tab inspection of stored data</td></tr>
+            <tr><td>Element Inspection</td><td>Use Element Viewer to inspect canvas, DOM elements, and styles</td><td>Demo: Inspect element properties and game object state</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details class="lesson-details">
+      <summary>Testing &amp; Verification</summary>
+      <div class="lesson-details-body lesson-table-wrap">
+        <table class="lesson-table">
+          <thead>
+            <tr>
+              <th>Learning Objective</th>
+              <th>Project Evidence Required</th>
+              <th>Assessment Method</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Gameplay Testing</td><td>Test level completion, character interactions, and collision detection</td><td>Live demo: Play through level without critical bugs</td></tr>
+            <tr><td>Integration Testing</td><td>Test API integration such as Leaderboard or NPC AI with live backend</td><td>Demo: Successful score saving and AI responses</td></tr>
+            <tr><td>API Error Handling</td><td>Use <code>try/catch</code> blocks for API calls and network error handling</td><td>Code review: Error handling for fetch failures</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+  </div>
+</div>
+
+<div class="concept-mermaid-card">
+  <h3>How The Concepts Connect</h3>
+  <p>
+    This Mermaid diagram gives a quick visual map of how each CS111 concept shows up in the boss fight lesson before you open the summary buttons below.
+  </p>
+  <div class="concept-mermaid-wrap">
+    <div class="mermaid">
+%%{init: {'theme': 'dark'}}%%
+flowchart TD
+    A["CS111 Boss Fight Lesson"]
+
+    A --> B["Object-Oriented Programming"]
+    B --> B1["Classes<br/>boss class and level class"]
+    B --> B2["Inheritance<br/>extends Character and super()"]
+    B --> B3["Objects<br/>this.classes builds the scene"]
+
+    A --> C["Control Structures"]
+    C --> C1["Loops<br/>update bullets and cannonballs"]
+    C --> C2["Conditionals<br/>phases, menu, win and lose"]
+    C --> C3["Nested Checks<br/>collision and damage rules"]
+
+    A --> D["Data Types"]
+    D --> D1["Numbers<br/>HP, speed, timers, positions"]
+    D --> D2["Strings<br/>state names and messages"]
+    D --> D3["Arrays and Flags<br/>bullets, queue, booleans"]
+    D --> D4["Objects<br/>config data and grouped values"]
+
+    A --> E["Operators"]
+    E --> E1["Math<br/>orbiting and bullet spread"]
+    E --> E2["Strings<br/>template text for the UI"]
+    E --> E3["Boolean Logic<br/>compound checks"]
+
+    A --> F["Input and Output"]
+    F --> F1["Keyboard Input<br/>keydown and key maps"]
+    F --> F2["Canvas Output<br/>drawImage, bars, bullets"]
+    F --> F3["GameEnv Setup<br/>canvas size and space"]
+    F --> F4["API and JSON<br/>fetch, await, response.json()"]
+
+    A --> G["Documentation"]
+    G --> G1["Comments<br/>JSDoc and lesson notes"]
+    G --> G2["Mini-Lesson<br/>portfolio explanation page"]
+    G --> G3["Highlights<br/>snippets with context"]
+
+    A --> H["Debugging"]
+    H --> H1["Console Logs<br/>state and failure checks"]
+    H --> H2["Visual Inspection<br/>canvas and hitbox clues"]
+    H --> H3["Network and Storage<br/>API and localStorage checks"]
+
+    A --> I["Testing and Verification"]
+    I --> I1["Gameplay Tests<br/>play through the fight"]
+    I --> I2["Integration Tests<br/>frontend and backend"]
+    I --> I3["Error Handling<br/>safe fallback on failure"]
+    </div>
+  </div>
+</div>
+
 <div class="concept-grid">
-  <button class="concept-btn" onclick="openPopup('oop')">Pirate Boss OOP</button>
-  <button class="concept-btn" onclick="openPopup('control')">Pirate Boss Control</button>
-  <button class="concept-btn" onclick="openPopup('datatypes')">Pirate Boss Data</button>
-  <button class="concept-btn" onclick="openPopup('operators')">Pirate Boss Operators</button>
-  <button class="concept-btn" onclick="openPopup('io')">Pirate Boss Input/Output</button>
-  <button class="concept-btn" onclick="openPopup('documentation')">Pirate Boss Comments</button>
-  <button class="concept-btn" onclick="openPopup('debugging')">Pirate Boss Debugging</button>
-  <button class="concept-btn" onclick="openPopup('testing')">Pirate Boss Testing</button>
+  <a class="concept-btn concept-link-btn" href="{{ site.baseurl }}/CSSE111/GameRunner">Open Boss Game Page</a>
+  <button class="concept-btn" onclick="openPopup('oop')">Boss Fight OOP</button>
+  <button class="concept-btn" onclick="openPopup('control')">Boss Fight Control</button>
+  <button class="concept-btn" onclick="openPopup('datatypes')">Boss Fight Data</button>
+  <button class="concept-btn" onclick="openPopup('operators')">Boss Fight Operators</button>
+  <button class="concept-btn" onclick="openPopup('io')">Boss Fight Input/Output</button>
+  <button class="concept-btn" onclick="openPopup('documentation')">Boss Fight Comments</button>
+  <button class="concept-btn" onclick="openPopup('debugging')">Boss Fight Debugging</button>
+  <button class="concept-btn" onclick="openPopup('testing')">Boss Fight Testing</button>
 </div>
 
 <!-- Popup Overlay -->
@@ -234,11 +576,11 @@ function closePopup() {
 function getConceptContent(concept) {
   const contents = {
     oop: {
-      title: 'Pirate Boss Lesson: OOP',
+      title: 'Boss Fight Lesson: OOP',
       body: `
         <div class="concept-highlight">
           <strong>Lesson focus:</strong><br>
-          The Pirate Boss fight uses object-oriented programming by giving different jobs to different classes. The boss object handles boss behavior. The level object handles the battle system.
+          The boss fight uses object-oriented programming by giving different jobs to different classes. The boss object handles boss behavior. The level object handles the battle system.
         </div>
 
         <h4>What to notice in the fight</h4>
@@ -281,7 +623,7 @@ class GameLevelPirateBoss {
     },
 
     control: {
-      title: 'Pirate Boss Lesson: Control Flow',
+      title: 'Boss Fight Lesson: Control Flow',
       body: `
         <div class="concept-highlight">
           <strong>Lesson focus:</strong><br>
@@ -327,7 +669,7 @@ if (this.attackTimer >= this.attackDur) {
     },
 
     datatypes: {
-      title: 'Pirate Boss Lesson: Data Types',
+      title: 'Boss Fight Lesson: Data Types',
       body: `
         <div class="concept-highlight">
           <strong>Lesson focus:</strong><br>
@@ -365,7 +707,7 @@ this.cannonballs.push({ x: bx, y: by, vx, vy, life: 140, r: 9 });
     },
 
     operators: {
-      title: 'Pirate Boss Lesson: Operators',
+      title: 'Boss Fight Lesson: Operators',
       body: `
         <div class="concept-highlight">
           <strong>Lesson focus:</strong><br>
@@ -401,7 +743,7 @@ const dmg = this.bossPhase === 3 ? 12 : this.bossPhase === 2 ? 8 : 5;
     },
     
     io: {
-      title: 'Pirate Boss Lesson: Input and Output',
+      title: 'Boss Fight Lesson: Input and Output',
       body: `
         <div class="concept-highlight">
           <strong>Lesson focus:</strong><br>
@@ -442,11 +784,11 @@ if (this.keys['ArrowRight'] || this.keys['KeyD']) this.soulX += spd;
     },
 
     documentation: {
-      title: 'Pirate Boss Lesson: Comments and Readability',
+      title: 'Boss Fight Lesson: Comments and Readability',
       body: `
         <div class="concept-highlight">
           <strong>Lesson focus:</strong><br>
-          The Pirate Boss file does not rely on big textbook definitions. Instead, it uses short comments to show the reader what each section is trying to do.
+          The boss fight file does not rely on big textbook definitions. Instead, it uses short comments to show the reader what each section is trying to do.
         </div>
 
         <h4>What to notice in the file</h4>
@@ -482,7 +824,7 @@ const phaseLabel = this.bossPhase === 3 ? '★ PHASE III — ENRAGED' : '';
     },
 
     debugging: {
-      title: 'Pirate Boss Lesson: Debugging',
+      title: 'Boss Fight Lesson: Debugging',
       body: `
         <div class="concept-highlight">
           <strong>Lesson focus:</strong><br>
@@ -518,11 +860,11 @@ console.log({
     },
 
     testing: {
-      title: 'Pirate Boss Lesson: Testing',
+      title: 'Boss Fight Lesson: Testing',
       body: `
         <div class="concept-highlight">
           <strong>Lesson focus:</strong><br>
-          The Pirate Boss file does not include automated tests, so the lesson here is how to turn the real gameplay states into a clean test checklist.
+          The boss fight file does not include automated tests, so the lesson here is how to turn the real gameplay states into a clean test checklist.
         </div>
 
         <h4>What should be tested in this fight</h4>
@@ -560,7 +902,7 @@ console.log({
 
 Click these links to verify lessons are available on other pages:
 
-- [CS111 Game Runner](/CSSE111/GameRunner) - Interactive Pirate Boss game
+- [CS111 Game Runner](/CSSE111/GameRunner) - Interactive boss fight game
 - [CS111 Review](/CSSE/Review) - Detailed code explanations
 - [Game Runner Examples](/rpg/game) - Additional game examples
 
