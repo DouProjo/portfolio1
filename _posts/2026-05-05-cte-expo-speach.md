@@ -17,7 +17,7 @@ comments: true
 
 ## Proof of Experience
 
-![alt text](../WIN_20260521_15_56_55_Pro.jpg)
+![alt text](/WIN_20260521_15_56_55_Pro.jpg)
 
 **Caption:**  
 I Was in the photo listening before the presentaiton
