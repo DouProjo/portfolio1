@@ -1,0 +1,2572 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>OCS Game Engine Clicker Mechanics | Open Coding</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="OCS Game Engine Clicker Mechanics" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A code-first walkthrough of canvas click capture, object hit testing, and callback-driven score updates in the OCS Game Engine." />
+<meta name="twitter:description" property="og:description" content="A code-first walkthrough of canvas click capture, object hit testing, and callback-driven score updates in the OCS Game Engine." />
+<meta property="og:site_name" content="Open Coding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-03-29T00:00:00-07:00" />
+<meta property="article:modified_time" content="2026-03-29T00:00:00-07:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="OCS Game Engine Clicker Mechanics" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-03-29T00:00:00-07:00","datePublished":"2026-03-29T00:00:00-07:00","description":"A code-first walkthrough of canvas click capture, object hit testing, and callback-driven score updates in the OCS Game Engine.","headline":"OCS Game Engine Clicker Mechanics","mainEntityOfPage":{"@type":"WebPage","@id":"/portfolio1/gamerunner/cookie"},"url":"/portfolio1/gamerunner/cookie"}</script>
+<!-- End Jekyll SEO tag -->
+<link id="main-stylesheet" rel="stylesheet" href="/portfolio1/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="/portfolio1/feed.xml" title="Open Coding" />
+<!-- Minima start custom head snippets -->
+<!-- Favicon for browser tabs and bookmarks -->
+<link rel="icon" href="/portfolio1/favicon.ico" type="image/x-icon">
+
+<!-- Support for Apple devices (iPhone/iPad homescreen icon) -->
+<link rel="apple-touch-icon" sizes="180x180" href="/portfolio1/apple-touch-icon.png">
+
+<!-- Support for modern browsers and pinned tabs -->
+<link rel="icon" type="image/png" sizes="32x32" href="/portfolio1/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/portfolio1/favicon-16x16.png">
+
+<!-- Google Fonts - commonly used across the site -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Open+Sans:wght@400;600&family=Lato:wght@400;700&family=Montserrat:wght@400;600&family=Noto+Sans:wght@400;700&family=Merriweather:wght@400;700&family=Source+Code+Pro:wght@400;700&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet"><!-- CodeMirror CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/darcula.min.css">
+<!-- CodeMirror JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/clike/clike.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script><link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script><link rel="stylesheet" href="/portfolio1/assets/css/style.css">
+<script src="/portfolio1/assets/js/user-preferences.js"></script>
+<!-- Set up javaURI globally for OCS Analytics Tracker -->
+<script>
+    if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+        window.javaURI = "http://localhost:8585";
+    } else {
+        window.javaURI = "https://spring.opencodingsociety.com";
+    }
+</script>
+<!-- OCS Analytics Tracking Script (loaded on every page) -->
+<script src="/portfolio1/assets/js/ocs-analytics-tracker.js" defer></script><!-- Keyboard Shortcuts (Alt+Shift+key navigation, loaded on every page) -->
+<script>window.baseurl = "/portfolio1";</script>
+<script src="/portfolio1/assets/js/keyboard-shortcuts.js" defer></script>
+
+<!-- AI A/B Test Engine SDK (passes site.baseurl for asset resolution) -->
+<script src="http://localhost:3000/sdk.js"
+  data-site-baseurl="/portfolio1"
+  data-project-id="cmnfour780000f63gu69kg2v8"></script>
+<script type="importmap">
+{
+  "imports": {
+    "@assets/": "/portfolio1/assets/"
+  }
+}
+</script>
+<!-- Minima end custom head snippets -->
+ </head>
+<body>    <header class="site-header">
+        <div class="wrapper"><a class="site-title" rel="author" href="/portfolio1/" data-value="Open Coding">
+                <img id="site-logo" src="/portfolio1/images/logo.png" alt="Logo">
+            </a><nav class="site-nav">
+                <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+                <label for="nav-trigger">
+                    <span class="menu-icon">
+                        <svg viewBox="0 0 18 15" width="18px" height="15px">
+                            <path
+                                d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z" />
+                        </svg>
+                    </span>
+                </label>
+
+                <div class="trigger"><a class="page-link" href="/portfolio1/blogs/">Blogs</a><a class="page-link" href="/portfolio1/search/">Search</a><a class="page-link" href="/portfolio1/about/">About</a><a id="loginArea" class="page-link" href="/portfolio1/login">Login</a>
+                </div>
+            </nav></div>
+    </header>
+
+    <script type="module" src="/portfolio1/assets/js/api/login.js"></script>    
+
+          <div class="micro-actions-wrapper">
+            <!-- Floating Microblog Button (upper right, below header) -->
+<button id="microblog-toggle-btn" class="microblog-fab microblog-fab-top" aria-label="Open Microblog">💬 Microblog</button>
+
+<!-- Microblog Side Panel -->
+<aside id="microblog-panel" class="microblog-panel" tabindex="-1" aria-label="Microblog panel">
+  <div class="microblog-panel-header">
+    <button id="microblog-close-btn" class="microblog-close-btn" aria-label="Close Microblog">&times;</button>
+    <h2 class="microblog-panel-title">Microblog</h2>
+    <button id="guest-signup-toggle" class="guest-signup-toggle-btn">Guest Signup</button>
+  </div>
+
+  <!-- Guest Signup Form (initially hidden) -->
+  <div id="guest-signup-form" class="guest-signup-container" style="display: none;">
+    <h3 class="guest-signup-title">Quick Guest Signup</h3>
+    <form id="guest-form" onsubmit="handleGuestSignup(event);">
+      <div class="guest-form-group">
+        <input type="text" id="guest-username" placeholder="Username" required>
+      </div>
+      <div class="guest-form-group">
+        <input type="password" id="guest-password" placeholder="Password" required>
+      </div>
+      <p>
+        <button type="submit" class="guest-submit-btn">Sign Up & Login</button>
+      </p>
+      <p id="guest-status-message" class="guest-status"></p>
+    </form>
+  </div>
+
+  <div class="microblog-panel-content">
+    <!-- MicroBlog Container -->
+    <div id="microblog-playground">
+      <em>Loading microblog posts...</em>
+    </div>
+  </div>
+</aside>
+
+<script type="module">
+// Import required functions from config
+import { pythonURI, javaURI, fetchOptions } from '/portfolio1/assets/js/api/config.js';
+
+// Microblog panel open/close logic
+const microblogPanel = document.getElementById('microblog-panel');
+const microblogFab = document.getElementById('microblog-toggle-btn');
+const microblogCloseBtn = document.getElementById('microblog-close-btn');
+
+function openMicroblogPanel() {
+  microblogPanel.classList.add('open');
+  microblogFab.style.display = 'none';
+}
+function closeMicroblogPanel() {
+  microblogPanel.classList.remove('open');
+  microblogFab.style.display = '';
+}
+microblogFab.onclick = openMicroblogPanel;
+microblogCloseBtn.onclick = closeMicroblogPanel;
+
+// Guest signup toggle logic
+const guestSignupToggle = document.getElementById('guest-signup-toggle');
+const guestSignupForm = document.getElementById('guest-signup-form');
+
+guestSignupToggle.onclick = function() {
+  if (guestSignupForm.style.display === 'none') {
+    guestSignupForm.style.display = 'block';
+  } else {
+    guestSignupForm.style.display = 'none';
+  }
+};
+
+// Guest signup handler with auto-login
+window.handleGuestSignup = async function(event) {
+  event.preventDefault();
+
+  const username = document.getElementById('guest-username').value;
+  const password = document.getElementById('guest-password').value;
+  const statusMessage = document.getElementById('guest-status-message');
+  const submitButton = document.querySelector('.guest-submit-btn');
+
+  // Disable button and show loading state
+  submitButton.disabled = true;
+  submitButton.textContent = 'Creating Account...';
+  statusMessage.textContent = '';
+  statusMessage.style.color = '#666';
+
+  const signupData = {
+    uid: username,
+    password: password
+  };
+
+  try {
+    let accountExists = false;
+
+    // Step 1: Try to create guest account using Flask backend
+    statusMessage.textContent = 'Creating guest account...';
+    const signupResponse = await fetch(`${pythonURI}/api/user/guest`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(signupData)
+    });
+
+    if (!signupResponse.ok) {
+      // Account might already exist, so we'll try to login instead
+      accountExists = true;
+      statusMessage.textContent = 'Account exists, logging in...';
+    } else {
+      await signupResponse.json();
+      statusMessage.textContent = 'Account created! Logging in...';
+    }
+
+    // Step 2: Login with the credentials (whether account was just created or already existed)
+    const loginResponse = await fetch(`${pythonURI}/authenticate`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify(signupData)
+    });
+
+    if (!loginResponse.ok) {
+      throw new Error('Login failed - please check your credentials');
+    }
+
+    await loginResponse.json();
+
+    // Success - stay on current page
+    statusMessage.textContent = 'Success! You are now logged in.';
+    statusMessage.style.color = 'green';
+
+    // Hide the form after successful signup/login
+    setTimeout(() => {
+      guestSignupForm.style.display = 'none';
+      // Reset form
+      document.getElementById('guest-username').value = '';
+      document.getElementById('guest-password').value = '';
+      submitButton.disabled = false;
+      submitButton.textContent = 'Sign Up & Login';
+    }, 2000);
+
+  } catch (error) {
+    console.error('Guest signup error:', error);
+    statusMessage.textContent = `Error: ${error.message}`;
+    statusMessage.style.color = 'red';
+    submitButton.disabled = false;
+    submitButton.textContent = 'Sign Up & Login';
+  }
+};
+</script>
+
+<!-- Create/Edit Modal Overlay using Tailwind -->
+<div id="microblog-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
+  <div class="microblog-modal-panel">
+    <div class="microblog-modal-header">
+      <button id="modal-close" class="microblog-modal-close" aria-label="Close Modal">&times;</button>
+      <h2 id="modal-title" class="microblog-modal-title">Create Microblog Post</h2>
+    </div>
+    <form id="microblog-form" class="space-y-4">
+      <input type="hidden" id="post-id" name="id">
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Topic</label>
+        <input id="topic-id" name="topicId" type="text" class="mt-1 block w-full border border-gray-300 rounded-md p-2" readonly>
+      </div>
+      <div class="microblog-form-group">
+        <label for="content" class="microblog-form-label">Content <span class="required">*</span></label>
+        <textarea id="content" name="content" required class=""></textarea>
+      </div>
+      <div class="flex justify-end space-x-2">
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Reply Modal -->
+<div id="reply-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
+  <div class="microblog-modal-panel">
+    <div class="microblog-modal-header">
+      <button id="reply-modal-close" class="microblog-modal-close" aria-label="Close Reply Modal">&times;</button>
+      <h2 id="reply-modal-title" class="microblog-modal-title">Reply to Post</h2>
+    </div>
+    <form id="reply-form" class="space-y-4">
+      <input type="hidden" id="reply-post-id" name="postId">
+      <div class="microblog-form-group">
+        <label for="reply-content" class="microblog-form-label">Content <span class="required">*</span></label>
+        <textarea id="reply-content" name="content" required class=""></textarea>
+      </div>
+      <div class="flex justify-end space-x-2">
+        <button type="button" id="reply-cancel-btn" class="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500">Cancel</button>
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Reply</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!--JavaScript Logic for MicroBlog -->
+<script type="module">
+// Imports for APIs used on this page
+import { fetchPosts, createPost, updatePost, createReply, fetchReplies } from '/assets/js/api/microblog.js';
+
+// Default Key for New MicroBlog Posts
+const pagePermalink = '/gamerunner/cookie';
+
+// Create/Edit Modal Functions
+function openModal({ mode, post = {} }) {
+  document.getElementById('microblog-modal').classList.remove('hidden');
+  document.getElementById('modal-title').textContent = mode === 'edit' ? 'Edit Microblog Post' : 'Create Microblog Post';
+  document.getElementById('post-id').value = post.id || '';
+  document.getElementById('topic-id').value = post.topicPath || pagePermalink;
+  document.getElementById('content').value = post.content || '';
+}
+function closeModal() {
+  document.getElementById('microblog-modal').classList.add('hidden');
+}
+document.getElementById('modal-close').onclick = closeModal;
+document.getElementById('microblog-modal').onclick = function(e) {
+  if (e.target === this) closeModal();
+};
+
+// Reply Modal Functions
+function openReplyModal(postId) {
+  document.getElementById('reply-modal').classList.remove('hidden');
+  document.getElementById('reply-post-id').value = postId;
+  document.getElementById('reply-content').value = '';
+}
+function closeReplyModal() {
+  document.getElementById('reply-modal').classList.add('hidden');
+  document.getElementById('reply-post-id').value = '';
+  document.getElementById('reply-content').value = '';
+}
+document.getElementById('reply-modal-close').onclick = closeReplyModal;
+document.getElementById('reply-cancel-btn').onclick = closeReplyModal;
+document.getElementById('reply-modal').onclick = function(e) {
+  if (e.target === this) closeReplyModal();
+};
+
+// Reply Form Submission
+document.getElementById('reply-form').onsubmit = async function(e) {
+  e.preventDefault();
+  const postId = document.getElementById('reply-post-id').value;
+  const content = document.getElementById('reply-content').value;
+  const topicPath = pagePermalink || (window.location ? window.location.pathname : 'default');
+  
+  try {
+    await createReply({ postId, content, topicPath });
+    closeReplyModal();
+    renderMicroblogTable(); // Refresh to show new reply
+  } catch (err) {
+    alert('Error posting reply: ' + err.message);
+  }
+};
+
+// Load replies for a specific post
+async function loadRepliesForPost(postId) {
+  try {
+    const repliesData = await fetchReplies(postId);
+    const replies = repliesData.replies || repliesData || [];
+    if (replies.length > 0) {
+      // Find the row for this post
+      const postRow = document.querySelector(`#post-row-${postId}`);
+      if (postRow) {
+        // Check if replies section already exists
+        let repliesRow = document.querySelector(`#replies-row-${postId}`);
+        if (!repliesRow) {
+          // Create a new row for replies
+          repliesRow = document.createElement('tr');
+          repliesRow.id = `replies-row-${postId}`;
+          repliesRow.className = 'replies-row';
+          postRow.insertAdjacentElement('afterend', repliesRow);
+        }
+        
+        // Format replies HTML
+        const repliesHtml = replies.map(reply => {
+          const replyDate = reply.timestamp ? new Date(reply.timestamp).toLocaleString() : '';
+          return `
+            <div class="reply-item ml-4 mt-2 p-2 rounded border-l-4 border-green-500">
+              <div class="text-sm text-gray-600">
+                ${reply.userName || 'Anonymous'} - ${replyDate}
+              </div>
+              <div class="mt-1">${escapeHtml(reply.content || '')}</div>
+            </div>
+          `;
+        }).join('');
+        
+        repliesRow.innerHTML = `
+          <td colspan="2" class="text-left p-2">
+            <div class="replies-container">
+              <strong class="text-sm text-gray-600">Replies (${replies.length}):</strong>
+              ${repliesHtml}
+            </div>
+          </td>
+        `;
+      }
+    }
+  } catch (error) {
+    console.error(`Error loading replies for post ${postId}:`, error);
+  }
+}
+
+// Utility function to escape HTML
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+// Save Button Listner for Update and Create
+document.getElementById('microblog-form').onsubmit = async function(e) {
+  e.preventDefault();
+  const id = document.getElementById('post-id').value;
+  const topicPath = document.getElementById('topic-id').value;
+  const content = document.getElementById('content').value;
+  try {
+    // API calls to Update and Create Posts
+    if (id) {
+      await updatePost({ id, content, topicPath });
+    } else {
+      await createPost({ content, topicPath });
+    }
+    closeModal();
+    renderMicroblogTable();
+  } catch (err) {
+    alert('Error saving post: ' + err.message);
+  }
+};
+
+// MicroBlog Table Manager
+async function renderMicroblogTable() {
+    const container = document.getElementById('microblog-playground');
+    try {
+        // Determine filter mode and pass page if needed
+        let pageArg = undefined;
+        if (window.__microblogFilterMode === undefined || window.__microblogFilterMode === 'page') {
+          // Use current page as filter; fallback to location.pathname or a default string
+          pageArg = window.location ? window.location.pathname : 'default';
+        }
+        // API call to Read former Posts
+        const data = await fetchPosts(pageArg);
+        // SVG icons for Create (+) and Edit (pencil)
+        const createIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="microblog-filter-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>`;
+        const editIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="microblog-filter-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="18" height="18"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536M9 13l6.586-6.586a2 2 0 112.828 2.828L11.828 15.828a4 4 0 01-2.828 1.172H7v-2a4 4 0 011.172-2.828z" /></svg>`;
+        const replyIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="microblog-filter-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="18" height="18"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" /></svg>`;
+        // Single page icon (default)
+        const pageIcon = `<span class="microblog-filter-icon microblog-filter-page" id="page-icon" title="Show this page only"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><rect x="6" y="4" width="12" height="16" rx="2" fill="white" stroke="white" stroke-width="1.5"/><rect x="8" y="6" width="8" height="12" rx="1" fill="#9333ea" stroke="white" stroke-width="1.5"/></svg></span>`;
+        // Many pages icon (secondary option)
+        const manyPagesIcon = `<span class="microblog-filter-icon microblog-filter-many" id="many-pages-icon" title="Show all pages"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><g><rect x="7" y="15" width="10" height="6" rx="2" fill="#60a5fa" stroke="white" stroke-width="1.2"/><rect x="5" y="11" width="12" height="6" rx="2" fill="#2563eb" stroke="white" stroke-width="1.2"/><rect x="3" y="7" width="12" height="6" rx="2" fill="#1e40af" stroke="white" stroke-width="1.2"/></g></svg></span>`;
+        // Create and Page Icons
+        const controlsInfo = `
+          <span id="filter-icons" class="microblog-filter-controls">
+            <button id="create-btn" class="microblog-btn microblog-btn-create" title="Create Post">${createIcon}</button>
+            ${pageIcon}
+            ${manyPagesIcon}
+          </span>
+        `;
+
+        // Table: Keys and Special Formatting
+        const analytics = [
+          { key: 'userName' },
+          { key: 'timestamp', format: ts => {
+              if (!ts) return '';
+              const d = new Date(ts);
+              if (isNaN(d)) return ts;
+              return d.toLocaleString();
+            }
+          },
+          { key: 'characterCount', format: v => `Count: ${v}` }
+        ];
+        const message = [
+          { key: 'topicPath', format: v => `Topic: ${v}` },
+          { key: 'content' }
+        ];
+
+        // Table: columns
+        let head = `
+            <thead>
+                <tr>
+                    <th style="width:30%">Analytics</th>
+                    <th>Message</th>
+                </tr>
+            </thead>
+        `;
+
+        // Table: rows; generated from microblog data
+        let genBody = '';
+        (data.microblogs || []).forEach(post => {
+            const analyticsCell = analytics.map(f => {
+              let value = post[f.key] ?? '';
+              if (f.format) value = f.format(value);
+              return `<div>${value}</div>`;
+            }).join('');
+            // Edit and Reply buttons inline with Topic
+            const messageCell = message.map(f => {
+              let value = post[f.key] ?? '';
+              if (f.key === 'topicPath') {
+                value = (f.format ? f.format(value) : value) +
+                  ` <button class='edit-btn ml-2' data-id='${post.id}' title='Edit'>${editIcon}</button>` +
+                  ` <button class='reply-btn ml-2' data-id='${post.id}' title='Reply'>${replyIcon}</button>`;
+              } else if (f.format) {
+                value = f.format(value);
+              }
+              return `<div>${value}</div>`;
+            }).join('');
+            genBody += `<tr id="post-row-${post.id}"><td class="text-left">${analyticsCell}</td><td class="text-left">${messageCell}</td></tr>`;
+        });
+
+        // Table: body
+        let body = `
+        <tbody>
+            ${genBody}
+        </tbody>
+        `;
+
+
+        // Table: set container with scrollable wrapper
+        container.innerHTML = `
+        <div class="max-h-[45vh] sm:max-h-[60vh] lg:max-h-[70vh] overflow-y-auto" style="max-height:70vh;">
+          <table id="microblog-table" border="1" style="border-collapse:collapse; margin-top:1em; width:100%;">
+              ${head}
+              ${body}
+          </table>
+        </div>
+        `;
+
+        // Wait for DOM update, then initialize DataTables
+        setTimeout(async () => {
+        // JQuery micro-table Bottom and Top control updates
+        if (window.jQuery && $('#microblog-table').length) {
+            $('#microblog-table').DataTable({
+                initComplete: function() {
+                    // Top controls (Show entries)
+                    const lengthDiv = document.querySelector('.dataTables_length');
+                    if (lengthDiv) {
+                      lengthDiv.style.display = 'flex';
+                      lengthDiv.style.alignItems = 'center';
+                      lengthDiv.insertAdjacentHTML('afterbegin', controlsInfo);
+                      lengthDiv.querySelectorAll('*').forEach(el => {
+                        el.style.marginTop = '0';
+                        el.style.marginBottom = '0';
+                      });
+                      const createBtn = document.getElementById('create-btn');
+                      if (createBtn) createBtn.onclick = () => openModal({ mode: 'create' });
+                    }
+                    // Bottom controls (prefix to info)
+                    const infoDiv = document.querySelector('.dataTables_info');
+                    if (infoDiv) {
+                      infoDiv.style.display = 'flex';
+                      infoDiv.style.alignItems = 'center';
+                      infoDiv.innerHTML = controlsInfo + infoDiv.innerHTML;
+                      // Only bind if not already bound (avoid duplicate IDs)
+                      const btns = infoDiv.querySelectorAll('#create-btn');
+                      btns.forEach(btn => btn.onclick = () => openModal({ mode: 'create' }));
+                    }
+                    // Filter mode logic (default: page, people = all)
+                    window.__microblogFilterMode = 'page';
+                    function setFilterMode(mode) {
+                      window.__microblogFilterMode = mode;
+                      // Update icon backgrounds for visual feedback
+                      const pageIconEl = document.getElementById('page-icon');
+                      const manyPagesIconEl = document.getElementById('many-pages-icon');
+                      if (pageIconEl && manyPagesIconEl) {
+                        if (mode === 'page') {
+                          pageIconEl.style.background = '#9333ea'; // purple
+                          manyPagesIconEl.style.background = '#2563eb'; // blue
+                          pageIconEl.style.opacity = '1';
+                          manyPagesIconEl.style.opacity = '0.5';
+                        } else {
+                          manyPagesIconEl.style.background = '#2563eb';
+                          pageIconEl.style.background = '#9333ea';
+                          manyPagesIconEl.style.opacity = '1';
+                          pageIconEl.style.opacity = '0.5';
+                        }
+                      }
+                      // Re-render table with new filter
+                      renderMicroblogTable();
+                    }
+                    setTimeout(() => {
+                      // Bind ALL filter icons (top and bottom)
+                      document.querySelectorAll('#page-icon').forEach(el => {
+                        el.onclick = () => setFilterMode('page');
+                      });
+                      document.querySelectorAll('#many-pages-icon').forEach(el => {
+                        el.onclick = () => setFilterMode('people');
+                      });
+                      // Only set default filter if not already set
+                      if (!window.__microblogFilterModeInitialized) {
+                        window.__microblogFilterModeInitialized = true;
+                        setFilterMode('page');
+                      }
+                    }, 0);
+                }
+            });
+            // Bind edit buttons using event delegation so it works on all pages
+            $('#microblog-table').off('click', '.edit-btn').on('click', '.edit-btn', function() {
+              const id = $(this).data('id');
+              const post = (data.microblogs || []).find(p => p.id == id);
+              openModal({ mode: 'edit', post });
+            });
+            // Bind reply buttons
+            $('#microblog-table').off('click', '.reply-btn').on('click', '.reply-btn', async function() {
+              const postId = $(this).data('id');
+              openReplyModal(postId);
+            });
+            
+            // Load and display replies for each post
+            for (const post of (data.microblogs || [])) {
+              await loadRepliesForPost(post.id);
+            }
+        }
+        }, 0);
+    } catch (error) {
+        container.innerHTML = `<div style="color:red;">Failed to load microblog posts: ${error.message}</div>`;
+    }
+}
+renderMicroblogTable();
+</script>
+            <!-- Small Inbox Button (appears to the left of the microblog FAB) -->
+<button id="inbox-toggle-btn" class="inbox-fab" aria-label="Open Inbox">
+  📥
+  <div id="inbox-badge" class="inbox-badge hidden" title="Unread announcements">!</div>
+</button>
+
+<!-- Compact Inbox Panel (opened by the small inbox FAB) -->
+<aside id="inbox-panel" class="microblog-panel inbox-panel--compact" tabindex="-1" aria-label="Inbox panel">
+  <div class="microblog-panel-header">
+    <button id="inbox-close-btn" class="microblog-close-btn" aria-label="Close Inbox">&times;</button>
+    <h2 class="microblog-panel-title">Inbox</h2>
+  </div>
+  <div class="microblog-panel-content">
+    <div class="inbox-tabs" style="display:flex; gap:0.5rem; padding:0.5rem;">
+      <button id="tab-announcements" class="inbox-tab" style="padding:0.35rem 0.6rem; background:transparent; border-radius:6px;">Announcements</button>
+    </div>
+
+    <div id="announcements-content">
+      <div id="inbox-app" class="inbox-app">
+      <!-- Admin-only form - hidden by default, shown via JS for admins -->
+      <form id="inbox-form" class="microblog-form" aria-label="Inbox announcement form" style="display:none;">
+        <div class="microblog-form-group">
+          <label class="microblog-form-label" for="inbox-title">Title <span class="required">*</span></label>
+          <input id="inbox-title" name="title" type="text" required class="microblog-input" style="width:100%;" />
+        </div>
+        <div class="microblog-form-group">
+          <label class="microblog-form-label" for="inbox-content">Content <span class="required">*</span></label>
+          <textarea id="inbox-content" name="content" required class="microblog-textarea"></textarea>
+        </div>
+        <div class="microblog-form-group" id="links-area">
+          <label class="microblog-form-label">Links (optional)</label>
+          <div id="inbox-links-container"></div>
+          <p style="margin-top:0.5rem;"><button id="add-link-btn" type="button" class="microblog-btn">Add link</button></p>
+        </div>
+        <div class="microblog-form-actions">
+          <button type="submit" class="microblog-btn">Post to Inbox</button>
+          <button type="button" id="inbox-clear-btn" class="microblog-btn-cancel">Clear</button>
+        </div>
+      </form>
+
+      <hr id="inbox-form-divider" style="border-color: rgba(255,255,255,0.08); margin:0.75rem 0; display:none;" />
+
+      <div id="inbox-messages" class="inbox-messages">
+        <em style="color:var(--white); padding:0.5rem; display:block;">No announcements yet.</em>
+      </div>
+      </div>
+
+  </div>
+</aside>
+
+<script type="module">
+import { pythonURI, fetchOptions } from '/portfolio1/assets/js/api/config.js';
+
+// Store admin status globally for use in message rendering
+window.inboxUserIsAdmin = false;
+
+// Check if user is Admin and show inbox form
+async function checkInboxAdminAccess() {
+  try {
+    const res = await fetch(`${pythonURI}/api/id`, fetchOptions);
+    if (!res.ok) return;
+    
+    const user = await res.json();
+    const isAdmin = user.role === "Admin";
+    window.inboxUserIsAdmin = isAdmin;
+    
+    if (isAdmin) {
+      const inboxForm = document.getElementById('inbox-form');
+      const inboxDivider = document.getElementById('inbox-form-divider');
+      
+      if (inboxForm) inboxForm.style.display = 'block';
+      if (inboxDivider) inboxDivider.style.display = 'block';
+      
+      // Show admin controls on existing messages
+      document.querySelectorAll('.inbox-admin-controls').forEach(ctrl => {
+        ctrl.style.display = 'flex';
+      });
+    }
+  } catch (err) {
+    console.error("Error checking inbox admin access:", err);
+  }
+}
+
+// Run admin check on load
+checkInboxAdminAccess();
+
+// Inbox toggle (small FAB)
+const inboxToggle = document.getElementById('inbox-toggle-btn');
+const inboxPanel = document.getElementById('inbox-panel');
+const inboxCloseBtn = document.getElementById('inbox-close-btn');
+
+function openInboxPanel() {
+  inboxPanel.classList.add('open');
+}
+function closeInboxPanel() {
+  inboxPanel.classList.remove('open');
+}
+if (inboxToggle) {
+  inboxToggle.onclick = function(e) {
+    e.stopPropagation();
+    // toggle the compact inbox panel
+    if (inboxPanel.classList.contains('open')) closeInboxPanel(); else openInboxPanel();
+  };
+}
+if (inboxCloseBtn) inboxCloseBtn.onclick = closeInboxPanel;
+
+// Close inbox when clicking outside the panel
+document.addEventListener('click', (e) => {
+  if (!inboxPanel) return;
+  if (!inboxPanel.classList.contains('open')) return;
+  if (e.target === inboxPanel || inboxPanel.contains(e.target)) return;
+  if (inboxToggle && e.target === inboxToggle) return;
+  closeInboxPanel();
+});
+</script>
+
+<script>
+// Inbox form behavior (no persistence)
+;(function(){
+  const form = document.getElementById('inbox-form');
+  const linksContainer = document.getElementById('inbox-links-container');
+  const addLinkBtn = document.getElementById('add-link-btn');
+  const messagesEl = document.getElementById('inbox-messages');
+  const clearBtn = document.getElementById('inbox-clear-btn');
+  const badge = document.getElementById('inbox-badge');
+
+  // Update badge visibility based on unread messages
+  function updateBadge() {
+    const unreadMessages = messagesEl.querySelectorAll('.inbox-message.unread');
+    const unreadCount = unreadMessages.length;
+    
+    if (unreadCount > 0) {
+      badge.textContent = unreadCount > 9 ? '!' : unreadCount;
+      badge.classList.remove('hidden');
+    } else {
+      badge.classList.add('hidden');
+    }
+  }
+
+  function createLinkRow(url='', label=''){
+    const row = document.createElement('div');
+    row.className = 'inbox-link-row';
+    row.style.display = 'flex';
+    row.style.gap = '0.5rem';
+    row.style.marginTop = '0.25rem';
+
+    const urlInput = document.createElement('input');
+    urlInput.type = 'url';
+    urlInput.placeholder = 'https://example.com';
+    urlInput.value = url;
+    urlInput.style.flex = '1';
+    urlInput.className = 'microblog-input';
+
+    const labelInput = document.createElement('input');
+    labelInput.type = 'text';
+    labelInput.placeholder = 'Link label (optional)';
+    labelInput.value = label;
+    labelInput.style.width = '10rem';
+    labelInput.className = 'microblog-input';
+
+    const removeBtn = document.createElement('button');
+    removeBtn.type = 'button';
+    removeBtn.className = 'microblog-btn-cancel';
+    removeBtn.textContent = 'Remove';
+    removeBtn.onclick = () => row.remove();
+
+    row.appendChild(urlInput);
+    row.appendChild(labelInput);
+    row.appendChild(removeBtn);
+    return row;
+  }
+
+  addLinkBtn && addLinkBtn.addEventListener('click', () => {
+    linksContainer.appendChild(createLinkRow());
+  });
+
+  clearBtn && clearBtn.addEventListener('click', () => {
+    form.reset();
+    linksContainer.innerHTML = '';
+  });
+
+  form && form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const title = document.getElementById('inbox-title').value.trim();
+    const content = document.getElementById('inbox-content').value.trim();
+    if (!title || !content) return alert('Please provide title and content.');
+
+    const linkRows = Array.from(linksContainer.querySelectorAll('.inbox-link-row'));
+    const links = linkRows.map(r => {
+      const inputs = r.getElementsByTagName('input');
+      return { url: inputs[0].value.trim(), label: inputs[1].value.trim() };
+    }).filter(l => l.url);
+
+    // Build announcement object
+    const ann = { id: 'ann-' + Date.now() + '-' + Math.floor(Math.random()*1000), title, content, links, unread: true };
+
+    function buildMessageElement(announcement){
+      const el = document.createElement('div');
+      el.className = 'inbox-message' + (announcement.unread ? ' unread' : '');
+      el.dataset.annId = announcement.id;
+      el.dataset.unread = announcement.unread ? 'true' : 'false';
+      el.style.padding = '0.75rem';
+      el.style.border = '1px solid rgba(255,255,255,0.06)';
+      el.style.borderRadius = '6px';
+      el.style.marginBottom = '0.5rem';
+
+      const header = document.createElement('div');
+      header.style.display = 'flex';
+      header.style.justifyContent = 'space-between';
+      header.style.alignItems = 'center';
+
+      const h = document.createElement('div');
+      h.style.fontWeight = '700';
+      h.style.marginBottom = '0.25rem';
+      h.textContent = announcement.title;
+
+      const controls = document.createElement('div');
+      controls.className = 'inbox-admin-controls';
+      controls.style.display = 'none'; // Hidden by default, shown for admins
+      controls.style.gap = '0.5rem';
+      controls.style.alignItems = 'center';
+
+      const editBtn = document.createElement('button');
+      editBtn.type = 'button';
+      editBtn.className = 'microblog-btn';
+      editBtn.textContent = 'Edit';
+      editBtn.onclick = () => {
+        // populate form for editing
+        document.getElementById('inbox-title').value = announcement.title;
+        document.getElementById('inbox-content').value = announcement.content;
+        linksContainer.innerHTML = '';
+        (announcement.links || []).forEach(l => linksContainer.appendChild(createLinkRow(l.url, l.label)));
+        form.dataset.editingId = announcement.id;
+        // change submit label
+        const submitBtn = form.querySelector('button[type=submit]');
+        if (submitBtn) submitBtn.textContent = 'Save changes';
+        // open panel
+        openInboxPanel();
+      };
+
+      const delBtn = document.createElement('button');
+      delBtn.type = 'button';
+      delBtn.className = 'microblog-btn-cancel';
+      delBtn.textContent = 'Delete';
+      delBtn.onclick = () => {
+        if (confirm('Delete this announcement?')) {
+          el.remove();
+          updateBadge();
+        }
+      };
+
+      const markDoneBtn = document.createElement('button');
+      markDoneBtn.type = 'button';
+      markDoneBtn.className = 'microblog-btn-done';
+      markDoneBtn.title = 'Mark as read';
+      markDoneBtn.setAttribute('aria-label', 'Mark as read');
+      markDoneBtn.innerHTML = '&#10003;';
+      markDoneBtn.onclick = () => {
+        // Mark as read: remove unread class and update dataset
+        const wasUnread = el.dataset.unread === 'true';
+        el.classList.remove('unread');
+        el.dataset.unread = 'false';
+        // visual toggle for done state
+        el.classList.toggle('inbox-done');
+        markDoneBtn.classList.toggle('done');
+        // Update badge if there are no more unread messages
+        if (wasUnread) updateBadge();
+      };
+
+      controls.appendChild(editBtn);
+      controls.appendChild(delBtn);
+      controls.appendChild(markDoneBtn);
+      
+      // Show controls if user is admin
+      if (window.inboxUserIsAdmin) {
+        controls.style.display = 'flex';
+      }
+
+      header.appendChild(h);
+      header.appendChild(controls);
+
+      const c = document.createElement('div');
+      c.style.marginBottom = '0.5rem';
+      c.innerHTML = announcement.content.replace(/\n/g, '<br>');
+
+      el.appendChild(header);
+      el.appendChild(c);
+
+      if ((announcement.links || []).length > 0) {
+        const ul = document.createElement('ul');
+        ul.style.margin = '0';
+        ul.style.paddingLeft = '1rem';
+        (announcement.links || []).forEach(l => {
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.href = l.url;
+          a.textContent = l.label || l.url;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          a.style.color = 'var(--white)';
+          a.style.textDecoration = 'underline';
+          li.appendChild(a);
+          ul.appendChild(li);
+        });
+        el.appendChild(ul);
+      }
+
+      return el;
+    }
+
+    // If editing existing announcement, update it
+    const editingId = form.dataset.editingId;
+    if (editingId) {
+      const existing = messagesEl.querySelector(`[data-ann-id="${editingId}"]`);
+      if (existing) {
+        const newEl = buildMessageElement(ann);
+        existing.replaceWith(newEl);
+      }
+      delete form.dataset.editingId;
+      const submitBtn = form.querySelector('button[type=submit]');
+      if (submitBtn) submitBtn.textContent = 'Post to Inbox';
+    } else {
+      // Prepend new message
+      const msgEl = buildMessageElement(ann);
+      if (messagesEl) {
+        const placeholder = messagesEl.querySelector('em');
+        if (placeholder) placeholder.remove();
+        // Prepend to ensure newest announcements appear first
+        if (messagesEl.prepend) messagesEl.prepend(msgEl); else messagesEl.insertBefore(msgEl, messagesEl.firstChild);
+      }
+      // Update badge with new unread count
+      updateBadge();
+    }
+
+    // reset form
+    form.reset();
+    linksContainer.innerHTML = '';
+  });
+
+})();
+</script>
+
+          </div>
+        
+
+        
+
+        
+
+        <main class="page-content" aria-label="Content">
+            <div class="wrapper">
+                                <div class="opencs_root">
+                                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<div class="lesson-player">
+  <!-- LEFT SIDEBAR -->
+  <!-- LESSON PLAYER SIDEBAR NAVIGATION -->
+
+
+<div class="lesson-sidebar">
+  <div class="sidebar-header">
+    
+      <h2>Computer Science & Software Engineering</h2>
+    
+
+    <div class="course-progress-section">
+      <div class="progress-label">
+        <span>Course Progress</span>
+        <span id="progress-count">0/0</span>
+      </div>
+      <div class="progress-bar-sidebar">
+        <div class="progress-bar-sidebar-fill" id="sidebar-progress" style="width: 0%"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sprint-nav">
+    
+    
+      
+      
+
+      
+    
+      
+      
+
+      
+    
+      
+      
+
+      
+    
+      
+      
+
+      
+    
+      
+      
+
+      
+    
+      
+      
+
+      
+    
+      
+      
+
+      
+    
+      
+      
+
+      
+    
+      
+      
+
+      
+    
+  </div>
+</div>
+
+
+  <!-- MAIN CONTENT -->
+  <div class="lesson-main">
+    <!-- Top Bar -->
+    <!-- LESSON PLAYER TOP BAR - Navigation and progress -->
+
+
+<div class="topbar-lesson">
+  <div class="topbar-left">
+    <div class="breadcrumbs">
+      <a href="/portfolio1/navigation/courses/csse" title="Back to course">
+        <i class="fas fa-home"></i>
+      </a>
+      <i class="fas fa-chevron-right"></i>
+      <span>Week 17</span>
+      <i class="fas fa-chevron-right"></i>
+      <span class="current">OCS Game Engine Clicker Mechanics</span>
+      <button id="topbar-complete-btn" onclick="toggleComplete()" type="button" title="Mark lesson complete">
+        <i class="fas fa-circle" id="complete-icon-topbar"></i>
+        <span id="complete-text-topbar">Burndown</span>
+      </button>
+    </div>
+  </div>
+  <div class="topbar-progress">
+    <div class="topbar-progress-fill" id="lesson-progress"></div>
+  </div>
+</div>
+
+
+    <!-- Lesson Content -->
+    <div class="lesson-content">
+      <div class="lesson-content-inner">
+        <div class="lesson-header">
+          <h1>OCS Game Engine Clicker Mechanics</h1>
+          <div class="lesson-meta"><span><i class="fas fa-clock"></i> <span class="read-time" title="Estimated read time">
+    
+     1 min read  </span></span>
+            <span>•</span>
+            <span><i class="fas fa-file-alt"></i> Assignment</span>
+            
+          </div>
+        </div>
+
+        <div class="lesson-body"><ul><li><a href="#game-time">Game Time!</a><ul><li>How to Play</li><li>Hack IT Goals</li></ul></li><li><a href="#how-the-game-engine-rumbles">How the Game Engine Rumbles!</a><ul><li>Interaction Flow Diagram</li><li>Related Code Snippets:</li></ul></li></ul><h2 id="game-time">Game Time!</h2>
+
+<p>This is a code-first activity with less talking and more interacting, building, testing, and improving.</p>
+
+<hr />
+
+<div class="container-panel container-panel--row" id="container-panel-cookie_intro_game" style="--cp-gap: 1rem; --cp-left: 20%; --cp-right: 80%;">
+  <div class="container-panel__item container-panel__item--left">
+    
+<div class="ui-runner">
+<div id="cookie-intro-panel" class="cookie-play-panel">
+  <h3>How to Play</h3>
+  <ol>
+    <li>Click Start to begin the game loop.</li>
+    <li>Click the cookie sprite to score points.</li>
+    <li>Tune values in code directly like <code>SCALE_FACTOR</code>, <code>speed</code>, and <code>hitbox</code>.</li>
+    <li>Run again and compare how gameplay changes.</li>
+  </ol>
+  <p id="cookie-intro-panel-clicks">Clicks: 0</p>
+</div>
+<script>
+(function() {
+
+})();
+</script>
+</div>
+
+
+  </div>
+  <div class="container-panel__item container-panel__item--right">
+    
+
+
+
+
+
+<!-- Reusable Game Runner Component -->
+<div class="game-runner-container hide-editor" id="game-runner-gamerunner-cookie-0" data-storage-key="_gamerunner_cookie_gamerunner-cookie-0" style="--gr-panel-width: 100%;--gr-canvas-height: 520px;">
+  
+  <!-- Compact controls for hide_edit mode -->
+  <div class="compact-controls">
+    <button type="button" class="runBtn" title="Start Game">▶ Play</button>
+    <button type="button" class="pauseBtn" title="Pause Game">⏸ Pause</button>
+    <button type="button" class="stopBtn" title="Stop Game">■ Stop</button>
+    <button type="button" class="fullscreenBtn" title="Toggle Fullscreen">⛶ Fullscreen</button>
+    <select class="engineVersionSelect" title="Select Game Engine Version">
+      <option value="GameEnginev1">Engine v1</option>
+      <option value="GameEnginev1.1" selected="">Engine v1.1</option>
+    </select>
+    <select class="levelSelect" title="Select Level">
+      <option value="">Select Level...</option>
+    </select>
+  </div>
+  
+
+  <div class="output-container">
+    <div class="control-panel">
+      <span class="game-status">Game Status: 
+        <span class="status-text">Not Started</span> 
+      </span>
+      <span class="game-status"> 
+        <span id="gamerunner-cookie-0-metric"></span>
+      </span>
+    </div>
+    <div class="game-output" id="game-output-gamerunner-cookie-0">
+      <div id="game-container-gamerunner-cookie-0" class="gameContainer">
+        <!-- GameEnv will create canvas dynamically -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { BaseRunner, GameExecutor } from '/portfolio1/assets/js/pages/runners/index.js';
+
+(function() {
+  const container = document.getElementById('game-runner-gamerunner-cookie-0');
+  if (!container) return;
+  
+  const hideEdit = "true" === "true";
+  const defaultCode = `
+import GameControl from '@assets/js/GameEnginev1.1/essentials/GameControl.js';
+import Clicker from '@assets/js/GameEnginev1.1/essentials/Clicker.js'
+
+class CookieClicker {
+  constructor(gameEnv) {
+    const path = gameEnv.path;
+    const width = gameEnv.innerWidth;
+    const height = gameEnv.innerHeight;
+
+    const sprite_src_clicker = path + "/hacks/cookie-clicker/assets/baseCookie.png";
+
+    // This object literal is the "blueprint" the Game Engine uses to build the cookie Game Object.
+    const cookie_clicker = {
+       id: 'Cookie Clicker',
+       greeting: "Click or collide with me to earn points!",
+       src: sprite_src_clicker,
+       // SCALE_FACTOR of 1 keeps the sprite large on screen (our big cookie lesson setup).
+       SCALE_FACTOR: 1,
+       pixels: {height: 512, width: 512},
+       INIT_POSITION: { x: 0, y: 0},
+       orientation: {rows: 1, columns: 1 },
+       down: {row: 0, start: 0, columns: 1, wiggle: 0.10 },
+       up: {row: 0, start: 0, columns: 1, wiggle: 0.10 },
+       left: {row: 0, start: 0, columns: 1, wiggle: 0.10 },
+       right: {row: 0, start: 0, columns: 1, wiggle: 0.10 },
+       hitbox: { widthPercentage: 0.15, heightPercentage: 0.15 },
+       walkingArea: {
+          xMin: 0, //left boundary
+          xMax: width, //right boundary 
+          yMin: 0, //top boundary 
+          yMax: height //bottom boundary
+       },
+       speed: 3,
+       direction: { x: 1, y: 1 },
+       interact: function(clicks) {
+           // When clicked, write the live click count into the Game Runner status bar.
+           document.getElementById('gamerunner-cookie-0-metric').textContent = "Clicks: " + clicks;
+           document.getElementById('cookie-intro-panel-clicks').textContent = "Clicks: " + clicks;
+       },
+    };
+    this.classes = [{ class: Clicker, data: cookie_clicker}];
+  }
+}
+export const gameLevelClasses = [CookieClicker];
+export { GameControl };
+`.trim();
+  const editorHeight = "";
+  const canvasHeight = "520px";
+  const levelClasses = ``.trim().split(',').map(s => s.trim()).filter(Boolean);
+  const storageKey = container.dataset.storageKey;
+
+  function parseCssSizeToPixels(value, fallback) {
+    const parsed = Number.parseFloat(value);
+    return Number.isFinite(parsed) ? parsed : fallback;
+  }
+
+  function getLevelOptionLabel(levelClass, index) {
+    return levelClass?.displayName
+      || levelClass?.levelName
+      || levelClass?.title
+      || levelClass?.levelId
+      || levelClass?.id
+      || levelClass?.name
+      || `Level ${index + 1}`;
+  }
+
+  const configuredCanvasHeight = parseCssSizeToPixels(canvasHeight, 580);
+  const runner = new BaseRunner(container, {
+    storageKey,
+    statusSelector: '.status-text'
+  });
+
+  const editor = runner.initializeEditor({
+    defaultCode,
+    editorHeight,
+    enabled: !hideEdit,
+    codeMirrorOptions: {
+      mode: 'javascript',
+      theme: 'darcula',
+      lineNumbers: true
+    }
+  });
+
+  // Get UI elements
+  const runBtn = container.querySelector('.runBtn');
+  const pauseBtn = container.querySelector('.pauseBtn');
+  const stopBtn = container.querySelector('.stopBtn');
+  const fullscreenBtn = container.querySelector('.fullscreenBtn');
+  const engineVersionSelect = container.querySelector('.engineVersionSelect');
+  const levelSelect = container.querySelector('.levelSelect');
+  const gameOutput = container.querySelector('.game-output');
+  const statusText = container.querySelector('.status-text');
+
+  const gameExecutor = new GameExecutor({
+    getCode: () => runner.getValue(),
+    updateStatus: (status) => runner.updateStatus(status),
+    runBtn,
+    pauseBtn,
+    stopBtn,
+    fullscreenBtn,
+    levelSelect,
+    engineVersionSelect,
+    getGameContainer: () => document.getElementById('game-container-gamerunner-cookie-0'),
+    getGameOutput: () => gameOutput,
+    configuredCanvasHeight,
+    path: '/portfolio1',
+    getLevelOptionLabel,
+  });
+
+  // Disable game controls initially
+  pauseBtn.disabled = true;
+  stopBtn.disabled = true;
+  if (fullscreenBtn) fullscreenBtn.disabled = true;
+
+  // Update status
+  function updateStatus(status) {
+    runner.updateStatus(status);
+  }
+
+  runner.bindEditorButtons({
+    resetValue: defaultCode || "",
+    onClear: () => {
+      stopGame();
+      updateStatus('Reset');
+    }
+  });
+
+  // Stop game
+  function stopGame() {
+    gameExecutor.stop();
+  }
+
+  // Toggle pause/resume
+  function togglePause() {
+    gameExecutor.togglePause();
+  }
+
+  // Run game
+  async function runGame() {
+    return gameExecutor.run();
+  }
+
+  // Event listeners
+  if (!runner.bindButton('.runBtn', runGame)) {
+    console.error('Game runner gamerunner-cookie-0: run button not found');
+  }
+
+  runner.bindButton('.pauseBtn', togglePause);
+
+  if (!runner.bindButton('.stopBtn', stopGame)) {
+    console.error('Game runner gamerunner-cookie-0: stop button not found');
+  }
+
+  // Fullscreen handler
+  function toggleFullscreen() {
+    console.log('Toggling fullscreen');
+    gameExecutor.toggleFullscreen();
+  }
+
+  if (fullscreenBtn) {
+    fullscreenBtn.addEventListener('click', toggleFullscreen);
+  }
+
+  // Level selector
+  gameExecutor.bindLevelSelector();
+
+  // Keyboard shortcuts (only if editor exists)
+  runner.bindShortcut(runGame);
+
+})();
+</script>
+
+
+
+  </div>
+</div>
+
+<hr />
+
+<div class="container-panel container-panel--row" id="container-panel-cookie_hack_game" style="--cp-gap: 1rem; --cp-left: 20%; --cp-right: 80%;">
+  <div class="container-panel__item container-panel__item--left">
+    
+<div class="ui-runner">
+<div id="cookie-hack-panel" class="runner-side-panel">
+  <h3>Hack IT Goals</h3>
+  <ul>
+    <li>This version makes the cookie harder to click.</li>
+    <li>Adjust movement speed and wiggle behavior.</li>
+    <li>Tune hitbox percentages for difficulty.</li>
+  </ul>
+  <p id="cookie-hack-panel-clicks">Total Clicks: 0</p>
+  <div id="cookie-hack-panel-counter-list"></div>
+</div>
+<script>
+(function() {
+
+})();
+</script>
+</div>
+
+
+  </div>
+  <div class="container-panel__item container-panel__item--right">
+    
+
+
+
+
+
+<!-- Reusable Game Runner Component -->
+<div class="game-runner-container hide-editor" id="game-runner-gamerunner-cookie-1" data-storage-key="_gamerunner_cookie_gamerunner-cookie-1" style="--gr-panel-width: 100%;--gr-canvas-height: 520px;">
+  
+  <!-- Compact controls for hide_edit mode -->
+  <div class="compact-controls">
+    <button type="button" class="runBtn" title="Start Game">▶ Play</button>
+    <button type="button" class="pauseBtn" title="Pause Game">⏸ Pause</button>
+    <button type="button" class="stopBtn" title="Stop Game">■ Stop</button>
+    <button type="button" class="fullscreenBtn" title="Toggle Fullscreen">⛶ Fullscreen</button>
+    <select class="engineVersionSelect" title="Select Game Engine Version">
+      <option value="GameEnginev1">Engine v1</option>
+      <option value="GameEnginev1.1" selected="">Engine v1.1</option>
+    </select>
+    <select class="levelSelect" title="Select Level">
+      <option value="">Select Level...</option>
+    </select>
+  </div>
+  
+
+  <div class="output-container">
+    <div class="control-panel">
+      <span class="game-status">Game Status: 
+        <span class="status-text">Not Started</span> 
+      </span>
+      <span class="game-status"> 
+        <span id="gamerunner-cookie-1-metric"></span>
+      </span>
+    </div>
+    <div class="game-output" id="game-output-gamerunner-cookie-1">
+      <div id="game-container-gamerunner-cookie-1" class="gameContainer">
+        <!-- GameEnv will create canvas dynamically -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { BaseRunner, GameExecutor } from '/portfolio1/assets/js/pages/runners/index.js';
+
+(function() {
+  const container = document.getElementById('game-runner-gamerunner-cookie-1');
+  if (!container) return;
+  
+  const hideEdit = "true" === "true";
+  const defaultCode = `
+import GameControl from '@assets/js/GameEnginev1.1/essentials/GameControl.js';
+import Clicker from '@assets/js/GameEnginev1.1/essentials/Clicker.js'
+
+class CookieClicker {
+  constructor(gameEnv) {
+    const path = gameEnv.path;
+    const width = gameEnv.innerWidth;
+    const height = gameEnv.innerHeight;
+
+    const cookie_src = path + "/hacks/cookie-clicker/assets/baseCookie.png";
+    const grandma_src = path + "/hacks/cookie-clicker/assets/grandma.png";
+
+    // Shared score map for all spawned clickers in this runner instance.
+    window.cookieHackCounters = window.cookieHackCounters || {};
+    // Function to render the counters
+    const renderCounters = () => {
+      const entries = Object.entries(window.cookieHackCounters);
+      const total = entries.reduce((sum, pair) => sum + pair[1], 0);
+      // Update total clicks
+      const totalEl = document.getElementById('cookie-hack-panel-clicks');
+      if (totalEl) totalEl.textContent = "Total Clicks: " + total;
+      // Also keep the game-runner metric aligned with the same total.
+      const runnerMetric = document.getElementById('gamerunner-cookie-1-metric');
+      if (runnerMetric) runnerMetric.textContent = "Total Clicks: " + total;
+      // Breakdown clicks by spawned objects
+      const listEl = document.getElementById('cookie-hack-panel-counter-list');
+      if (!listEl) return;
+      if (entries.length === 0) {
+        listEl.innerHTML = "<em>No clicks yet.</em>";
+        return;
+      }
+
+      const rows = entries
+        .sort((a, b) => a[0].localeCompare(b[0]))
+        .map(function(pair) {
+          const id = pair[0];
+          const count = pair[1];
+          return '<li><code>' + id + '</code>: ' + count + '</li>';
+        })
+        .join('');
+
+      listEl.innerHTML = '<strong>Per Object:</strong><ul>' + rows + '</ul>';
+    };
+
+    // Same object-literal pattern as Runner 1, now tuned for more challenging play.
+    const cookie_clicker = {
+       id: 'Cookie Clicker',
+       greeting: "Click or collide with me to earn points!",
+       src: cookie_src,
+       SCALE_FACTOR: 8, // Higher value means smaller cookie, division of original size
+       pixels: {height: 512, width: 512},
+       INIT_POSITION: { x: 0, y: 0},
+       orientation: {rows: 1, columns: 1 },
+       down: {row: 0, start: 0, columns: 1, wiggle: 0.10 },
+       up: {row: 0, start: 0, columns: 1, wiggle: 0.10 },
+       left: {row: 0, start: 0, columns: 1, wiggle: 0.10 },
+       right: {row: 0, start: 0, columns: 1, wiggle: 0.10 },
+       hitbox: { widthPercentage: 0.15, heightPercentage: 0.15 },
+       // Walking area uses full container, so motion bounces off all four walls.
+       walkingArea: {
+          xMin: 0,
+          xMax: width,
+          yMin: 0,
+          yMax: height
+       },
+       speed: 3,
+       direction: { x: 1, y: 1 },
+       interact: function(clicks, objectId) {
+          // on callback, get objectId
+          const id = objectId || (this && this.spriteData && this.spriteData.id) || 'unknown';
+          window.cookieHackCounters[id] = clicks; // update map with object count
+          renderCounters();
+       },
+    };
+    // Associate Template with Clicker Class, define to spawn multiple instances
+    this.classes = [
+      { class: Clicker, data: cookie_clicker,
+        spawn: {
+          count: 3, // object count
+          ranges: { // random value from range
+            INIT_POSITION: {
+              x: [0, Math.max(0, width - 128)],
+              y: [0, Math.max(0, height - 128)]
+            },
+            speed: [1, 5]
+          },
+          pickOne: { // random pick
+            src: [
+              cookie_src,
+              grandma_src
+            ]
+          }
+        }
+      }
+    ];
+
+    renderCounters();
+  }
+}
+export const gameLevelClasses = [CookieClicker];
+export { GameControl };
+`.trim();
+  const editorHeight = "";
+  const canvasHeight = "520px";
+  const levelClasses = ``.trim().split(',').map(s => s.trim()).filter(Boolean);
+  const storageKey = container.dataset.storageKey;
+
+  function parseCssSizeToPixels(value, fallback) {
+    const parsed = Number.parseFloat(value);
+    return Number.isFinite(parsed) ? parsed : fallback;
+  }
+
+  function getLevelOptionLabel(levelClass, index) {
+    return levelClass?.displayName
+      || levelClass?.levelName
+      || levelClass?.title
+      || levelClass?.levelId
+      || levelClass?.id
+      || levelClass?.name
+      || `Level ${index + 1}`;
+  }
+
+  const configuredCanvasHeight = parseCssSizeToPixels(canvasHeight, 580);
+  const runner = new BaseRunner(container, {
+    storageKey,
+    statusSelector: '.status-text'
+  });
+
+  const editor = runner.initializeEditor({
+    defaultCode,
+    editorHeight,
+    enabled: !hideEdit,
+    codeMirrorOptions: {
+      mode: 'javascript',
+      theme: 'darcula',
+      lineNumbers: true
+    }
+  });
+
+  // Get UI elements
+  const runBtn = container.querySelector('.runBtn');
+  const pauseBtn = container.querySelector('.pauseBtn');
+  const stopBtn = container.querySelector('.stopBtn');
+  const fullscreenBtn = container.querySelector('.fullscreenBtn');
+  const engineVersionSelect = container.querySelector('.engineVersionSelect');
+  const levelSelect = container.querySelector('.levelSelect');
+  const gameOutput = container.querySelector('.game-output');
+  const statusText = container.querySelector('.status-text');
+
+  const gameExecutor = new GameExecutor({
+    getCode: () => runner.getValue(),
+    updateStatus: (status) => runner.updateStatus(status),
+    runBtn,
+    pauseBtn,
+    stopBtn,
+    fullscreenBtn,
+    levelSelect,
+    engineVersionSelect,
+    getGameContainer: () => document.getElementById('game-container-gamerunner-cookie-1'),
+    getGameOutput: () => gameOutput,
+    configuredCanvasHeight,
+    path: '/portfolio1',
+    getLevelOptionLabel,
+  });
+
+  // Disable game controls initially
+  pauseBtn.disabled = true;
+  stopBtn.disabled = true;
+  if (fullscreenBtn) fullscreenBtn.disabled = true;
+
+  // Update status
+  function updateStatus(status) {
+    runner.updateStatus(status);
+  }
+
+  runner.bindEditorButtons({
+    resetValue: defaultCode || "",
+    onClear: () => {
+      stopGame();
+      updateStatus('Reset');
+    }
+  });
+
+  // Stop game
+  function stopGame() {
+    gameExecutor.stop();
+  }
+
+  // Toggle pause/resume
+  function togglePause() {
+    gameExecutor.togglePause();
+  }
+
+  // Run game
+  async function runGame() {
+    return gameExecutor.run();
+  }
+
+  // Event listeners
+  if (!runner.bindButton('.runBtn', runGame)) {
+    console.error('Game runner gamerunner-cookie-1: run button not found');
+  }
+
+  runner.bindButton('.pauseBtn', togglePause);
+
+  if (!runner.bindButton('.stopBtn', stopGame)) {
+    console.error('Game runner gamerunner-cookie-1: stop button not found');
+  }
+
+  // Fullscreen handler
+  function toggleFullscreen() {
+    console.log('Toggling fullscreen');
+    gameExecutor.toggleFullscreen();
+  }
+
+  if (fullscreenBtn) {
+    fullscreenBtn.addEventListener('click', toggleFullscreen);
+  }
+
+  // Level selector
+  gameExecutor.bindLevelSelector();
+
+  // Keyboard shortcuts (only if editor exists)
+  runner.bindShortcut(runGame);
+
+})();
+</script>
+
+
+
+  </div>
+</div>
+
+<hr />
+
+<h2 id="how-the-game-engine-rumbles">How the Game Engine Rumbles!</h2>
+
+<div class="container-panel container-panel--row" id="container-panel-cookie_engine_docs_pair" style="--cp-gap: 1rem; --cp-left: 45%; --cp-right: 55%;">
+  <div class="container-panel__item container-panel__item--left">
+    
+<div class="ui-runner">
+<div id="cookie-engine-flow-panel" class="runner-side-panel">
+<h3>Interaction Flow Diagram</h3>
+<div class="mermaid">
+flowchart TD
+  A[Canvas click] --&gt; B[GameControl.js captures click]
+  B --&gt; C[GameObject.js hit check]
+  C --&gt; D[Clicker.js increments count]
+  D --&gt; E[GAME_RUNNER interact: callback updates Status Bar]
+</div>
+</div>
+<script>
+(function() {
+
+})();
+</script>
+</div>
+
+
+  </div>
+  <div class="container-panel__item container-panel__item--right">
+    
+<div class="ui-runner">
+<div id="cookie-engine-snippets-panel" class="runner-side-panel">
+  <h3>Related Code Snippets:</h3>
+  <p><strong>GameControl.js</strong> (canvas click wiring)</p>
+  <pre><code>this.gameContainer.addEventListener('click', this._boundClick);
+const obj = this.gameEnv.gameObjects.find(o =&gt; o.canvas &amp;&amp; o.canvas.id === clickedCanvas.id);
+if (obj &amp;&amp; typeof obj.handleClick === 'function') {
+    obj.handleClick(event);
+}</code></pre>
+  <p><strong>GameObject.js</strong> (hitbox test + click hook)</p>
+  <pre><code>isPointInside(x, y) {
+    const px = this.position?.x ?? this.INIT_POSITION?.x ?? 0;
+    const py = this.position?.y ?? this.INIT_POSITION?.y ?? 0;
+    return (x &gt;= px &amp;&amp; x &lt;= px + width &amp;&amp; y &gt;= py &amp;&amp; y &lt;= py + height);
+}
+handleClick() {
+    // Default: do nothing. Subclasses can override for interactivity.
+}</code></pre>
+  <p><strong>Clicker.js</strong> (counter + callback)</p>
+  <pre><code>handleClick(event) {
+    if (this.interact) {
+        this.clcks++;
+        this.interact(this.clcks);
+    }
+}</code></pre>
+<p><small>Source path: @assets/js/GameEnginev1.1/essentials</small></p>
+</div>
+
+<script>
+(function() {
+
+})();
+</script>
+</div>
+
+
+  </div>
+</div>
+
+
+
+          
+
+          
+          <!-- ASSIGNMENT SUBMISSION FORM -->
+
+
+<div class="assignment-submission">
+  <h3>
+    <i class="fas fa-upload assignment-submission-icon"></i>
+    Submit Assignment
+  </h3>
+
+  <div class="submission-options">
+    <button class="submission-tab" onclick="switchSubmissionType('link')" type="button">
+      <i class="fas fa-link"></i> Link Submission
+    </button>
+    <button class="submission-tab" onclick="switchSubmissionType('file')" type="button">
+      <i class="fas fa-file-upload"></i> File Upload
+    </button>
+  </div>
+
+  <!-- Link Submission Form -->
+  <form class="submission-form" id="link-form">
+    <div class="form-group">
+      <label for="submission-link">Submission Link</label>
+      <input type="url" id="submission-link" placeholder="https://..." required>
+    </div>
+    <div class="form-group">
+      <label for="link-description">Description</label>
+      <textarea id="link-description" placeholder="Describe what you're submitting..." required></textarea>
+    </div>
+    <button type="submit" class="submit-btn">
+      <i class="fas fa-check"></i>
+      Submit Link
+    </button>
+  </form>
+
+  <!-- File Upload Form -->
+  <form class="submission-form hidden" id="file-form">
+    <div class="form-group">
+      <label>Upload Files</label>
+      <div class="file-upload-area" id="file-upload-area">
+        <input type="file" id="file-input" multiple style="display: none;">
+        <div class="file-upload-icon">
+          <i class="fas fa-cloud-upload-alt"></i>
+        </div>
+        <div class="file-upload-text">Click to upload or drag and drop</div>
+        <div class="file-upload-hint">PDF, ZIP, images, or documents (Max 10MB per file)</div>
+      </div>
+      <div class="file-list" id="file-list"></div>
+    </div>
+    <div class="form-group">
+      <label for="file-notes">Notes (Optional)</label>
+      <textarea id="file-notes" placeholder="Add any additional comments..."></textarea>
+    </div>
+    <button type="submit" class="submit-btn" id="file-submit-btn" disabled>
+      <i class="fas fa-check"></i>
+      Submit Files
+    </button>
+  </form>
+
+  <div class="submission-status" id="submission-status"></div>
+</div>
+
+          
+        </div></div>
+    </div>
+</div>
+
+
+
+<!-- Modals for lesson player -->
+<!-- LESSON PLAYER MODALS -->
+
+<!-- Floating hamburger menu (mobile only) -->
+<button class="floating-menu-btn" id="floating-menu-btn" style="display: none;">
+  <i class="fas fa-bars"></i>
+</button>
+
+<!-- Timeline modal overlay -->
+<div class="timeline-modal-overlay" id="timeline-modal-overlay"></div>
+
+<!-- Timeline modal (mobile only) -->
+<div class="timeline-modal" id="timeline-modal">
+  <div class="timeline-modal-header">
+    <h3>Course Timeline</h3>
+    <button class="timeline-close-btn" id="timeline-close-btn" type="button">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <div class="timeline-modal-content" id="timeline-modal-content">
+    <!-- Sprint cards will be populated by JavaScript -->
+  </div>
+</div>
+
+
+
+<script type="module">
+  import { pythonURI, fetchOptions, javaURI } from '/portfolio1/assets/js/api/config.js';
+
+  /**
+   * ============================================
+   * CONFIGURATION & CONSTANTS
+   * ============================================
+   */
+  const COURSE = 'csse';
+  const WEEK = '17';
+  const PAGE_TITLE = "OCS Game Engine Clicker Mechanics";
+  const CURRENT_LESSON_ID = '/gamerunner/cookie';
+  const STORAGE_KEY = `${COURSE}-lesson-completion`;
+  const STATUS_AUTO_HIDE_MS = 5000;
+  const FILE_SIZE_LIMIT_MB = 10;
+  const ASSIGNMENT_ID = null;
+  const ASSIGNMENT_NAME = "null";
+
+  /**
+   * ============================================
+   * SPRINT NAVIGATION: Toggle sprint visibility
+   * ============================================
+   */
+  window.toggleSprint = function (sprintId) {
+    const lessons = document.getElementById(`sprint-${sprintId}-lessons`);
+    const chevron = document.getElementById(`chevron-${sprintId}`);
+    if (!lessons || !chevron) return;
+
+    const isHidden = lessons.style.display === 'none';
+    lessons.style.display = isHidden ? 'block' : 'none';
+    chevron.classList.toggle('fa-chevron-right', !isHidden);
+    chevron.classList.toggle('fa-chevron-down', isHidden);
+  };
+
+  /**
+   * ============================================
+   * COMPLETION DATA LAYER: LocalStorage operations
+   * ============================================
+   */
+  function getCompletionData() {
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      return stored ? JSON.parse(stored) : {};
+    } catch (e) {
+      console.error('Error reading completion data:', e);
+      return {};
+    }
+  }
+
+  function saveCompletionData(data) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    } catch (e) {
+      console.error('Error saving completion data:', e);
+    }
+  }
+
+  /**
+   * ============================================
+   * COMPLETION TOGGLING: Toggle lesson status
+   * ============================================
+   */
+  window.toggleComplete = function () {
+    const completionData = getCompletionData();
+    const isCompleted = completionData[CURRENT_LESSON_ID] || false;
+    completionData[CURRENT_LESSON_ID] = !isCompleted;
+    saveCompletionData(completionData);
+
+    syncCompletionUI();
+    window.dispatchEvent(new CustomEvent('completionChanged', {
+      detail: { itemId: CURRENT_LESSON_ID, completed: !isCompleted }
+    }));
+  };
+
+  /**
+   * ============================================
+   * UI UPDATES: Individual responsibility functions
+   * ============================================
+   */
+  function updateCompleteButton(isCompleted) {
+    const updateButton = (iconId, textId) => {
+      const icon = document.getElementById(iconId);
+      const text = document.getElementById(textId);
+      if (!icon || !text) return;
+      
+      icon.classList.toggle('fa-circle', !isCompleted);
+      icon.classList.toggle('fa-circle-check', isCompleted);
+      text.textContent = isCompleted ? 'Completed' : 'Burndown';
+    };
+    
+    updateButton('complete-icon', 'complete-text');
+    updateButton('complete-icon-topbar', 'complete-text-topbar');
+  }
+
+  function updateLessonItems(completionData) {
+    let completed = 0;
+    const lessonItems = document.querySelectorAll('.lesson-item');
+    
+    lessonItems.forEach(item => {
+      const lessonId = item.dataset.lessonId;
+      const icon = item.querySelector('.lesson-status-icon');
+      const isCompleted = completionData[lessonId] || false;
+      
+      if (icon) {
+        icon.classList.toggle('fa-circle', !isCompleted);
+        icon.classList.toggle('fa-circle-check', isCompleted);
+        icon.classList.toggle('incomplete', !isCompleted);
+        icon.classList.toggle('completed', isCompleted);
+      }
+      
+      if (isCompleted) completed++;
+    });
+    
+    return { total: lessonItems.length, completed };
+  }
+
+  function updateProgressBars(completionData) {
+    const lessonItems = Array.from(document.querySelectorAll('.lesson-item'));
+    const stats = updateLessonItems(completionData);
+    
+    const sidebarProgress = document.getElementById('sidebar-progress');
+    if (sidebarProgress) {
+      const sidebarPercent = stats.total > 0 ? (stats.completed / stats.total) * 100 : 0;
+      sidebarProgress.style.width = `${sidebarPercent}%`;
+    }
+    
+    const progressCount = document.getElementById('progress-count');
+    if (progressCount) {
+      progressCount.textContent = `${stats.completed}/${stats.total}`;
+    }
+    
+    const lessonProgress = document.getElementById('lesson-progress');
+    if (lessonProgress) {
+      const currentIndex = lessonItems.findIndex(item => item.classList.contains('active'));
+      const lessonPercent = stats.total > 0 ? ((currentIndex + 1) / stats.total) * 100 : 0;
+      lessonProgress.style.width = `${lessonPercent}%`;
+    }
+  }
+
+  function syncCompletionUI() {
+    const completionData = getCompletionData();
+    const isCompleted = completionData[CURRENT_LESSON_ID] || false;
+    updateCompleteButton(isCompleted);
+    updateProgressBars(completionData);
+  }
+
+  /**
+   * ============================================
+   * LESSON NAVIGATION: Move between lessons
+   * ============================================
+   */
+  window.prevLesson = function () {
+    const lessonItems = Array.from(document.querySelectorAll('.lesson-item'));
+    const currentIndex = lessonItems.findIndex(item => item.classList.contains('active'));
+    if (currentIndex > 0) {
+      window.location.href = lessonItems[currentIndex - 1].href;
+    } else {
+      alert('You are on the first lesson!');
+    }
+  };
+
+  window.nextLesson = function () {
+    const lessonItems = Array.from(document.querySelectorAll('.lesson-item'));
+    const currentIndex = lessonItems.findIndex(item => item.classList.contains('active'));
+    if (currentIndex >= 0 && currentIndex < lessonItems.length - 1) {
+      window.location.href = lessonItems[currentIndex + 1].href;
+    } else {
+      alert('You\'ve reached the last lesson!');
+    }
+  };
+
+  /**
+   * ============================================
+   * INITIALIZATION: Player setup
+   * ============================================
+   */
+  function initLessonPlayer() {
+    if (document.querySelector('.lesson-player')) {
+      document.body.style.margin = '0';
+      document.body.style.padding = '0';
+    }
+  }
+
+  function expandCurrentSprint() {
+    const activeLesson = document.querySelector('.lesson-item.active');
+    if (!activeLesson) return;
+    
+    const sprintSection = activeLesson.closest('.sprint-section');
+    if (sprintSection) {
+      const sprintToggle = sprintSection.querySelector('.sprint-toggle');
+      if (sprintToggle) sprintToggle.click();
+    }
+  }
+
+  /**
+   * ============================================
+   * CROSS-TAB SYNC: Listen for changes
+   * ============================================
+   */
+  function setupSyncListeners() {
+    window.addEventListener('focus', () => {
+      if (document.querySelector('.lesson-player')) syncCompletionUI();
+    });
+
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden && document.querySelector('.lesson-player')) syncCompletionUI();
+    });
+
+    window.addEventListener('storage', (e) => {
+      if (e.key === STORAGE_KEY && document.querySelector('.lesson-player')) {
+        syncCompletionUI();
+      }
+    });
+
+    window.addEventListener('completionChanged', () => {
+      if (document.querySelector('.lesson-player')) syncCompletionUI();
+    });
+  }
+
+  /**
+   * ============================================
+   * TIMELINE MODAL: Mobile navigation
+   * ============================================
+   */
+  function buildTimelineModal() {
+    const completionData = getCompletionData();
+    const lessonItems = document.querySelectorAll('.lesson-item');
+    const sprintGroups = {};
+
+    lessonItems.forEach(item => {
+      const sprintSection = item.closest('.sprint-section');
+      if (!sprintSection) return;
+      
+      const sprintTitle = sprintSection.querySelector('.sprint-title').textContent;
+      if (!sprintGroups[sprintTitle]) sprintGroups[sprintTitle] = [];
+      
+      sprintGroups[sprintTitle].push({
+        id: item.dataset.lessonId,
+        title: item.querySelector('.lesson-title').textContent,
+        url: item.href,
+        completed: completionData[item.dataset.lessonId] || false,
+        active: item.classList.contains('active')
+      });
+    });
+
+    return sprintGroups;
+  }
+
+  function renderTimelineModal(sprintGroups) {
+    const modalContent = document.getElementById('timeline-modal-content');
+    if (!modalContent) return;
+
+    modalContent.innerHTML = Object.entries(sprintGroups).map(([sprintTitle, lessons]) => {
+      const sprintId = sprintTitle.replace(/\s+/g, '-').toLowerCase();
+      const lessonHTML = lessons.map(lesson => `
+        <a href="${lesson.url}" class="modal-lesson-item ${lesson.active ? 'active' : ''}">
+          <i class="fas ${lesson.completed ? 'fa-circle-check' : 'fa-circle'} modal-lesson-status ${lesson.completed ? 'completed' : 'incomplete'}"></i>
+          <span class="modal-lesson-title">${lesson.title}</span>
+        </a>
+      `).join('');
+      
+      return `
+        <div class="modal-sprint-card">
+          <div class="modal-sprint-header">
+            <h3 class="modal-sprint-title">${sprintTitle}</h3>
+            <button class="modal-sprint-toggle" onclick="toggleModalSprint('${sprintId}')">
+              <i class="fas fa-chevron-down"></i> View Lessons
+            </button>
+          </div>
+          <div class="modal-lessons" id="modal-${sprintId}">
+            ${lessonHTML}
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    // Auto-expand active sprint
+    const sprintGroups_arr = Object.values(sprintGroups);
+    const activeSprintIndex = sprintGroups_arr.findIndex(lessons => 
+      lessons.some(l => l.active)
+    );
+    
+    if (activeSprintIndex !== -1) {
+      const activeSprintTitle = Object.keys(sprintGroups)[activeSprintIndex];
+      const sprintId = activeSprintTitle.replace(/\s+/g, '-').toLowerCase();
+      setTimeout(() => {
+        window.toggleModalSprint(sprintId);
+      }, 0);
+    }
+  }
+
+  window.toggleModalSprint = function (sprintId) {
+    const lessonsContainer = document.getElementById(`modal-${sprintId}`);
+    const toggleBtn = document.querySelector(`[onclick="toggleModalSprint('${sprintId}')"] i`);
+    if (!lessonsContainer || !toggleBtn) return;
+
+    lessonsContainer.classList.toggle('expanded');
+    toggleBtn.classList.toggle('fa-chevron-down', !lessonsContainer.classList.contains('expanded'));
+    toggleBtn.classList.toggle('fa-chevron-up', lessonsContainer.classList.contains('expanded'));
+  };
+
+  function setupMobileModal() {
+    const floatingBtn = document.getElementById('floating-menu-btn');
+    const timelineModal = document.getElementById('timeline-modal');
+    const overlay = document.getElementById('timeline-modal-overlay');
+    const closeBtn = document.getElementById('timeline-close-btn');
+    const modalContent = document.getElementById('timeline-modal-content');
+
+    if (window.innerWidth > 768) {
+      if (floatingBtn) floatingBtn.style.display = 'none';
+      return;
+    }
+
+    if (floatingBtn) floatingBtn.style.display = 'flex';
+
+    const sprintGroups = buildTimelineModal();
+    renderTimelineModal(sprintGroups);
+
+    const openModal = () => {
+      timelineModal.classList.add('open');
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeModal = () => {
+      timelineModal.classList.remove('open');
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    };
+
+    if (floatingBtn) floatingBtn.addEventListener('click', openModal);
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (overlay) overlay.addEventListener('click', closeModal);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && timelineModal.classList.contains('open')) closeModal();
+    });
+
+    if (modalContent) {
+      modalContent.addEventListener('click', (e) => {
+        if (e.target.closest('.modal-lesson-item')) closeModal();
+      });
+    }
+  }
+
+  /**
+   * ============================================
+   * ASSIGNMENT SUBMISSION: API operations
+   * ============================================
+   */
+  async function resolveCurrentUser() {
+    const uidRes = await fetch(`${pythonURI}/api/id`, fetchOptions);
+    if (!uidRes.ok) throw new Error('Not authenticated. Please log in.');
+    const { uid } = await uidRes.json();
+    const personRes = await fetch(`${javaURI}/api/person/uid/${encodeURIComponent(uid)}`, fetchOptions);
+    if (!personRes.ok) throw new Error('Could not resolve your account in the gradebook.');
+    const person = await personRes.json();
+    return { uid, personId: person.id };
+  }
+
+  async function resolveAssignmentName() {
+    if (typeof ASSIGNMENT_NAME === 'string' && ASSIGNMENT_NAME) return ASSIGNMENT_NAME;
+    const res = await fetch(`${javaURI}/api/assignments/${ASSIGNMENT_ID}`, fetchOptions);
+    if (!res.ok) throw new Error('Assignment not found on server.');
+    return await res.text();
+  }
+
+  async function submitLinkToBackend(link, description) {
+    if (!ASSIGNMENT_ID) throw new Error("Assignment ID not configured. Add assignment_id to this page's frontmatter.");
+    const { uid, personId } = await resolveCurrentUser();
+    const content = { type: 'link', url: link, notes: description };
+    const res = await fetch(`${javaURI}/api/submissions/${ASSIGNMENT_ID}`, {
+      ...fetchOptions,
+      method: 'POST',
+      body: JSON.stringify({
+        assignmentId: ASSIGNMENT_ID,
+        submitterId: personId,
+        isGroupSubmission: false,
+        content,
+        comment: description,
+        isLate: false
+      })
+    });
+    if (!res.ok) {
+      const e = await res.json().catch(() => ({}));
+      throw new Error(e.error || res.statusText);
+    }
+    // Dual-write to EshikaP1's grades system
+    const assignmentLabel = (typeof ASSIGNMENT_NAME === 'string' && ASSIGNMENT_NAME) ? ASSIGNMENT_NAME : String(ASSIGNMENT_ID);
+    await fetch(`${javaURI}/api/grades`, {
+      ...fetchOptions,
+      method: 'POST',
+      body: JSON.stringify({ uid, assignment: assignmentLabel, score: null, submission: content, submittedAt: new Date().toISOString() })
+    }).catch(() => {}); // non-blocking — don't fail submission if grades write fails
+  }
+
+  async function submitFilesToBackend(files, notes) {
+    if (!ASSIGNMENT_ID) throw new Error("Assignment ID not configured. Add assignment_id to this page's frontmatter.");
+    const { uid, personId } = await resolveCurrentUser();
+    const assignmentName = await resolveAssignmentName();
+    for (const file of files) {
+      const content = { type: 'file', filename: file.name, notes: notes || '' };
+      const fd = new FormData();
+      fd.append('assignmentName', assignmentName);
+      fd.append('userId', personId);
+      fd.append('username', uid);
+      fd.append('file', file);
+      if (notes) fd.append('notes', notes);
+      const r = await fetch(`${javaURI}/api/assignment-submissions/upload`, {
+        method: 'POST',
+        mode: fetchOptions.mode,
+        credentials: fetchOptions.credentials,
+        headers: { 'X-Origin': 'client' },
+        body: fd
+      });
+      if (!r.ok) {
+        const e = await r.json().catch(() => ({}));
+        throw new Error(`Upload failed for ${file.name}: ` + (e.error || r.statusText));
+      }
+      // Dual-write to EshikaP1's grades system
+      const assignmentLabel = (typeof ASSIGNMENT_NAME === 'string' && ASSIGNMENT_NAME) ? ASSIGNMENT_NAME : String(ASSIGNMENT_ID);
+      await fetch(`${javaURI}/api/grades`, {
+        ...fetchOptions,
+        method: 'POST',
+        body: JSON.stringify({ uid, assignment: assignmentLabel, score: null, submission: content, submittedAt: new Date().toISOString() })
+      }).catch(() => {}); // non-blocking
+    }
+  }
+
+  /**
+   * ============================================
+   * FILE HANDLING: File operations
+   * ============================================
+   */
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        let encoded = reader.result.toString().replace(/^data:(.*,)?/, '');
+        if ((encoded.length % 4) > 0) {
+          encoded += '='.repeat(4 - (encoded.length % 4));
+        }
+        resolve(encoded);
+      };
+      reader.onerror = error => reject(error);
+    });
+  }
+
+  function formatFileSize(bytes) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+  }
+
+  /**
+   * ============================================
+   * STATUS MESSAGES: Display feedback
+   * ============================================
+   */
+  function showStatus(type, message) {
+    const status = document.getElementById('submission-status');
+    if (!status) return;
+    const icon = type === 'success' ? 'check-circle' : type === 'loading' ? 'spinner fa-spin' : 'exclamation-circle';
+    status.className = `submission-status ${type}`;
+    status.innerHTML = `<i class="fas fa-${icon}"></i> ${message}`;
+    status.style.display = 'block';
+    if (type !== 'loading') {
+      setTimeout(() => {
+        status.style.display = 'none';
+      }, STATUS_AUTO_HIDE_MS);
+    }
+  }
+
+  /**
+   * ============================================
+   * SUBMISSION STORAGE: Local persistence
+   * ============================================
+   */
+  function saveSubmissionLocally(type, data) {
+    const submissions = JSON.parse(localStorage.getItem('assignment-submissions') || '{}');
+    const lessonId = window.location.pathname;
+    if (!submissions[lessonId]) submissions[lessonId] = [];
+    submissions[lessonId].push({ type, data, timestamp: new Date().toISOString() });
+    localStorage.setItem('assignment-submissions', JSON.stringify(submissions));
+  }
+
+  /**
+   * ============================================
+   * SUBMISSION UI: Tab switching & file display
+   * ============================================
+   */
+  window.switchSubmissionType = function (type) {
+    document.querySelectorAll('.submission-tab').forEach(tab => tab.classList.remove('active'));
+    event.target.closest('.submission-tab').classList.add('active');
+    
+    document.querySelectorAll('.submission-form').forEach(form => form.classList.remove('active'));
+    document.getElementById(`${type}-form`).classList.add('active');
+    
+    const status = document.getElementById('submission-status');
+    if (status) status.style.display = 'none';
+  };
+
+  window.removeFile = function (index) {
+    const fileInput = document.getElementById('file-input');
+    const fileList = document.getElementById('file-list');
+    if (!fileInput || !fileList) return;
+    
+    const dt = new DataTransfer();
+    Array.from(fileInput.files).forEach((file, i) => {
+      if (i !== index) dt.items.add(file);
+    });
+    fileInput.files = dt.files;
+    updateFileListDisplay();
+  };
+
+  /**
+   * ============================================
+   * FILE DISPLAY: Render file list
+   * ============================================
+   */
+  function updateFileListDisplay() {
+    const fileInput = document.getElementById('file-input');
+    const fileList = document.getElementById('file-list');
+    const fileSubmitBtn = document.getElementById('file-submit-btn');
+    
+    if (!fileList) return;
+    
+    fileList.innerHTML = Array.from(fileInput.files).map((file, index) => `
+      <div class="file-item">
+        <div class="file-info">
+          <i class="fas fa-file"></i>
+          <div>
+            <div class="file-name">${file.name}</div>
+            <div class="file-size">${formatFileSize(file.size)}</div>
+          </div>
+        </div>
+        <button type="button" class="remove-file" onclick="removeFile(${index})">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    `).join('');
+    
+    if (fileSubmitBtn) fileSubmitBtn.disabled = fileInput.files.length === 0;
+  }
+
+  /**
+   * ============================================
+   * FORM SUBMISSION: Handle submissions
+   * ============================================
+   */
+  function setupSubmissionForms() {
+    const linkForm = document.getElementById('link-form');
+    if (linkForm) {
+      linkForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const link = document.getElementById('submission-link').value.trim();
+        const description = document.getElementById('link-description').value.trim();
+        const submitBtn = linkForm.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        showStatus('loading', 'Submitting...');
+        try {
+          await submitLinkToBackend(link, description);
+          saveSubmissionLocally('link', { link, description });
+          showStatus('success', 'Link submitted successfully!');
+          this.reset();
+        } catch (err) {
+          showStatus('error', err.message);
+        } finally {
+          submitBtn.disabled = false;
+        }
+      });
+    }
+
+    const fileForm = document.getElementById('file-form');
+    if (fileForm) {
+      fileForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const fileInput = document.getElementById('file-input');
+        const notes = document.getElementById('file-notes')?.value?.trim() || '';
+        const submitBtn = fileForm.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        showStatus('loading', 'Uploading...');
+        try {
+          for (const file of fileInput.files) {
+            if (file.size > FILE_SIZE_LIMIT_MB * 1024 * 1024) {
+              throw new Error(`${file.name} exceeds ${FILE_SIZE_LIMIT_MB}MB limit.`);
+            }
+          }
+          await submitFilesToBackend(Array.from(fileInput.files), notes);
+          saveSubmissionLocally('file', { files: Array.from(fileInput.files).map(f => f.name), notes });
+          showStatus('success', `${fileInput.files.length} file(s) submitted successfully!`);
+          fileInput.value = '';
+          updateFileListDisplay();
+          this.reset();
+        } catch (err) {
+          showStatus('error', err.message);
+        } finally {
+          submitBtn.disabled = false;
+        }
+      });
+    }
+  }
+
+  /**
+   * ============================================
+   * MASTER INITIALIZATION
+   * ============================================
+   */
+  function initializePage() {
+    // Lesson player setup
+    initLessonPlayer();
+    expandCurrentSprint();
+    syncCompletionUI();
+    setupSyncListeners();
+    
+    // Mobile enhancements
+    setupMobileModal();
+    window.addEventListener('resize', () => setupMobileModal());
+    
+    // Assignment submission
+    setupSubmissionForms();
+    
+    // File upload handling
+    const fileUploadArea = document.getElementById('file-upload-area');
+    const fileInput = document.getElementById('file-input');
+    if (fileUploadArea && fileInput) {
+      fileUploadArea.addEventListener('click', () => fileInput.click());
+      fileUploadArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        fileUploadArea.classList.add('dragover');
+      });
+      fileUploadArea.addEventListener('dragleave', () => {
+        fileUploadArea.classList.remove('dragover');
+      });
+      fileUploadArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        fileUploadArea.classList.remove('dragover');
+        fileInput.files = e.dataTransfer.files;
+        updateFileListDisplay();
+      });
+      fileInput.addEventListener('change', () => updateFileListDisplay());
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', initializePage);
+</script>
+
+
+                                </div>
+            </div>
+        </main><footer id="masterFooter" class="site-footer h-card">
+    <data class="u-url" href="/portfolio1/"></data>
+
+    <!-- <div class="wrapper">
+
+        <div class="social-links"><ul class="social-media-list"><li>
+    <a rel="me" href="" target="_blank" title="">
+      <span class="grey fa-brands fa- fa-lg"></span>
+    </a>
+  </li><li>
+    <a rel="me" href="" target="_blank" title="">
+      <span class="grey fa-brands fa- fa-lg"></span>
+    </a>
+  </li><li>
+    <a rel="me" href="" target="_blank" title="">
+      <span class="grey fa-brands fa- fa-lg"></span>
+    </a>
+  </li>
+  <li>
+    <a href="/portfolio1/feed.xml" target="_blank" title="Subscribe to syndication feed">
+      <svg class="svg-icon grey" viewbox="0 0 16 16">
+        <path d="M12.8 16C12.8 8.978 7.022 3.2 0 3.2V0c8.777 0 16 7.223 16 16h-3.2zM2.194
+          11.61c1.21 0 2.195.985 2.195 2.196 0 1.21-.99 2.194-2.2 2.194C.98 16 0 15.017 0
+          13.806c0-1.21.983-2.195 2.194-2.195zM10.606
+          16h-3.11c0-4.113-3.383-7.497-7.496-7.497v-3.11c5.818 0 10.606 4.79 10.606 10.607z"
+        />
+      </svg>
+    </a>
+  </li>
+</ul>
+</div>
+
+    </div> -->
+
+    <!--<p style="font-style: italic;">aesthetihawkc v3.0rc1.1</p>-->
+
+    <div class="footer-links">
+        <div class="footer-previous">
+            
+        </div>
+
+        <div class="footer-home">
+            
+        </div>
+
+        <div class="footer-next">
+            
+        </div>
+    </div>
+
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const style = getComputedStyle(document.documentElement);
+        const theme = style.getPropertyValue('--theme').trim() || "dark";
+        const panel = style.getPropertyValue('--panel-mid').trim() || "#0b1220";
+        const text = style.getPropertyValue('--pref-text-color').trim() || "#e6eef8";
+        const accent = style.getPropertyValue('--pref-accent-color').trim() || "#3b82f6";
+        const fontFamily = style.getPropertyValue('--pref-font-family').trim() || "Arial, sans-serif";
+        mermaid.initialize({ 
+            startOnLoad: false,
+            theme: theme,
+            securityLevel: 'loose',
+            themeVariables: {
+                background: panel,
+                primaryColor: panel,
+                primaryTextColor: text,
+                primaryBorderColor: accent,
+                lineColor: text,
+                arrowheadColor: text,
+                fontFamily: fontFamily
+            }
+        });
+        
+        // Convert fenced code blocks to mermaid divs
+        document.querySelectorAll('pre code.language-mermaid').forEach((block, index) => {
+            const content = block.textContent;
+            const wrapper = document.createElement('div');
+            wrapper.className = 'mermaid';
+            wrapper.id = 'mermaid-' + index;
+            wrapper.textContent = content;
+            block.parentElement.parentNode.replaceChild(wrapper, block.parentElement);
+        });
+        
+        mermaid.run();
+    });
+</script></body>
+</html>

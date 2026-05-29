@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>JavaScript Variables and HTML DOM Homework | Open Coding</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="JavaScript Variables and HTML DOM Homework" />
+<meta name="author" content="John Mortensen" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Perform variables and HTML DOM homework using this notebook." />
+<meta name="twitter:description" property="og:description" content="Perform variables and HTML DOM homework using this notebook." />
+<meta property="og:site_name" content="Open Coding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-02-16T00:00:00-08:00" />
+<meta property="article:modified_time" content="2026-02-16T00:00:00-08:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="JavaScript Variables and HTML DOM Homework" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"John Mortensen"},"dateModified":"2026-02-16T00:00:00-08:00","datePublished":"2026-02-16T00:00:00-08:00","description":"Perform variables and HTML DOM homework using this notebook.","headline":"JavaScript Variables and HTML DOM Homework","mainEntityOfPage":{"@type":"WebPage","@id":"/portfolio1/game/essentials/variables"},"url":"/portfolio1/game/essentials/variables"}</script>
+<!-- End Jekyll SEO tag -->
+<link id="main-stylesheet" rel="stylesheet" href="/portfolio1/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="/portfolio1/feed.xml" title="Open Coding" />
+<!-- Minima start custom head snippets -->
+<!-- Favicon for browser tabs and bookmarks -->
+<link rel="icon" href="/portfolio1/favicon.ico" type="image/x-icon">
+
+<!-- Support for Apple devices (iPhone/iPad homescreen icon) -->
+<link rel="apple-touch-icon" sizes="180x180" href="/portfolio1/apple-touch-icon.png">
+
+<!-- Support for modern browsers and pinned tabs -->
+<link rel="icon" type="image/png" sizes="32x32" href="/portfolio1/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/portfolio1/favicon-16x16.png">
+
+<!-- Google Fonts - commonly used across the site -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Open+Sans:wght@400;600&family=Lato:wght@400;700&family=Montserrat:wght@400;600&family=Noto+Sans:wght@400;700&family=Merriweather:wght@400;700&family=Source+Code+Pro:wght@400;700&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet"><link rel="stylesheet" href="/portfolio1/assets/css/style.css">
+<script src="/portfolio1/assets/js/user-preferences.js"></script>
+<!-- Set up javaURI globally for OCS Analytics Tracker -->
+<script>
+    if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+        window.javaURI = "http://localhost:8585";
+    } else {
+        window.javaURI = "https://spring.opencodingsociety.com";
+    }
+</script>
+<!-- OCS Analytics Tracking Script (loaded on every page) -->
+<script src="/portfolio1/assets/js/ocs-analytics-tracker.js" defer></script><!-- Keyboard Shortcuts (Alt+Shift+key navigation, loaded on every page) -->
+<script>window.baseurl = "/portfolio1";</script>
+<script src="/portfolio1/assets/js/keyboard-shortcuts.js" defer></script>
+
+<!-- AI A/B Test Engine SDK (passes site.baseurl for asset resolution) -->
+<script src="http://localhost:3000/sdk.js"
+  data-site-baseurl="/portfolio1"
+  data-project-id="cmnfour780000f63gu69kg2v8"></script>
+<script type="importmap">
+{
+  "imports": {
+    "@assets/": "/portfolio1/assets/"
+  }
+}
+</script>
+<!-- Minima end custom head snippets -->
+ </head>
+<body>    <header class="site-header">
+        <div class="wrapper"><a class="site-title" rel="author" href="/portfolio1/" data-value="Open Coding">
+                <img id="site-logo" src="/portfolio1/images/logo.png" alt="Logo">
+            </a><nav class="site-nav">
+                <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+                <label for="nav-trigger">
+                    <span class="menu-icon">
+                        <svg viewBox="0 0 18 15" width="18px" height="15px">
+                            <path
+                                d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z" />
+                        </svg>
+                    </span>
+                </label>
+
+                <div class="trigger"><a class="page-link" href="/portfolio1/blogs/">Blogs</a><a class="page-link" href="/portfolio1/search/">Search</a><a class="page-link" href="/portfolio1/about/">About</a><a id="loginArea" class="page-link" href="/portfolio1/login">Login</a>
+                </div>
+            </nav></div>
+    </header>
+
+    <script type="module" src="/portfolio1/assets/js/api/login.js"></script>    
+
+
+        
+
+        
+
+        <main class="page-content" aria-label="Content">
+            <div class="wrapper">
+                                <div class="opencs_root">
+                                    
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+  /* === Post Header === */
+  .post-header h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+
+  .page-description {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 1rem;
+  }
+
+  /* === Meta Info (date, author, reading time) === */
+  .post-meta {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+  }
+
+  .post-meta time {
+    font-weight: 500;
+  }
+
+  /* === Category & Breadcrumb Links === */
+  .category-tags-link {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    margin: 0.1rem;
+    font-size: 0.85rem;
+    background: #f5f5f5;
+    border-radius: 999px;
+    color: #333;
+    text-decoration: none;
+    transition: background 0.2s ease;
+  }
+
+  .category-tags-link:hover {
+    background: #e0e0e0;
+  }
+
+  .post-header {
+    margin-bottom: 1rem;
+  }
+
+  .post-header a.category-tags-link {
+    margin-right: 0.3rem;
+  }
+
+  /* === Main Content Styling === */
+  .post-content {
+    line-height: 1.7;
+    font-size: 1rem;
+  }
+
+  .post-content h2,
+  .post-content h3 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.3rem;
+  }
+
+  /* === Comments Section Separator === */
+  .post-content+div,
+  .post-content+section {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #ddd;
+  }
+
+  /* Assignment Submission Widget */
+  .assignment-submission {
+    margin-top: 48px;
+    padding: 24px;
+    background: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+  }
+
+  .assignment-submission h3 {
+    color: #333;
+    font-size: 1.25rem;
+    margin: 0 0 16px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .assignment-submission-icon {
+    color: #2563eb;
+  }
+
+  .submission-options {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .submission-tab {
+    padding: 8px 16px;
+    background: white;
+    border: 1px solid #d0d0d0;
+    border-radius: 6px;
+    color: #555;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .submission-tab:hover {
+    background: #f0f0f0;
+    color: #333;
+  }
+
+  .submission-tab.active {
+    background: #2563eb;
+    color: white;
+    border-color: #2563eb;
+  }
+
+  .submission-form {
+    display: none;
+  }
+
+  .submission-form.active {
+    display: block;
+  }
+
+  .form-group {
+    margin-bottom: 16px;
+  }
+
+  .form-group label {
+    display: block;
+    color: #333;
+    font-size: 14px;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .form-group input[type="text"],
+  .form-group input[type="url"],
+  .form-group textarea {
+    width: 100%;
+    padding: 10px 12px;
+    background: white;
+    border: 1px solid #d0d0d0;
+    border-radius: 6px;
+    color: #333;
+    font-size: 14px;
+    font-family: inherit;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+  }
+
+  .form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+
+  .file-upload-area {
+    border: 2px dashed #d0d0d0;
+    border-radius: 8px;
+    padding: 32px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: white;
+  }
+
+  .file-upload-area:hover {
+    border-color: #2563eb;
+    background: #f0f7ff;
+  }
+
+  .file-upload-area.dragover {
+    border-color: #2563eb;
+    background: #f0f7ff;
+  }
+
+  .file-upload-icon {
+    font-size: 48px;
+    color: #2563eb;
+    margin-bottom: 12px;
+  }
+
+  .file-upload-text {
+    color: #555;
+    margin-bottom: 8px;
+  }
+
+  .file-upload-hint {
+    color: #999;
+    font-size: 12px;
+  }
+
+  .file-list {
+    margin-top: 16px;
+  }
+
+  .file-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    margin-bottom: 8px;
+  }
+
+  .file-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .file-name {
+    color: #333;
+    font-size: 14px;
+  }
+
+  .file-size {
+    color: #999;
+    font-size: 12px;
+  }
+
+  .remove-file {
+    background: transparent;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .remove-file:hover {
+    background: #fee;
+    color: #dc2626;
+  }
+
+  .submit-btn {
+    padding: 12px 24px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .submit-btn:hover {
+    background: #1d4ed8;
+  }
+
+  .submit-btn:disabled {
+    background: #d0d0d0;
+    color: #999;
+    cursor: not-allowed;
+  }
+
+  .submission-status {
+    margin-top: 16px;
+    padding: 12px;
+    border-radius: 6px;
+    display: none;
+  }
+
+  .submission-status.success {
+    display: block;
+    background: #dbeafe;
+    border: 1px solid #2563eb;
+    color: #1e40af;
+  }
+
+  .submission-status.error {
+    display: block;
+    background: #fee2e2;
+    border: 1px solid #dc2626;
+    color: #991b1b;
+  }
+
+  .submission-status.loading {
+    display: block;
+    background: #dbeafe;
+    border: 1px solid #3b82f6;
+    color: #1d4ed8;
+  }
+</style>
+
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+    
+    
+    
+    
+    
+    Breadcrumb:
+    <a class="category-tags-link" href="/portfolio1/game/essentials">/game/essentials</a>
+    
+    
+    
+    <p class="post-meta post-meta-title"><time class="dt-published" datetime="2026-02-16T00:00:00-08:00" itemprop="datePublished">
+        Feb 16, 2026
+      </time>• 
+      <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-author h-card" itemprop="name">John Mortensen</span></span>• <span class="read-time" title="Estimated read time">
+    
+     2 min read  </span></p>
+    <h3>JavaScript Variables and HTML DOM Homework</h3><p class="page-description">Perform variables and HTML DOM homework using this notebook.</p></header>
+
+  <div class="post-content e-content" itemprop="articleBody"><h2 id="javascript-variables-homework-notebook">JavaScript Variables: Homework Notebook`</h2>
+
+<p>Use this Notbook to perform JavaScript Variable Homework Hacks.</p>
+
+<hr />
+
+<!-- Reusable Code Runner Component -->
+<div class="code-runner-container" id="runner-game-essentials-variables-0" data-runner-id="game-essentials-variables-0" data-default-code="&quot;\n/*\nAdd-Lives Homework Instructions:\n- Add a reaction message for the enemy when it reacts (e.g., \&quot;Enemy reacts!\&quot;).\n- Add lives to player\n  - Reflect: Did adding lives impact the enemy? Why or why not?\n- Add lives to enemy \n  - Reflect: How can values be the same for both player and enemy? Without duplicating assignments?\n  - Reflect: How can you have default values for lives, but also allow for custom values?\n*/\n\n\nlet gameSpeed = 10; // Global game speed variable\n\n// Example of a class representing a game object\nclass GameObject {\n  constructor(data) {\n    // Using &#39;this&#39; to define properties of the class instance\n    this.image = data.image;\n    this.width = data.width;\n    this.height = data.height;\n    this.speedRatio = data.speedRatio;\n    // Position coordinates of the object are set to default values if arguments are not provided\n    this.x = data.x;\n    this.y = data.y;\n    // Speed is calculated based on the global game speed and the speed ratio\n    this.speed = gameSpeed * this.speedRatio;\n    // Store the react callback if provided\n    this.react = data.react || function() {\n      console.log(&#39;No reaction defined&#39;);\n    };\n  }\n}\n\nconst player_data = {\n  image: &#39;player.png&#39;,\n  width: 50,\n  height: 50,\n  speedRatio: 1.5,\n  x: 0,\n  y: 0,\n  react: function() {\n    console.log(`${this.image} is reacting at position (${this.x}, ${this.y})!`);\n  }\n};\n\nconst player = new GameObject(player_data);\n\nconsole.log(\&quot;Player Object (Class Instance):\&quot;, player, \&quot;Type:\&quot;, typeof player);\n// Object reference\nconsole.log(\&quot;Player Image:\&quot;, player.image);\n\n// Activate the react callback\nplayer.react();\n\nconst enemy_data = {\n  image: &#39;enemy.png&#39;,\n  width: 40,\n  height: 40,\n  speedRatio: 1.0,\n  x: 100,\n  y: 150\n};\n\nconst enemy = new GameObject(enemy_data);\nconsole.log(\&quot;Enemy Object (Class Instance):\&quot;, enemy, \&quot;Type:\&quot;, typeof enemy);\n\n// Object reference\nconsole.log(\&quot;Enemy Position:\&quot;, `(${enemy.x}, ${enemy.y})`);\nenemy.x += enemy.speed; // Move enemy based on its speed\nconsole.log(\&quot;Enemy New Position after moving:\&quot;, `(${enemy.x}, ${enemy.y})`);\nenemy.react(); // Enemy has default reaction\n&quot;" data-storage-key="_game_essentials_variables_game-essentials-variables-0">
+  
+  
+<div class="challenge-box">
+  <h3>Code Runner Challenge </h3>
+  <p>
+Class definition with properties, methods, and default values
+</p>
+</div>
+
+
+  
+  <details>
+    <summary>View IPYNB Source</summary>
+
+<div>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%%</span><span class="nx">js</span>
+
+<span class="cm">/*
+Add-Lives Homework Instructions:
+- Add a reaction message for the enemy when it reacts (e.g., "Enemy reacts!").
+- Add lives to player
+  - Reflect: Did adding lives impact the enemy? Why or why not?
+- Add lives to enemy 
+  - Reflect: How can values be the same for both player and enemy? Without duplicating assignments?
+  - Reflect: How can you have default values for lives, but also allow for custom values?
+*/</span>
+
+<span class="c1">// CODE_RUNNER: Class definition with properties, methods, and default values</span>
+
+<span class="kd">let</span> <span class="nx">gameSpeed</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span> <span class="c1">// Global game speed variable</span>
+
+<span class="c1">// Example of a class representing a game object</span>
+<span class="kd">class</span> <span class="nx">GameObject</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Using 'this' to define properties of the class instance</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">image</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">image</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">speedRatio</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">speedRatio</span><span class="p">;</span>
+    <span class="c1">// Position coordinates of the object are set to default values if arguments are not provided</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+    <span class="c1">// Speed is calculated based on the global game speed and the speed ratio</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">speed</span> <span class="o">=</span> <span class="nx">gameSpeed</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">speedRatio</span><span class="p">;</span>
+    <span class="c1">// Store the react callback if provided</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">react</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">react</span> <span class="o">||</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">No reaction defined</span><span class="dl">'</span><span class="p">);</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">player_data</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">image</span><span class="p">:</span> <span class="dl">'</span><span class="s1">player.png</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">width</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+  <span class="na">height</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+  <span class="na">speedRatio</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span>
+  <span class="na">x</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="na">y</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="na">react</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">image</span><span class="p">}</span><span class="s2"> is reacting at position (</span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">x</span><span class="p">}</span><span class="s2">, </span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">y</span><span class="p">}</span><span class="s2">)!`</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">player</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GameObject</span><span class="p">(</span><span class="nx">player_data</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Player Object (Class Instance):</span><span class="dl">"</span><span class="p">,</span> <span class="nx">player</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Type:</span><span class="dl">"</span><span class="p">,</span> <span class="k">typeof</span> <span class="nx">player</span><span class="p">);</span>
+<span class="c1">// Object reference</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Player Image:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">player</span><span class="p">.</span><span class="nx">image</span><span class="p">);</span>
+
+<span class="c1">// Activate the react callback</span>
+<span class="nx">player</span><span class="p">.</span><span class="nx">react</span><span class="p">();</span>
+
+<span class="kd">const</span> <span class="nx">enemy_data</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">image</span><span class="p">:</span> <span class="dl">'</span><span class="s1">enemy.png</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">width</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span>
+  <span class="na">height</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span>
+  <span class="na">speedRatio</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+  <span class="na">x</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+  <span class="na">y</span><span class="p">:</span> <span class="mi">150</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">enemy</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GameObject</span><span class="p">(</span><span class="nx">enemy_data</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Enemy Object (Class Instance):</span><span class="dl">"</span><span class="p">,</span> <span class="nx">enemy</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Type:</span><span class="dl">"</span><span class="p">,</span> <span class="k">typeof</span> <span class="nx">enemy</span><span class="p">);</span>
+
+<span class="c1">// Object reference</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Enemy Position:</span><span class="dl">"</span><span class="p">,</span> <span class="s2">`(</span><span class="p">${</span><span class="nx">enemy</span><span class="p">.</span><span class="nx">x</span><span class="p">}</span><span class="s2">, </span><span class="p">${</span><span class="nx">enemy</span><span class="p">.</span><span class="nx">y</span><span class="p">}</span><span class="s2">)`</span><span class="p">);</span>
+<span class="nx">enemy</span><span class="p">.</span><span class="nx">x</span> <span class="o">+=</span> <span class="nx">enemy</span><span class="p">.</span><span class="nx">speed</span><span class="p">;</span> <span class="c1">// Move enemy based on its speed</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Enemy New Position after moving:</span><span class="dl">"</span><span class="p">,</span> <span class="s2">`(</span><span class="p">${</span><span class="nx">enemy</span><span class="p">.</span><span class="nx">x</span><span class="p">}</span><span class="s2">, </span><span class="p">${</span><span class="nx">enemy</span><span class="p">.</span><span class="nx">y</span><span class="p">}</span><span class="s2">)`</span><span class="p">);</span>
+<span class="nx">enemy</span><span class="p">.</span><span class="nx">react</span><span class="p">();</span> <span class="c1">// Enemy has default reaction</span>
+</code></pre></div>      </div>
+
+    </div>
+
+  </details>
+  
+
+  
+  
+  <div class="editor-container">
+  
+  <div class="control-panel">
+    
+      <button type="button" class="runBtn" title="Run">▶</button>
+      <button type="button" class="copyBtn" title="Copy Code">⎘</button>
+      <button type="button" class="saveBtn" title="Save Code">💾</button>
+      <button type="button" class="clearStorageBtn" title="Clear Storage">🗑</button>
+      <select class="languageSelect">
+        <option value="python">Python</option>
+        <option value="java">Java</option>
+        <option value="javascript">JavaScript</option>
+      </select>
+      <select class="fontSizeSelect">
+        <option value="14">14px</option>
+        <option value="16">16px</option>
+        <option value="18">18px</option>
+        <option value="20">20px</option>
+      </select>
+  
+  </div>
+  
+
+  <textarea class="editor-textarea"></textarea>
+
+  
+  <div class="control-panel">
+    
+    <span class="lineCount">Lines: 1</span>
+<span class="charCount">Characters: 0</span>
+
+
+  
+  </div>
+  
+</div>
+
+
+  <div class="output-container">
+    <div class="control-panel">
+      <span>Output</span>
+      <button type="button" class="copyOutputBtn" title="Copy Output">⎘</button>
+    </div>
+    <div class="output-content">Click "Run" in code control panel to see output ...</div>
+    <div class="control-panel">
+      <span class="execTime"></span>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { BaseRunner, CodeExecutor } from '/portfolio1/assets/js/pages/runners/index.js';
+import { pythonURI, javaURI, fetchOptions } from '/portfolio1/assets/js/api/config.js';
+
+(function() {
+  const container = document.getElementById('runner-game-essentials-variables-0');
+  if (!container) return;
+  
+  const initialLang = "javascript";
+  const defaultCode = JSON.parse(container.dataset.defaultCode || "\"\"");
+  const editorHeight = "";
+  const storageKey = container.dataset.storageKey;
+  const runner = new BaseRunner(container, { storageKey });
+
+  const editor = runner.initializeEditor({
+    defaultCode,
+    editorHeight,
+    fallbackCode: "print('Hello, world!')",
+    codeMirrorOptions: {
+      lineNumbers: true,
+      mode: initialLang === "java" ? "text/x-java" : (initialLang || "python"),
+      theme: "darcula",
+      indentUnit: 4,
+      tabSize: 4
+    }
+  });
+
+  const langSelect = container.querySelector('.languageSelect');
+  const fontSizeSelect = container.querySelector('.fontSizeSelect');
+  const outputDiv = container.querySelector('.output-content');
+  const execTimeSpan = container.querySelector('.execTime');
+  const codeExecutor = new CodeExecutor({
+    editor,
+    outputElement: outputDiv,
+    execTimeElement: execTimeSpan,
+    languageSelect: langSelect,
+    pythonURI,
+    javaURI,
+    fetchOptions,
+  });
+
+  // Set initial language selection
+  if (initialLang) {
+    langSelect.value = initialLang;
+  }
+
+  runner.bindEditorButtons({
+    resetValue: defaultCode || "print('Hello, world!')",
+    onClear: () => {
+      outputDiv.textContent = 'Storage cleared. Code reset to default.';
+      execTimeSpan.textContent = '';
+    }
+  });
+
+  // Font size changer
+  fontSizeSelect.addEventListener("change", () => {
+    const size = fontSizeSelect.value;
+    container.querySelector('.CodeMirror').style.fontSize = size + 'px';
+    editor.refresh();
+  });
+
+  // Language switcher
+  langSelect.addEventListener("change", () => {
+    const lang = langSelect.value;
+    if (lang === "python") {
+      editor.setOption("mode", "python");
+    } else if (lang === "java") {
+      editor.setOption("mode", "text/x-java");
+    } else if (lang === "javascript") {
+      editor.setOption("mode", "javascript");
+    }
+  });
+
+  codeExecutor.bindCopyOutput(container.querySelector('.copyOutputBtn'));
+
+  // Run button logic
+  function runCode() {
+    return codeExecutor.run();
+  }
+
+  runner.bindButton('.runBtn', runCode);
+
+  // Keyboard shortcut
+  runner.bindShortcut(runCode);
+})();
+</script>
+
+<div class="ui-runner">
+
+
+<!--
+Add-Button Homework Instructions:
+- Comment the code for Button 2 (Size Change) 
+- Comment the code for Button 3 (Clicker Box).
+- Add a 4th button, and make it do something new when clicked 
+  - change background
+  - highlight the text 
+- Comment your new button code
+-->
+
+
+<!-- Button Container  -->
+<div style="display: flex; flex-wrap: wrap; gap: 10px;">
+    <a style="text-decoration: none;">
+        <!-- Color Change Button with id -->
+        <div id="color-btn" style="background-color: #00FF00; color: white; padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer;">
+            Color Change
+        </div>
+    </a>
+    <a style="text-decoration: none;">
+        <!-- Size Change Button with id -->
+        <div id="size-btn" style="background-color: #FF0000; color: white; padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer;">
+            Size Change
+        </div>
+    </a>
+    <a style="text-decoration: none;">
+        <!-- Clicker Box with id -->
+        <div id="clicker-box" style="background-color: #12ABFF; color: white; padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer;">
+            Clicks: <span id="click-count">0</span>
+        </div>
+    </a>
+</div>
+
+<script>
+(function() {
+// All JS code inside a function to allow multiple runs in Jupyter Notebook without conflicts 
+(function() {
+
+  // 1. Color Change
+  // Define const variable for the color button by its ID
+  const colorBtn = document.getElementById('color-btn'); 
+  // Define isWhite variable to track current color state
+  let isWhite = true;
+  // Define an event listener for the button click event
+  colorBtn.addEventListener('click', function() {
+      // Toggle the button text color between white and black using setProperty with priority
+      if (isWhite) {
+          colorBtn.style.setProperty('color', 'black', 'important');
+      } else {
+          colorBtn.style.setProperty('color', 'white', 'important');
+      }
+      isWhite = !isWhite; // Toggle to opposite state
+  });
+
+  // 2. Size Change
+  const sizeBtn = document.getElementById('size-btn');
+  let isLarge = false;
+  sizeBtn.addEventListener('click', function() {
+      if (isLarge) {
+          sizeBtn.style.padding = '10px 20px';
+          sizeBtn.style.fontSize = '1em';
+      } else {
+          sizeBtn.style.padding = '20px 40px';
+          sizeBtn.style.fontSize = '1.5em';
+      }
+      isLarge = !isLarge;
+  });
+
+  // 3. Clicker Box (Cookie Clicker)
+  const clickerBox = document.getElementById('clicker-box');
+  const clickCount = document.getElementById('click-count');
+  let count = 0;
+  clickerBox.addEventListener('click', function() {
+      clickCount.textContent = ++count; 
+  });
+
+})(); // End Jupyter Notebook required function()
+})();
+</script>
+</div>
+
+<!--
+- Comment the code for Button 2 (Size Change) 
+- Comment the code for Button 3 (Clicker Box).
+- Add a 4th button, and make it do something new when clicked 
+  - change background
+  - highlight the text 
+- Comment your new button code
+-->
+
+<!-- Button Container  -->
+<div style="display: flex; flex-wrap: wrap; gap: 10px;">
+    <a style="text-decoration: none;">
+        <!-- Color Change Button with id -->
+        <div id="color-btn" style="background-color: #00FF00; color: white; padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer;">
+            Color Change
+        </div>
+    </a>
+    <a style="text-decoration: none;">
+        <!-- Size Change Button with id -->
+        <div id="size-btn" style="background-color: #FF0000; color: white; padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer;">
+            Size Change
+        </div>
+    </a>
+    <a style="text-decoration: none;">
+        <!-- Clicker Box with id -->
+        <div id="clicker-box" style="background-color: #12ABFF; color: white; padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer;">
+            Clicks: <span id="click-count">0</span>
+        </div>
+    </a>
+</div>
+
+<script>
+// All JS code inside a function to allow multiple runs in Jupyter Notebook without conflicts 
+(function() {
+
+  // 1. Color Change
+  // Define const variable for the color button by its ID
+  const colorBtn = document.getElementById('color-btn'); 
+  // Define isWhite variable to track current color state
+  let isWhite = true;
+  // Define an event listener for the button click event
+  colorBtn.addEventListener('click', function() {
+      // Tooggle the button text color between white and black
+      colorBtn.style.color = isWhite ? 'black' : 'white'; 
+      isWhite = !isWhite; // Toggle to opposite state
+  });
+
+  // 2. Size Change
+  const sizeBtn = document.getElementById('size-btn');
+  let isLarge = false;
+  sizeBtn.addEventListener('click', function() {
+      if (isLarge) {
+          sizeBtn.style.padding = '10px 20px';
+          sizeBtn.style.fontSize = '1em';
+      } else {
+          sizeBtn.style.padding = '20px 40px';
+          sizeBtn.style.fontSize = '1.5em';
+      }
+      isLarge = !isLarge;
+  });
+
+  // 3. Clicker Box (Cookie Clicker)
+  const clickerBox = document.getElementById('clicker-box');
+  const clickCount = document.getElementById('click-count');
+  let count = 0;
+  clickerBox.addEventListener('click', function() {
+      clickCount.textContent = ++count; 
+  });
+
+})(); // End Jupyter Notebook required function()
+</script>
+
+
+
+    
+  </div><a class="u-url" href="/portfolio1/game/essentials/variables" hidden></a>
+
+  <!-- Enhanced Analytics Tracking -->
+  <script type="module">
+    import { pythonURI, javaURI, fetchOptions } from '/portfolio1/assets/js/api/config.js';
+    window.pythonURI = pythonURI;
+    window.javaURI = javaURI;
+    window.fetchOptions = fetchOptions;
+  </script>
+  <script src="/portfolio1/assets/js/ocs-analytics-enhanced.js"></script>
+  <script src="/portfolio1/assets/js/code-runner-analytics.js"></script>
+  <script src="/portfolio1/assets/js/lesson-completion.js"></script>
+  <script src="/portfolio1/assets/js/lesson-completion-bigsix.js"></script>
+</article>
+
+
+                                </div>
+            </div>
+        </main><footer id="masterFooter" class="site-footer h-card">
+    <data class="u-url" href="/portfolio1/"></data>
+
+    <!-- <div class="wrapper">
+
+        <div class="social-links"><ul class="social-media-list"><li>
+    <a rel="me" href="" target="_blank" title="">
+      <span class="grey fa-brands fa- fa-lg"></span>
+    </a>
+  </li><li>
+    <a rel="me" href="" target="_blank" title="">
+      <span class="grey fa-brands fa- fa-lg"></span>
+    </a>
+  </li><li>
+    <a rel="me" href="" target="_blank" title="">
+      <span class="grey fa-brands fa- fa-lg"></span>
+    </a>
+  </li>
+  <li>
+    <a href="/portfolio1/feed.xml" target="_blank" title="Subscribe to syndication feed">
+      <svg class="svg-icon grey" viewbox="0 0 16 16">
+        <path d="M12.8 16C12.8 8.978 7.022 3.2 0 3.2V0c8.777 0 16 7.223 16 16h-3.2zM2.194
+          11.61c1.21 0 2.195.985 2.195 2.196 0 1.21-.99 2.194-2.2 2.194C.98 16 0 15.017 0
+          13.806c0-1.21.983-2.195 2.194-2.195zM10.606
+          16h-3.11c0-4.113-3.383-7.497-7.496-7.497v-3.11c5.818 0 10.606 4.79 10.606 10.607z"
+        />
+      </svg>
+    </a>
+  </li>
+</ul>
+</div>
+
+    </div> -->
+
+    <!--<p style="font-style: italic;">aesthetihawkc v3.0rc1.1</p>-->
+
+    <div class="footer-links">
+        <div class="footer-previous">
+            
+        </div>
+
+        <div class="footer-home">
+            
+        </div>
+
+        <div class="footer-next">
+            
+        </div>
+    </div>
+
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const style = getComputedStyle(document.documentElement);
+        const theme = style.getPropertyValue('--theme').trim() || "dark";
+        const panel = style.getPropertyValue('--panel-mid').trim() || "#0b1220";
+        const text = style.getPropertyValue('--pref-text-color').trim() || "#e6eef8";
+        const accent = style.getPropertyValue('--pref-accent-color').trim() || "#3b82f6";
+        const fontFamily = style.getPropertyValue('--pref-font-family').trim() || "Arial, sans-serif";
+        mermaid.initialize({ 
+            startOnLoad: false,
+            theme: theme,
+            securityLevel: 'loose',
+            themeVariables: {
+                background: panel,
+                primaryColor: panel,
+                primaryTextColor: text,
+                primaryBorderColor: accent,
+                lineColor: text,
+                arrowheadColor: text,
+                fontFamily: fontFamily
+            }
+        });
+        
+        // Convert fenced code blocks to mermaid divs
+        document.querySelectorAll('pre code.language-mermaid').forEach((block, index) => {
+            const content = block.textContent;
+            const wrapper = document.createElement('div');
+            wrapper.className = 'mermaid';
+            wrapper.id = 'mermaid-' + index;
+            wrapper.textContent = content;
+            block.parentElement.parentNode.replaceChild(wrapper, block.parentElement);
+        });
+        
+        mermaid.run();
+    });
+</script></body>
+</html>

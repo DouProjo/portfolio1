@@ -1,0 +1,208 @@
+<h1 id="analytics-help">Analytics Help</h1>
+
+<h2 id="overview">Overview</h2>
+
+<ul>
+  <li>
+    <p>The Nighthawk Coders’ portfolio dashboard visualizes your GitHub activity and predicts grades based on real contributions.</p>
+  </li>
+  <li>
+    <p>Designed for both students and admins to track, review, and improve coding engagement.</p>
+  </li>
+  <li>
+    <p>Focuses on clarity, interactivity, and actionable insights.</p>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="dashboard-features">Dashboard Features</h2>
+
+<ul>
+  <li><strong>Tabbed Interface:</strong>
+    <ul>
+      <li><strong>GitHub Analytics:</strong> View your profile, commits, PRs, issues, and code changes.</li>
+      <li><strong>Grade Predictor:</strong> Estimate your grade using real GitHub data.</li>
+      <li><strong>Admin Search:</strong> Admins can look up and compare any user’s contributions.</li>
+    </ul>
+  </li>
+  <li><strong>Interactive Commit Cards:</strong>
+    <ul>
+      <li>Each card links directly to the commit on GitHub.</li>
+      <li>Shows message, date, additions, deletions, and repository.</li>
+    </ul>
+  </li>
+  <li><strong>Modal Popups:</strong>
+    <ul>
+      <li>Click info icons to view raw JSON analytics for commits, PRs, and issues.</li>
+    </ul>
+  </li>
+  <li><strong>Admin Tools:</strong>
+    <ul>
+      <li>Search by UID to get a user summary and recent commit cards.</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="api-overview">API Overview</h2>
+
+<ul>
+  <li>
+    <p><strong>Blueprint:</strong> <code class="language-plaintext highlighter-rouge">/api/analytics</code></p>
+  </li>
+  <li><strong>Security:</strong>
+    <ul>
+      <li>All endpoints require JWT authentication (<code class="language-plaintext highlighter-rouge">@token_required</code>).</li>
+      <li>Admin endpoints require admin role.</li>
+    </ul>
+  </li>
+  <li><strong>Date Ranges:</strong>
+    <ul>
+      <li>Optional; defaults to trimester logic (June–Nov, Nov–Mar, Apr–June).</li>
+    </ul>
+  </li>
+  <li><strong>Error Handling:</strong>
+    <ul>
+      <li>Clear error messages for invalid UIDs, API issues, or permission errors.</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="api-endpoints">API Endpoints</h2>
+
+<ul>
+  <li><strong>User Endpoints (JWT Protected):</strong>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">GET /github/user</code> — Fetch your GitHub profile data.</li>
+      <li><code class="language-plaintext highlighter-rouge">GET /github/user/profile_links</code> — Get links to your GitHub profile and repositories.</li>
+      <li><code class="language-plaintext highlighter-rouge">GET /github/user/commits</code> — Get commit stats, additions, deletions, and details.</li>
+      <li><code class="language-plaintext highlighter-rouge">GET /github/user/prs</code> — List your pull requests.</li>
+      <li><code class="language-plaintext highlighter-rouge">GET /github/user/issues</code> — List your created issues.</li>
+      <li><code class="language-plaintext highlighter-rouge">GET /github/user/issue_comments</code> — Your comments on issues.</li>
+      <li><code class="language-plaintext highlighter-rouge">GET /github/user/received_issue_comments</code> — Comments received on your issues.</li>
+    </ul>
+  </li>
+  <li><strong>Admin Endpoints:</strong>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">GET /commits/&lt;uid&gt;</code> — View another user’s commit data (admin only).</li>
+      <li><code class="language-plaintext highlighter-rouge">GET /issues/&lt;uid&gt;</code> — View another user’s issue data (admin only).</li>
+    </ul>
+  </li>
+  <li><strong>Organization Endpoints:</strong>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">GET /github/org/&lt;org_name&gt;/users</code> — List users in a GitHub organization.</li>
+      <li><code class="language-plaintext highlighter-rouge">GET /github/org/&lt;org_name&gt;/repos</code> — List repositories in a GitHub organization.</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="backend-logic">Backend Logic</h2>
+
+<ul>
+  <li><strong>Authentication:</strong>
+    <ul>
+      <li>All endpoints require a valid JWT token.</li>
+      <li>Admin endpoints check for admin role.</li>
+    </ul>
+  </li>
+  <li><strong>Date Handling:</strong>
+    <ul>
+      <li>If no date range is provided, the API uses trimester logic to select a relevant period.</li>
+    </ul>
+  </li>
+  <li><strong>GitHub Data Collection:</strong>
+    <ul>
+      <li>Uses both REST and GraphQL APIs for detailed commit, PR, and issue data.</li>
+      <li>Tracks additions, deletions, comments, and more.</li>
+    </ul>
+  </li>
+  <li><strong>Error Handling:</strong>
+    <ul>
+      <li>Returns clear error messages for invalid requests or API failures.</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="model-githubuser-class">Model: <code class="language-plaintext highlighter-rouge">GitHubUser</code> Class</h2>
+
+<ul>
+  <li><strong>Purpose:</strong>
+    <ul>
+      <li>Handles all GitHub data retrieval for a user.</li>
+    </ul>
+  </li>
+  <li><strong>Key Methods:</strong>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">get(uid)</code> — Fetches user profile.</li>
+      <li><code class="language-plaintext highlighter-rouge">get_profile_links(uid)</code> — Returns profile and repo URLs.</li>
+      <li><code class="language-plaintext highlighter-rouge">get_commit_stats(uid, start, end)</code> — Commit details, additions, deletions.</li>
+      <li><code class="language-plaintext highlighter-rouge">get_pr_stats(uid, start, end)</code> — Pull request details.</li>
+      <li><code class="language-plaintext highlighter-rouge">get_issue_stats(uid, start, end)</code> — Issue details.</li>
+      <li><code class="language-plaintext highlighter-rouge">get_total_received_issue_comments(uid, start, end)</code> — Total comments received.</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="smart-grade-logic">Smart Grade Logic</h2>
+
+<ul>
+  <li><strong>Metrics Used:</strong>
+    <ul>
+      <li>Total commits</li>
+      <li>Lines added and deleted</li>
+      <li>Number of PRs and issues</li>
+      <li>Public repos and gists</li>
+      <li>Followers and following</li>
+    </ul>
+  </li>
+  <li><strong>Weighted Formula:</strong>
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">score</span> <span class="o">+=</span> <span class="nx">commits</span> <span class="o">*</span> <span class="mi">2</span>
+<span class="nx">score</span> <span class="o">+=</span> <span class="nx">additions</span> <span class="o">*</span> <span class="mf">0.15</span>
+<span class="nx">score</span> <span class="o">+=</span> <span class="nx">deletions</span> <span class="o">*</span> <span class="mf">0.1</span>
+<span class="nx">score</span> <span class="o">+=</span> <span class="nx">prs</span> <span class="o">*</span> <span class="mi">3</span>
+<span class="nx">score</span> <span class="o">+=</span> <span class="nx">issues</span> <span class="o">*</span> <span class="mf">1.5</span>
+<span class="nx">score</span> <span class="o">+=</span> <span class="nx">repos</span> <span class="o">*</span> <span class="mf">1.2</span>
+<span class="nx">score</span> <span class="o">+=</span> <span class="nx">gists</span> <span class="o">*</span> <span class="mf">0.5</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Grade Mapping:</strong>
+    <ul>
+      <li>90% (A): score &gt; 70</li>
+      <li>80% (B): score &gt; 50</li>
+      <li>70% (C): score &gt; 30</li>
+      <li>55% (F): score ≤ 30</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="visuals">Visuals</h2>
+
+<ul>
+  <li>
+    <p><strong>User Story Flowchart:</strong><br />
+<img src="https://github.com/user-attachments/assets/d3d4de2f-122f-41e8-b75a-341206f69914" alt="User Story Flowchart" /></p>
+  </li>
+  <li>
+    <p><strong>API Diagram:</strong><br />
+<img src="https://github.com/user-attachments/assets/f44da398-cb3d-43ef-b79b-9c6fdd6c30cd" alt="API Diagram" /></p>
+  </li>
+</ul>
+
+<hr />
+
+<p><a href="/dashboard" class="inline-block mb-4 px-4 py-2 rounded bg-blue-600 hover:bg-blue-700 text-white font-semibold no-underline">
+  ← Back to Dashboard
+</a></p>
+

@@ -1,0 +1,1769 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>Network Stack HTTP and TCP/IP | Open Coding</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Network Stack HTTP and TCP/IP" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Frontend and/network/stack Backend application applied to networking layers" />
+<meta name="twitter:description" property="og:description" content="Frontend and/network/stack Backend application applied to networking layers" />
+<meta property="og:site_name" content="Open Coding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-02-05T00:00:00-08:00" />
+<meta property="article:modified_time" content="2025-02-05T00:00:00-08:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Network Stack HTTP and TCP/IP" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-02-05T00:00:00-08:00","datePublished":"2025-02-05T00:00:00-08:00","description":"Frontend and/network/stack Backend application applied to networking layers","headline":"Network Stack HTTP and TCP/IP","mainEntityOfPage":{"@type":"WebPage","@id":"/portfolio1/network/stack"},"url":"/portfolio1/network/stack"}</script>
+<!-- End Jekyll SEO tag -->
+<link id="main-stylesheet" rel="stylesheet" href="/portfolio1/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="/portfolio1/feed.xml" title="Open Coding" />
+<!-- Minima start custom head snippets -->
+<!-- Favicon for browser tabs and bookmarks -->
+<link rel="icon" href="/portfolio1/favicon.ico" type="image/x-icon">
+
+<!-- Support for Apple devices (iPhone/iPad homescreen icon) -->
+<link rel="apple-touch-icon" sizes="180x180" href="/portfolio1/apple-touch-icon.png">
+
+<!-- Support for modern browsers and pinned tabs -->
+<link rel="icon" type="image/png" sizes="32x32" href="/portfolio1/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/portfolio1/favicon-16x16.png">
+
+<!-- Google Fonts - commonly used across the site -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Open+Sans:wght@400;600&family=Lato:wght@400;700&family=Montserrat:wght@400;600&family=Noto+Sans:wght@400;700&family=Merriweather:wght@400;700&family=Source+Code+Pro:wght@400;700&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet"><!-- CodeMirror CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/darcula.min.css">
+<!-- CodeMirror JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/clike/clike.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script><link rel="stylesheet" href="/portfolio1/assets/css/style.css">
+<script src="/portfolio1/assets/js/user-preferences.js"></script>
+<!-- Set up javaURI globally for OCS Analytics Tracker -->
+<script>
+    if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+        window.javaURI = "http://localhost:8585";
+    } else {
+        window.javaURI = "https://spring.opencodingsociety.com";
+    }
+</script>
+<!-- OCS Analytics Tracking Script (loaded on every page) -->
+<script src="/portfolio1/assets/js/ocs-analytics-tracker.js" defer></script><!-- Keyboard Shortcuts (Alt+Shift+key navigation, loaded on every page) -->
+<script>window.baseurl = "/portfolio1";</script>
+<script src="/portfolio1/assets/js/keyboard-shortcuts.js" defer></script>
+
+<!-- AI A/B Test Engine SDK (passes site.baseurl for asset resolution) -->
+<script src="http://localhost:3000/sdk.js"
+  data-site-baseurl="/portfolio1"
+  data-project-id="cmnfour780000f63gu69kg2v8"></script>
+<script type="importmap">
+{
+  "imports": {
+    "@assets/": "/portfolio1/assets/"
+  }
+}
+</script>
+<!-- Minima end custom head snippets -->
+ </head>
+<body>    <header class="site-header">
+        <div class="wrapper"><a class="site-title" rel="author" href="/portfolio1/" data-value="Open Coding">
+                <img id="site-logo" src="/portfolio1/images/logo.png" alt="Logo">
+            </a><nav class="site-nav">
+                <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+                <label for="nav-trigger">
+                    <span class="menu-icon">
+                        <svg viewBox="0 0 18 15" width="18px" height="15px">
+                            <path
+                                d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z" />
+                        </svg>
+                    </span>
+                </label>
+
+                <div class="trigger"><a class="page-link" href="/portfolio1/blogs/">Blogs</a><a class="page-link" href="/portfolio1/search/">Search</a><a class="page-link" href="/portfolio1/about/">About</a><a id="loginArea" class="page-link" href="/portfolio1/login">Login</a>
+                </div>
+            </nav></div>
+    </header>
+
+    <script type="module" src="/portfolio1/assets/js/api/login.js"></script>    
+
+
+        
+
+        
+
+        <main class="page-content" aria-label="Content">
+            <div class="wrapper">
+                                <div class="opencs_root">
+                                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<div class="lesson-player">
+  <!-- LEFT SIDEBAR -->
+  <!-- LESSON PLAYER SIDEBAR NAVIGATION -->
+
+
+<div class="lesson-sidebar">
+  <div class="sidebar-header">
+    
+      <h2>Computer Science Principles</h2>
+    
+
+    <div class="course-progress-section">
+      <div class="progress-label">
+        <span>Course Progress</span>
+        <span id="progress-count">0/0</span>
+      </div>
+      <div class="progress-bar-sidebar">
+        <div class="progress-bar-sidebar-fill" id="sidebar-progress" style="width: 0%"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sprint-nav">
+    
+    
+      
+      
+
+      
+    
+      
+      
+
+      
+    
+      
+      
+
+      
+    
+      
+      
+
+      
+    
+      
+      
+
+      
+    
+      
+      
+
+      
+    
+      
+      
+
+      
+    
+      
+      
+
+      
+    
+      
+      
+
+      
+    
+  </div>
+</div>
+
+
+  <!-- MAIN CONTENT -->
+  <div class="lesson-main">
+    <!-- Top Bar -->
+    <!-- LESSON PLAYER TOP BAR - Navigation and progress -->
+
+
+<div class="topbar-lesson">
+  <div class="topbar-left">
+    <div class="breadcrumbs">
+      <a href="/portfolio1/navigation/courses/csp" title="Back to course">
+        <i class="fas fa-home"></i>
+      </a>
+      <i class="fas fa-chevron-right"></i>
+      <span>Week 26</span>
+      <i class="fas fa-chevron-right"></i>
+      <span class="current">Network Stack | HTTP and TCP/IP</span>
+      <button id="topbar-complete-btn" onclick="toggleComplete()" type="button" title="Mark lesson complete">
+        <i class="fas fa-circle" id="complete-icon-topbar"></i>
+        <span id="complete-text-topbar">Burndown</span>
+      </button>
+    </div>
+  </div>
+  <div class="topbar-progress">
+    <div class="topbar-progress-fill" id="lesson-progress"></div>
+  </div>
+</div>
+
+
+    <!-- Lesson Content -->
+    <div class="lesson-content">
+      <div class="lesson-content-inner">
+        <div class="lesson-header">
+          <h1>Network Stack | HTTP and TCP/IP</h1>
+          <div class="lesson-meta"><span><i class="fas fa-clock"></i> <span class="read-time" title="Estimated read time">
+    
+     13 min read  </span></span>
+          </div>
+        </div>
+
+        <div class="lesson-body"><ul><li><a href="#network-stack">Network Stack</a><ul><li><a href="#httpdns-application-layer">HTTP/DNS (Application Layer)</a><ul><li><a href="#frontend-github-pages">Frontend (GitHub Pages)</a></li><li><a href="#backend-aws-ec2-with-docker">Backend (AWS EC2 with Docker)</a></li></ul></li><li><a href="#presentation-layer">Presentation Layer</a></li><li><a href="#session-layer">Session Layer</a></li><li><a href="#tcpudp-transport-layer">TCP/UDP (Transport Layer)</a><ul><li><a href="#request">Request</a></li><li><a href="#response">Response</a></li></ul></li><li><a href="#ip-network-layer">IP (Network Layer)</a><ul><li><a href="#request-1">Request</a></li><li><a href="#response-1">Response</a></li></ul></li></ul></li><li><a href="#data-link-layer">Data Link Layer</a><ul><li><a href="#physical-layer">Physical Layer</a></li></ul></li><li><a href="#-physical-layer---electricaloptical-signal-">[ Physical Layer - Electrical/Optical Signal ]</a><ul><li><a href="#request--response">Request &amp; Response</a></li></ul></li></ul></li><li><a href="#nginx-as-orchestrator">NGINX as Orchestrator</a></li></ul><h2 id="network-stack">Network Stack</h2>
+<p>The Networking Stack in a GitHub Pages → AWS EC2 Interaction</p>
+
+<p>When making an HTTP request using JavaScript’s fetch method, several layers of the networking stack come into play. This blog applies to CSA (Computer Science “A”) and CSP (Computer Science Principles) projects. The content applies to our application(s) setup, with GitHub Pages interacting with a backend Python or Java web application on AWS EC2.</p>
+
+<p><strong><em>Tools in Use</em></strong></p>
+<ul>
+  <li><strong><em>Docker:</em></strong> Encapsulates the backend application for consistent deployment across environments.</li>
+  <li><strong><em>Nginx:</em></strong> Manages TCP/IP traffic, load balancing, and routing to backend containers.</li>
+  <li><strong><em>Certbot:</em></strong> Secures communication by managing SSL/TLS certificates for HTTPS.</li>
+  <li><strong><em>SQL Database:</em></strong> Stores and retrieves data for CRUD operations.</li>
+  <li><strong><em>JavaScript Fetch and Promise Handling:</em></strong> Enables asynchronous HTTP requests from the GitHub Pages frontend to the backend.</li>
+  <li><strong><em>Python Flask API (RESTful):</em></strong> Provides the backend framework for handling HTTP requests, defining routes, and interacting with the database.</li>
+  <li><strong><em>Java Spring API (RESTful):</em></strong> Similarly provides backend framework for HTTP requests.</li>
+</ul>
+
+<!-- Reusable Game Runner Component -->
+<div class="game-runner-container hide-editor" id="game-runner-network-stack-0" data-storage-key="_network_stack_network-stack-0">
+  
+  <!-- Compact controls for hide_edit mode -->
+  <div class="compact-controls">
+    <button type="button" class="runBtn" title="Start Game">▶ Play</button>
+    <button type="button" class="pauseBtn" title="Pause Game">⏸ Pause</button>
+    <button type="button" class="stopBtn" title="Stop Game">■ Stop</button>
+    <button type="button" class="fullscreenBtn" title="Toggle Fullscreen">⛶ Fullscreen</button>
+    <select class="engineVersionSelect" title="Select Game Engine Version">
+      <option value="GameEnginev1">Engine v1</option>
+      <option value="GameEnginev1.1" selected="">Engine v1.1</option>
+    </select>
+    <select class="levelSelect" title="Select Level">
+      <option value="">Select Level...</option>
+    </select>
+  </div>
+  
+
+  <div class="output-container">
+    <div class="control-panel">
+      <span class="game-status">Game Status: 
+        <span class="status-text">Not Started</span> 
+      </span>
+      <span class="game-status"> 
+        <span id="network-stack-0-metric"></span>
+      </span>
+    </div>
+    <div class="game-output" id="game-output-network-stack-0">
+      <div id="game-container-network-stack-0" class="gameContainer">
+        <!-- GameEnv will create canvas dynamically -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { BaseRunner, GameExecutor } from '/portfolio1/assets/js/pages/runners/index.js';
+
+(function() {
+  const container = document.getElementById('game-runner-network-stack-0');
+  if (!container) return;
+  
+  const hideEdit = "true" === "true";
+  const defaultCode = `
+// Import for GameRunner
+import GameControl from '@assets/js/GameEnginev1.1/essentials/GameControl.js';
+// Level Code
+import GameEnvBackground from '@assets/js/GameEnginev1.1/essentials/GameEnvBackground.js';
+import Player from '@assets/js/GameEnginev1.1/essentials/Player.js';
+import NPC from '@assets/js/GameEnginev1.1/essentials/Npc.js';
+import AiNpc from '@assets/js/GameEnginev1.1/essentials/AiNpc.js';
+
+class CustomLevel {
+  constructor(gameEnv) {
+    const path = gameEnv.path;
+    const width = gameEnv.innerWidth;
+    const height = gameEnv.innerHeight;
+    
+    const bgData = {
+        name: 'custom_bg',
+        src: path + "/images/gamify/comics/network-stack/7-layers-of-osi-model.png",
+    };
+
+    const playerData = {
+      id: 'Hero',
+      src: path + "/images/gamify/chillguy.png",
+      SCALE_FACTOR: 5,
+      STEP_FACTOR: 1000,
+      ANIMATION_RATE: 50,
+      INIT_POSITION: { x: 0, y: height * .15 },
+      pixels: { height: 512, width: 384 },
+      orientation: { rows: 4, columns: 3 },
+      down: { row: 0, start: 0, columns: 3 },
+      downRight: { row: 1, start: 0, columns: 3, rotate: Math.PI/16 },
+      downLeft: { row: 2, start: 0, columns: 3, rotate: -Math.PI/16 },
+      right: { row: 1, start: 0, columns: 3 },
+      left: { row: 2, start: 0, columns: 3 },
+      up: { row: 3, start: 0, columns: 3 },
+      upRight: { row: 1, start: 0, columns: 3, rotate: -Math.PI/16 },
+      upLeft: { row: 2, start: 0, columns: 3, rotate: Math.PI/16 },
+      hitbox: { widthPercentage: 0.45, heightPercentage: 0.2 },
+      keypress: { up: 87, left: 65, down: 83, right: 68 }
+    };
+
+    const npcData1 = {
+      id: 'Application Layer',
+      greeting: 'Layer 7: This is where network applications and their protocols operate. It provides services directly to user applications, such as web browsers and email clients.',
+      SCALE_FACTOR: 8,
+      INIT_POSITION: { x: width * .06, y: height * .46 },
+      visible: false,
+      hitbox: { widthPercentage: 0, heightPercentage: 0 },
+      reaction: function() { if (this.dialogueSystem) { this.showReactionDialogue(); } else { console.log(this.greeting); } },
+      interact: function() { if (this.dialogueSystem) { this.showRandomDialogue(); } }
+    };
+
+    const npcData2 = {
+      id: 'Presentation Layer',
+      greeting: 'Layer 6: This layer is responsible for translating data between the application layer and the network format. It handles data encryption, compression, and translation.',
+      SCALE_FACTOR: 8,
+      visible: false,
+      INIT_POSITION: { x: width * .20, y: height * .46 },
+      hitbox: { widthPercentage: 0, heightPercentage: 0 },
+      reaction: function() { if (this.dialogueSystem) { this.showReactionDialogue(); } else { console.log(this.greeting); } },
+      interact: function() { if (this.dialogueSystem) { this.showRandomDialogue(); } }
+    };
+
+    const npcData3 = {
+      id: 'Session Layer',
+      greeting: 'Layer 5: This layer manages sessions between applications. It establishes, maintains, and terminates connections between local and remote applications.',
+      SCALE_FACTOR: 8,
+      visible: false,
+      INIT_POSITION: { x: width * .34, y: height * .46 },
+      hitbox: { widthPercentage: 0, heightPercentage: 0 },
+      reaction: function() { if (this.dialogueSystem) { this.showReactionDialogue(); } else { console.log(this.greeting); } },
+      interact: function() { if (this.dialogueSystem) { this.showRandomDialogue(); } }
+    };  
+
+    const npcData4 = {
+      id: 'Transport Layer',
+      greeting: 'Layer 4: This layer provides reliable data transfer services to the upper layers. It ensures error recovery and flow control.',
+      SCALE_FACTOR: 8,
+      visible: false,
+      INIT_POSITION: { x: width * .48, y: height * .46 },
+      hitbox: { widthPercentage: 0, heightPercentage: 0 },
+      reaction: function() { if (this.dialogueSystem) { this.showReactionDialogue(); } else { console.log(this.greeting); } },
+      interact: function() { if (this.dialogueSystem) { this.showRandomDialogue(); } }
+    };
+
+   const npcData5 = {
+      id: 'Network Layer',
+      greeting: 'Layer 3: This layer is responsible for routing data across the network. It determines the best path for data to travel from source to destination.',
+      SCALE_FACTOR: 8,
+      visible: false,
+      INIT_POSITION: { x: width * .62, y: height * .46 },
+      hitbox: { widthPercentage: 0, heightPercentage: 0 },
+      reaction: function() { if (this.dialogueSystem) { this.showReactionDialogue(); } else { console.log(this.greeting); } },
+      interact: function() { if (this.dialogueSystem) { this.showRandomDialogue(); } }
+    };
+    
+    const npcData6 = {
+      id: 'Data Link Layer',
+      greeting: 'Layer 2: This layer is responsible for node-to-node data transfer. It handles error detection and correction from the physical layer.',
+      SCALE_FACTOR: 8,
+      visible: false,
+      INIT_POSITION: { x: width * .76, y: height * .46 },
+      hitbox: { widthPercentage: 0, heightPercentage: 0 },
+      reaction: function() { if (this.dialogueSystem) { this.showReactionDialogue(); } else { console.log(this.greeting); } },
+      interact: function() { if (this.dialogueSystem) { this.showRandomDialogue(); } }
+    };
+    
+     const npcData7 = {
+      id: 'Physical Layer',
+      greeting: 'Layer 1: This layer is responsible for the physical connection between devices. It transmits raw bitstreams over a physical medium.',
+      SCALE_FACTOR: 8,
+      visible: false,
+      INIT_POSITION: { x: width * .90, y: height * .46 },
+      hitbox: { widthPercentage: 0, heightPercentage: 0 },
+      reaction: function() { if (this.dialogueSystem) { this.showReactionDialogue(); } else { console.log(this.greeting); } },
+      interact: function() { if (this.dialogueSystem) { this.showRandomDialogue(); } }
+    };
+
+    const network_wizard = path + "/images/gamify/wizard.png";
+    const network_wizard_greeting = "Hello! I'm an expert in networking!";
+    const npcWizard = {
+      id: "Network Wizard",
+      greeting: network_wizard_greeting,
+      src: network_wizard,
+      SCALE_FACTOR: 7,
+      ANIMATION_RATE: 10,
+      pixels: { height: 185, width: 163 },
+      INIT_POSITION: { x: width * 0.47, y: height * 0 },
+      orientation: { rows: 1, columns: 1 },
+      // LOCK: use ONLY the 4th row (index 3) for every direction/state
+      down:      { row: 0, start: 0, columns: 1 },
+      hitbox: { widthPercentage: 0.2, heightPercentage: 0.2 },
+      // AI-specific properties (required for AiNpc utility)
+      expertise: "default",              // Topic area for backend
+      chatHistory: [],                   // Conversation memory
+      dialogues: [                       // Random greetings
+          "Ask me the layers of the OSI model!",
+          "Test my knowledge on NGINX conf files.",
+          "What takes more bytes in a data packet the string 'ABC' or the number 123?",
+          "How can you tell source of a CORS error, NGINX conf or Application code?",
+          "Try a Docker question, how do you run multiple sessions?"
+      ],
+      knowledgeBase: {                   // Context hints for AI
+          default: [
+              {
+                  question: "What is a data packet?",
+                  answer: "A data packet is a unit of data transmitted over a network. It contains both the payload (the actual data) and control information, such as source and destination addresses."
+              },
+              {
+                  question: "What is difference between HTTP and HTTPS?",
+                  answer: "HTTP (HyperText Transfer Protocol) is used for transmitting web pages over the internet. HTTPS (HTTP Secure) is the secure version of HTTP, using encryption (SSL/TLS) to protect data during transmission."
+              },
+              {
+                  question: "What is an AWS EC2 instance?",
+                  answer: "An AWS EC2 (Elastic Compute Cloud) instance is a virtual server in Amazon's cloud. It allows users to run applications on a scalable and secure infrastructure."
+              },
+              {
+                  question: "How do you register a domain on AWS?",
+                  answer: "To register a domain on AWS, you can use the Amazon Route 53 service. It allows you to search for available domain names, register them, and manage DNS settings."
+              }
+          ]
+      },
+      // Orchestrator: Handle collision/proximity reactions
+      reaction: function() {
+          if (this.dialogueSystem) {
+              this.showReactionDialogue();
+          } else {
+              console.log(network_wizard_greeting);
+          }
+      },
+      // Orchestrator: Handle player interaction (E key press)
+      interact: function() {
+          // Delegate to AiNpc utility for full AI conversation interface
+          AiNpc.showInteraction(this);
+      }
+    };
+
+    this.classes = [
+      { class: GameEnvBackground, data: bgData },
+      { class: Player, data: playerData },
+      { class: NPC, data: npcData1 },
+      { class: NPC, data: npcData2 },
+      { class: NPC, data: npcData3 },
+      { class: NPC, data: npcData4 },
+      { class: NPC, data: npcData5 },
+      { class: NPC, data: npcData6 },
+      { class: NPC, data: npcData7 },
+      { class: NPC, data: npcWizard },
+    ];
+
+  }
+}
+export const gameLevelClasses = [CustomLevel];
+export { GameControl };
+`.trim();
+  const editorHeight = "";
+  const canvasHeight = "";
+  const levelClasses = ``.trim().split(',').map(s => s.trim()).filter(Boolean);
+  const storageKey = container.dataset.storageKey;
+
+  function parseCssSizeToPixels(value, fallback) {
+    const parsed = Number.parseFloat(value);
+    return Number.isFinite(parsed) ? parsed : fallback;
+  }
+
+  function getLevelOptionLabel(levelClass, index) {
+    return levelClass?.displayName
+      || levelClass?.levelName
+      || levelClass?.title
+      || levelClass?.levelId
+      || levelClass?.id
+      || levelClass?.name
+      || `Level ${index + 1}`;
+  }
+
+  const configuredCanvasHeight = parseCssSizeToPixels(canvasHeight, 580);
+  const runner = new BaseRunner(container, {
+    storageKey,
+    statusSelector: '.status-text'
+  });
+
+  const editor = runner.initializeEditor({
+    defaultCode,
+    editorHeight,
+    enabled: !hideEdit,
+    codeMirrorOptions: {
+      mode: 'javascript',
+      theme: 'darcula',
+      lineNumbers: true
+    }
+  });
+
+  // Get UI elements
+  const runBtn = container.querySelector('.runBtn');
+  const pauseBtn = container.querySelector('.pauseBtn');
+  const stopBtn = container.querySelector('.stopBtn');
+  const fullscreenBtn = container.querySelector('.fullscreenBtn');
+  const engineVersionSelect = container.querySelector('.engineVersionSelect');
+  const levelSelect = container.querySelector('.levelSelect');
+  const gameOutput = container.querySelector('.game-output');
+  const statusText = container.querySelector('.status-text');
+
+  const gameExecutor = new GameExecutor({
+    getCode: () => runner.getValue(),
+    updateStatus: (status) => runner.updateStatus(status),
+    runBtn,
+    pauseBtn,
+    stopBtn,
+    fullscreenBtn,
+    levelSelect,
+    engineVersionSelect,
+    getGameContainer: () => document.getElementById('game-container-network-stack-0'),
+    getGameOutput: () => gameOutput,
+    configuredCanvasHeight,
+    path: '/portfolio1',
+    getLevelOptionLabel,
+  });
+
+  // Disable game controls initially
+  pauseBtn.disabled = true;
+  stopBtn.disabled = true;
+  if (fullscreenBtn) fullscreenBtn.disabled = true;
+
+  // Update status
+  function updateStatus(status) {
+    runner.updateStatus(status);
+  }
+
+  runner.bindEditorButtons({
+    resetValue: defaultCode || "",
+    onClear: () => {
+      stopGame();
+      updateStatus('Reset');
+    }
+  });
+
+  // Stop game
+  function stopGame() {
+    gameExecutor.stop();
+  }
+
+  // Toggle pause/resume
+  function togglePause() {
+    gameExecutor.togglePause();
+  }
+
+  // Run game
+  async function runGame() {
+    return gameExecutor.run();
+  }
+
+  // Event listeners
+  if (!runner.bindButton('.runBtn', runGame)) {
+    console.error('Game runner network-stack-0: run button not found');
+  }
+
+  runner.bindButton('.pauseBtn', togglePause);
+
+  if (!runner.bindButton('.stopBtn', stopGame)) {
+    console.error('Game runner network-stack-0: stop button not found');
+  }
+
+  // Fullscreen handler
+  function toggleFullscreen() {
+    console.log('Toggling fullscreen');
+    gameExecutor.toggleFullscreen();
+  }
+
+  if (fullscreenBtn) {
+    fullscreenBtn.addEventListener('click', toggleFullscreen);
+  }
+
+  // Level selector
+  gameExecutor.bindLevelSelector();
+
+  // Keyboard shortcuts (only if editor exists)
+  runner.bindShortcut(runGame);
+
+})();
+</script>
+
+<h3 id="httpdns-application-layer">HTTP/DNS (Application Layer)</h3>
+<p>The Application Layer is responsible for providing network services directly to end-user applications. It facilitates communication between software applications and the network.</p>
+
+<p>Application Data: The original data being sent.</p>
+
+<h4 id="frontend-github-pages">Frontend (GitHub Pages)</h4>
+<p>The frontend uses fetch to make HTTP(S) requests to the backend. The domain name of the backend hosted on AWS EC2 is resolved to an IP address using DNS (Domain Name System). The HTTP request is formatted, specifying the method (e.g., GET, POST, PUT, DELETE), headers, and optional body (e.g., JSON payloads for CRUD operations).</p>
+
+<h4 id="backend-aws-ec2-with-docker">Backend (AWS EC2 with Docker)</h4>
+<p>The backend application, running inside Docker containers, processes the request. For database operations:</p>
+<ul>
+  <li><strong>Create</strong>: Inserts new records into the SQL database.</li>
+  <li><strong>Read</strong>: Queries data.</li>
+  <li><strong>Update</strong>: Modifies existing records.</li>
+  <li><strong>Delete</strong>: Removes records.</li>
+</ul>
+
+<p>The backend constructs an HTTP response with a status code, headers, and an optional response body (e.g., JSON data).</p>
+
+<p><strong>Security</strong>: Certbot ensures that HTTPS (secure HTTP) is enabled by managing SSL/TLS certificates, encrypting all communication.</p>
+
+<h3 id="presentation-layer">Presentation Layer</h3>
+
+<p>The Presentation Layer (Layer 6) is responsible for data translation, encryption, and compression.  In the more popular TCP/IP model this is folded into Application Layer.</p>
+
+<h3 id="session-layer">Session Layer</h3>
+
+<p>The Session Layer (Layer 5) is responsible for establishing, managing, and terminating communication “dialogues” between two applications on different devices.   This layer is part of the Application as well in TCP/IP, the description of this would be for something like websockets.</p>
+
+<div class="mermaid">
+graph TD
+    subgraph Application [Layer 7: Application]
+        A1[HTTP/S, DNS]
+        A2[Flask API / Spring API]
+        A3[JavaScript Fetch]
+    end
+
+    subgraph Presentation [Layer 6: Presentation]
+        B1[SSL/TLS, Certbot]
+    end
+
+    subgraph Session [Layer 5: Session]
+        C1[Session Management]
+    end
+
+    subgraph Transport [Layer 4: Transport]
+        D1[TCP/UDP]
+        D2[Nginx Proxy, Load Balancer]
+    end
+
+    subgraph Network [Layer 3: Network]
+        E1[IP Routing]
+        E2[AWS Network, Internet]
+    end
+
+    subgraph DataLink [Layer 2: Data Link]
+        F1[Ethernet/Wi-Fi]
+    end
+
+    subgraph Physical [Layer 1: Physical]
+        G1[Cables, Fiber, Wireless]
+    end
+
+    %% Connections
+    A1 --&gt; B1
+    A2 --&gt; B1
+    A3 --&gt; B1
+    B1 --&gt; C1
+    C1 --&gt; D1
+    D1 --&gt; E1
+    D2 --&gt; D1
+    E1 --&gt; F1
+    F1 --&gt; G1
+</div>
+
+<h3 id="tcpudp-transport-layer">TCP/UDP (Transport Layer)</h3>
+<p>The Transport Layer is responsible for providing reliable data transfer services to the upper layers. It ensures that data is delivered accurately and in the correct sequence.</p>
+
+<p>Transport Layer (TCP): Data is segmented into pieces, typically 1460 bytes (if MTU is 1500)</p>
+
+<h4 id="request">Request</h4>
+<p>HTTP(S) requests are transmitted using TCP (Transmission Control Protocol). Nginx handles incoming TCP traffic, routing it to the appropriate Docker container or application based on the request path. A three-way TCP handshake establishes a reliable connection between the client (browser) and the server.</p>
+
+<h4 id="response">Response</h4>
+<p>The HTTP response is sent back over the same TCP connection. TCP ensures the response is delivered accurately and in order.</p>
+
+<h3 id="ip-network-layer">IP (Network Layer)</h3>
+<p>The Network Layer is responsible for routing packets across network boundaries. It handles the logical addressing and routing of packets to ensure they reach their destination.</p>
+
+<p>Network Layer (IP): The TCP segment is encapsulated into an IP packet with a 20-byte IP header.</p>
+
+<h4 id="request-1">Request</h4>
+<p>TCP segments carrying the HTTP request are encapsulated into IP packets with source and destination IP addresses. The packets are routed through the internet via routers to the AWS EC2 server.</p>
+
+<h4 id="response-1">Response</h4>
+<p>The server’s IP address sends IP packets back to the client, carrying the HTTP response data.</p>
+
+<p><strong>AWS Infrastructure</strong>: AWS handles routing and load balancing as needed within its data center.</p>
+
+<h2 id="data-link-layer">Data Link Layer</h2>
+
+<p>Data Link Layer (Frame): The IP packet is placed inside an Ethernet frame, adding MAC addresses and a 4-byte CRC tail.</p>
+
+<h3 id="physical-layer">Physical Layer</h3>
+<p>The Physical Layer is responsible for the transmission and reception of raw bit streams over a physical medium. It converts data into electrical, optical, or radio signals, which are representations of binary data (0s and 1s).</p>
+
+<h2 id="-physical-layer---electricaloptical-signal-">[ Physical Layer - Electrical/Optical Signal ]</h2>
+
+<p>| Frame |  IP   |  TCP  |  Application Data  |  Frame  |
+| Hdr   |  Hdr  |  Hdr  |  (Payload)         |  Tail   |
+| (14B) | (20B) | (20B) |  (up to 1460B)     |  (4B)   |
+—————————————————————————–</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>&lt;— IP Packet (MTU 1500) —&gt;</td>
+    </tr>
+    <tr>
+      <td>&lt;— Ethernet Frame (1518 bytes total) —&gt;</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="request--response">Request &amp; Response</h4>
+<p>IP packets are converted into physical signals appropriate for the medium (e.g., Ethernet, Wi-Fi, or fiber optics). These signals, representing binary data, traverse physical infrastructure, including cables, wireless access points, and routers.</p>
+
+<p>This addition helps to clarify that the physical signals are essentially binary data being transmitted over various media.</p>
+
+<h2 id="nginx-as-orchestrator">NGINX as Orchestrator</h2>
+
+<p>Nginx helps connect all traffic from the internet to and from the backend server.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">server</span> <span class="p">{</span>
+    <span class="c1"># ==============================================================================
+</span>    <span class="c1"># REVERSE PROXY: DNS to Internal Port Mapping
+</span>    <span class="c1"># ==============================================================================
+</span>    <span class="c1"># KEY CONCEPT: This nginx server acts as a REVERSE PROXY
+</span>    <span class="c1">#
+</span>    <span class="c1"># THE FLOW:
+</span>    <span class="c1"># 1. DNS Resolution: flask.opencodingsociety.com → opencodingsociety.com → 3.233.212.71
+</span>    <span class="c1"># 2. Nginx listens on port 80/443 (standard HTTP/HTTPS ports)
+</span>    <span class="c1"># 3. Nginx receives the request for flask.opencodingsociety.com
+</span>    <span class="c1"># 4. Nginx FORWARDS (proxies) the request to localhost:8587 (Flask app)
+</span>    <span class="c1"># 5. Flask processes the request and returns response to nginx
+</span>    <span class="c1"># 6. Nginx sends the response back to the client
+</span>    <span class="c1">#
+</span>    <span class="c1"># NETWORK LAYERS: How data travels across the internet
+</span>    <span class="c1"># When browser sends request → travels DOWN the OSI layers:
+</span>    <span class="c1">#   Layer 7 (Application): HTTP/HTTPS request created
+</span>    <span class="c1">#   Layer 6 (Presentation): Encryption (TLS/SSL)
+</span>    <span class="c1">#   Layer 5 (Session): Connection management
+</span>    <span class="c1">#   Layer 4 (Transport): TCP segments with ports (443)
+</span>    <span class="c1">#   Layer 3 (Network): IP packets with addresses (24.18.xxx.xxx → 3.233.212.71)
+</span>    <span class="c1">#   Layer 2 (Data Link): Ethernet frames (MAC addresses)
+</span>    <span class="c1">#   Layer 1 (Physical): Electrical signals on wire/fiber
+</span>    <span class="c1">#
+</span>    <span class="c1"># At server → travels UP the layers:
+</span>    <span class="c1">#   Physical signals → Ethernet → IP packets → TCP → HTTP → NGINX processes
+</span>    <span class="c1">#
+</span>    <span class="c1"># Response follows same path backwards (down on server, up at client)
+</span>    <span class="c1">#
+</span>    <span class="c1"># WHY USE A REVERSE PROXY? (Key Teaching Points)
+</span>    <span class="c1"># - SECURITY: Flask app only listens on localhost (not exposed to internet)
+</span>    <span class="c1"># - SSL/TLS: Nginx handles HTTPS encryption (certbot/Let's Encrypt integration)
+</span>    <span class="c1"># - PORT MAPPING: Users access standard port 80/443, not obscure port 8587
+</span>    <span class="c1"># - MULTIPLE APPS: One server can host many apps on different ports
+</span>    <span class="c1">#   Example: flask.opencodingsociety.com → localhost:8587, spring.opencodingsociety.com → localhost:8585
+</span>    <span class="c1"># - LOAD BALANCING: Can distribute requests across multiple backend servers
+</span>    <span class="c1"># - CACHING: Nginx can cache responses to improve performance
+</span>    <span class="c1">#
+</span>    <span class="c1"># WITHOUT REVERSE PROXY: Users would need flask.opencodingsociety.com:8587
+</span>    <span class="c1"># WITH REVERSE PROXY: Users access clean URL flask.opencodingsociety.com
+</span>    <span class="c1"># ==============================================================================
+</span>    <span class="n">listen</span> <span class="mi">80</span><span class="p">;</span>
+    <span class="n">listen</span> <span class="p">[::]:</span><span class="mi">80</span><span class="p">;</span>
+    <span class="n">server_name</span> <span class="n">flask</span><span class="p">.</span><span class="n">opencodingsociety</span><span class="p">.</span><span class="n">com</span><span class="p">;</span>
+
+    <span class="c1"># ==============================================================================
+</span>    <span class="c1"># WEBSOCKET PROXY: Real-Time Bidirectional Communication
+</span>    <span class="c1"># ==============================================================================
+</span>    <span class="c1"># Socket.IO enables REAL-TIME features: live chat, notifications, collaborative editing
+</span>    <span class="c1"># 
+</span>    <span class="c1"># WEBSOCKET vs HTTP:
+</span>    <span class="c1">#   HTTP: Request → Response → Connection closes (like a letter)
+</span>    <span class="c1">#   WebSocket: Persistent connection, bidirectional (like a phone call)
+</span>    <span class="c1">#
+</span>    <span class="c1"># UPGRADE HANDSHAKE (How HTTP becomes WebSocket):
+</span>    <span class="c1">#   1. Browser sends HTTP request with "Upgrade: websocket" header
+</span>    <span class="c1">#   2. Server responds "101 Switching Protocols"
+</span>    <span class="c1">#   3. Same TCP connection is now upgraded to WebSocket protocol
+</span>    <span class="c1">#   4. Both sides can now send messages anytime (no request/response pattern)
+</span>    <span class="c1">#
+</span>    <span class="c1"># WHY SEPARATE location /socket.io/ BLOCK?
+</span>    <span class="c1">#   - Socket.IO connections need special headers: Upgrade, Connection
+</span>    <span class="c1">#   - Without these headers, WebSocket upgrade fails → falls back to polling (slower)
+</span>    <span class="c1">#   - This block ensures WebSocket connections are properly proxied
+</span>    <span class="c1">#
+</span>    <span class="c1"># TEACHING EXAMPLE: Student joins collaborative coding session
+</span>    <span class="c1">#   - Initial HTTP request to /socket.io/?transport=websocket
+</span>    <span class="c1">#   - Nginx proxies with Upgrade headers → Flask Socket.IO server
+</span>    <span class="c1">#   - Connection upgraded to WebSocket
+</span>    <span class="c1">#   - Now students see each other's code changes in real-time!
+</span>    <span class="c1"># ==============================================================================
+</span>    <span class="n">location</span> <span class="o">/</span><span class="n">socket</span><span class="p">.</span><span class="n">io</span><span class="o">/</span> <span class="p">{</span>
+        <span class="c1"># Forward Socket.IO traffic to Socket.IO server on port 8500
+</span>        <span class="n">proxy_pass</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8500</span><span class="p">;</span>
+        
+        <span class="c1"># Use HTTP/1.1 (required for WebSocket support)
+</span>        <span class="n">proxy_http_version</span> <span class="mf">1.1</span><span class="p">;</span>
+        
+        <span class="c1"># CRITICAL: Pass upgrade headers from client to Flask
+</span>        <span class="c1"># $http_upgrade = client's Upgrade header value (e.g., "websocket")
+</span>        <span class="n">proxy_set_header</span> <span class="n">Upgrade</span> <span class="err">$</span><span class="n">http_upgrade</span><span class="p">;</span>
+        
+        <span class="c1"># CRITICAL: Tell Flask to upgrade the connection
+</span>        <span class="c1"># "upgrade" value signals connection should be upgraded
+</span>        <span class="n">proxy_set_header</span> <span class="n">Connection</span> <span class="s">"upgrade"</span><span class="p">;</span>
+        
+        <span class="c1"># Preserve original domain for Flask
+</span>        <span class="n">proxy_set_header</span> <span class="n">Host</span> <span class="err">$</span><span class="n">host</span><span class="p">;</span>
+        
+        <span class="c1"># Preserve student's real IP address
+</span>        <span class="n">proxy_set_header</span> <span class="n">X</span><span class="o">-</span><span class="n">Real</span><span class="o">-</span><span class="n">IP</span> <span class="err">$</span><span class="n">remote_addr</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1"># ==============================================================================
+</span>    <span class="c1"># PROXY CONFIGURATION: Forwarding to Backend Application
+</span>    <span class="c1"># ==============================================================================
+</span>    <span class="c1"># location / means "match ALL paths" (/, /api/users, /api/posts, etc.)
+</span>    <span class="c1"># Everything (except /socket.io/) goes to the Flask application on port 8587
+</span>    <span class="c1"># ==============================================================================
+</span>    <span class="n">location</span> <span class="o">/</span> <span class="p">{</span>
+        <span class="c1"># CRITICAL LINE: Forward all requests to Flask on localhost:8587
+</span>        <span class="c1"># localhost = this same server (internal communication only)
+</span>        <span class="c1"># 8587 = the port where Flask is listening (configured in app.py or main.py)
+</span>        <span class="n">proxy_pass</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8587</span><span class="p">;</span>
+        
+        <span class="c1"># Use HTTP/1.1 for better connection reuse and performance
+</span>        <span class="n">proxy_http_version</span> <span class="mf">1.1</span><span class="p">;</span>
+        
+        <span class="c1"># Preserve original domain: flask.opencodingsociety.com
+</span>        <span class="n">proxy_set_header</span> <span class="n">Host</span> <span class="err">$</span><span class="n">host</span><span class="p">;</span>
+
+        <span class="c1"># ==============================================================================
+</span>        <span class="c1"># THE COMPLETE REQUEST/RESPONSE STORY
+</span>        <span class="c1"># ==============================================================================
+</span>        <span class="c1"># SCENARIO: Student at home visits pages.opencodingsociety.com
+</span>        <span class="c1">#
+</span>        <span class="c1"># FORWARD PATH (Request):
+</span>        <span class="c1">#   1. Student's browser (IP: 24.18.xxx.xxx from home ISP)
+</span>        <span class="c1">#      → Visits pages.opencodingsociety.com (GitHub Pages: 185.199.110.153)
+</span>        <span class="c1">#      → Downloads HTML/JavaScript to browser
+</span>        <span class="c1">#
+</span>        <span class="c1">#   2. JavaScript in browser makes API call:
+</span>        <span class="c1">#      GET https://flask.opencodingsociety.com/api/users
+</span>        <span class="c1">#      → Student's home router → ISP network → Internet
+</span>        <span class="c1">#      → DNS: flask.opencodingsociety.com → opencodingsociety.com → 3.233.212.71
+</span>        <span class="c1">#      → Arrives at flask.opencodingsociety.com (3.233.212.71)
+</span>        <span class="c1">#
+</span>        <span class="c1">#   3. NGINX (3.233.212.71) receives request at port 443:
+</span>        <span class="c1">#      Request headers from browser:
+</span>        <span class="c1">#        Host: flask.opencodingsociety.com
+</span>        <span class="c1">#        Origin: https://pages.opencodingsociety.com
+</span>        <span class="c1">#        Client IP: 24.18.xxx.xxx
+</span>        <span class="c1">#
+</span>        <span class="c1">#   4. NGINX proxies to localhost:8587 (Flask)
+</span>        <span class="c1">#      WITHOUT proxy_set_header, Flask would see:
+</span>        <span class="c1">#        Host: localhost:8587              ← WRONG! Lost the domain
+</span>        <span class="c1">#        IP: 127.0.0.1                     ← WRONG! Shows nginx, not student
+</span>        <span class="c1">#
+</span>        <span class="c1">#      WITH proxy_set_header, Flask correctly sees:
+</span>        <span class="c1">#        Host: flask.opencodingsociety.com      ← Original domain preserved
+</span>        <span class="c1">#
+</span>        <span class="c1"># REVERSE PATH (Response):
+</span>        <span class="c1">#   Flask → NGINX → Internet → ISP → Home Router → Student's Browser
+</span>        <span class="c1">#   (Same path backwards)
+</span>        <span class="c1">#
+</span>        <span class="c1"># WHY THIS MATTERS:
+</span>        <span class="c1"># - Flask can log the real student IP for security and analytics
+</span>        <span class="c1"># - Flask knows the original domain for generating correct URLs
+</span>        <span class="c1"># - Enables proper CORS validation against pages.opencodingsociety.com
+</span>        <span class="c1"># ==============================================================================
+</span>
+        <span class="c1"># ==============================================================================
+</span>        <span class="c1"># CORS SECURITY: Origin Validation - BLOCKS UNAUTHORIZED REQUESTERS
+</span>        <span class="c1"># ==============================================================================
+</span>        <span class="c1"># This configuration implements a whitelist approach to CORS (Cross-Origin Resource Sharing).
+</span>        <span class="c1"># In DEPLOYMENT, only requests from approved origins can access this API.
+</span>        <span class="c1"># 
+</span>        <span class="c1"># REAL EXAMPLE: pages.opencodingsociety.com (GitHub Pages) → flask.opencodingsociety.com (API)
+</span>        <span class="c1">#   - Different subdomains = different origins = CORS required!
+</span>        <span class="c1">#   - Without CORS headers, browser BLOCKS the request (security feature)
+</span>        <span class="c1">#   - With proper CORS setup, browser allows pages to call flask API
+</span>        <span class="c1">#
+</span>        <span class="c1"># This prevents unauthorized websites from making requests to your API.
+</span>        <span class="c1"># ==============================================================================
+</span>        
+        <span class="nb">set</span> <span class="err">$</span><span class="n">cors_origin</span> <span class="s">""</span><span class="p">;</span>  <span class="c1"># Start with empty string - deny all by default
+</span>        
+        <span class="c1"># Approve all requests from opencodingsociety.com subdomains
+</span>        <span class="c1"># Examples: pages.opencodingsociety.com, flask.opencodingsociety.com, dev.opencodingsociety.com
+</span>        <span class="c1"># Pattern breakdown:
+</span>        <span class="c1">#   ^https://           - Must use HTTPS (for production security)
+</span>        <span class="c1">#   (.*\.)?             - Optional subdomain (e.g., "pages.", "dev.", or none)
+</span>        <span class="c1">#   opencodingsociety\.com$ - Must end with opencodingsociety.com
+</span>        <span class="k">if</span> <span class="p">(</span><span class="err">$</span><span class="n">http_origin</span> <span class="o">~*</span> <span class="s">"^https://(.*\.)?opencodingsociety\.com$"</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nb">set</span> <span class="err">$</span><span class="n">cors_origin</span> <span class="err">$</span><span class="n">http_origin</span><span class="p">;</span>
+        <span class="p">}</span>
+        
+        <span class="c1"># Approve GitHub Pages deployments from open-coding-society organization
+</span>        <span class="c1"># Example: https://open-coding-society.github.io
+</span>        <span class="k">if</span> <span class="p">(</span><span class="err">$</span><span class="n">http_origin</span> <span class="o">=</span> <span class="s">"https://open-coding-society.github.io"</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nb">set</span> <span class="err">$</span><span class="n">cors_origin</span> <span class="err">$</span><span class="n">http_origin</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1"># ==============================================================================
+</span>        <span class="c1"># CORS HEADERS: Tell browser this origin is allowed
+</span>        <span class="c1"># ==============================================================================
+</span>        <span class="c1"># These headers are sent with EVERY response (not just OPTIONS)
+</span>        <span class="c1"># 'always' ensures headers are added even on error responses (4xx, 5xx)
+</span>        <span class="c1"># ==============================================================================
+</span>        
+        <span class="c1"># Tell browser: yes, this origin can access the response
+</span>        <span class="c1"># $cors_origin is set above (only if origin was approved)
+</span>        <span class="n">add_header</span> <span class="s">"Access-Control-Allow-Origin"</span> <span class="s">"$cors_origin"</span> <span class="n">always</span><span class="p">;</span>
+        
+        <span class="c1"># Tell browser: yes, include cookies/auth tokens in cross-origin requests
+</span>        <span class="c1"># Required for maintaining user sessions across pages → flask
+</span>        <span class="n">add_header</span> <span class="s">"Access-Control-Allow-Credentials"</span> <span class="s">"true"</span> <span class="n">always</span><span class="p">;</span>
+
+        <span class="c1"># ==============================================================================
+</span>        <span class="c1"># CROSS-ORIGIN REQUESTS: 2-PART PROCESS
+</span>        <span class="c1"># ==============================================================================
+</span>        <span class="c1"># PART 1: PREFLIGHT CHECK (handled here by nginx)
+</span>        <span class="c1">#   - Browser sends OPTIONS request to check permissions
+</span>        <span class="c1">#   - Nginx validates origin and responds with CORS headers
+</span>        <span class="c1">#   - Never reaches Flask application - handled entirely by nginx
+</span>        <span class="c1">#   - If origin not approved, browser blocks the entire sequence
+</span>        <span class="c1">#
+</span>        <span class="c1"># PART 2: ACTUAL REQUEST (handled by Flask application)
+</span>        <span class="c1">#   - After preflight succeeds, browser sends the real request (GET, POST, etc.)
+</span>        <span class="c1">#   - Nginx proxies this request to Flask on localhost:8587
+</span>        <span class="c1">#   - Flask application processes the business logic and returns response
+</span>        <span class="c1">#   - Flask may also add CORS headers for non-preflight responses
+</span>        <span class="c1">#
+</span>        <span class="c1"># WHY PREFLIGHT? Browser sends OPTIONS when request has:
+</span>        <span class="c1">#   - Custom headers (like Authorization)
+</span>        <span class="c1">#   - Methods other than GET/POST
+</span>        <span class="c1">#   - Content-Type other than simple types
+</span>        <span class="c1">#
+</span>        <span class="c1"># This separation improves security (nginx blocks bad origins before they reach app)
+</span>        <span class="c1"># and performance (nginx handles lightweight preflight checks efficiently).
+</span>        <span class="c1"># ==============================================================================
+</span>        
+        <span class="k">if</span> <span class="p">(</span><span class="err">$</span><span class="n">request_method</span> <span class="o">=</span> <span class="n">OPTIONS</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1"># Tell browser: these HTTP methods are permitted for cross-origin requests
+</span>            <span class="c1"># GET/POST = read/create data, PUT = update, DELETE = remove, HEAD = metadata
+</span>            <span class="n">add_header</span> <span class="s">"Access-Control-Allow-Methods"</span> <span class="s">"GET, POST, PUT, DELETE, OPTIONS, HEAD"</span> <span class="n">always</span><span class="p">;</span>
+            
+            <span class="c1"># Cache preflight response for 10 minutes (600 seconds)
+</span>            <span class="c1"># Browser won't send OPTIONS again for same endpoint during this time
+</span>            <span class="c1"># Reduces overhead - fewer preflight requests = better performance
+</span>            <span class="n">add_header</span> <span class="s">"Access-Control-Allow-MaxAge"</span> <span class="mi">600</span> <span class="n">always</span><span class="p">;</span>
+            
+            <span class="c1"># Tell browser: these request headers are allowed in actual request
+</span>            <span class="c1"># Authorization = JWT tokens, API keys
+</span>            <span class="c1"># Content-Type = JSON, form data
+</span>            <span class="c1"># Accept = response format preferences
+</span>            <span class="n">add_header</span> <span class="s">"Access-Control-Allow-Headers"</span> <span class="s">"Authorization, Origin, X-Origin, X-Requested-With, Content-Type, Accept"</span> <span class="n">always</span><span class="p">;</span>
+            
+            <span class="c1"># Return 204 No Content - preflight successful (if origin was approved)
+</span>            <span class="c1"># Browser now knows it's safe to send the actual request
+</span>            <span class="k">return</span> <span class="mi">204</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+
+          
+
+          
+        </div></div>
+    </div>
+</div>
+
+
+
+<!-- Modals for lesson player -->
+<!-- LESSON PLAYER MODALS -->
+
+<!-- Floating hamburger menu (mobile only) -->
+<button class="floating-menu-btn" id="floating-menu-btn" style="display: none;">
+  <i class="fas fa-bars"></i>
+</button>
+
+<!-- Timeline modal overlay -->
+<div class="timeline-modal-overlay" id="timeline-modal-overlay"></div>
+
+<!-- Timeline modal (mobile only) -->
+<div class="timeline-modal" id="timeline-modal">
+  <div class="timeline-modal-header">
+    <h3>Course Timeline</h3>
+    <button class="timeline-close-btn" id="timeline-close-btn" type="button">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <div class="timeline-modal-content" id="timeline-modal-content">
+    <!-- Sprint cards will be populated by JavaScript -->
+  </div>
+</div>
+
+
+
+<script type="module">
+  import { pythonURI, fetchOptions, javaURI } from '/portfolio1/assets/js/api/config.js';
+
+  /**
+   * ============================================
+   * CONFIGURATION & CONSTANTS
+   * ============================================
+   */
+  const COURSE = 'csp';
+  const WEEK = '26';
+  const PAGE_TITLE = "Network Stack | HTTP and TCP/IP";
+  const CURRENT_LESSON_ID = '/network/stack';
+  const STORAGE_KEY = `${COURSE}-lesson-completion`;
+  const STATUS_AUTO_HIDE_MS = 5000;
+  const FILE_SIZE_LIMIT_MB = 10;
+  const ASSIGNMENT_ID = null;
+  const ASSIGNMENT_NAME = "null";
+
+  /**
+   * ============================================
+   * SPRINT NAVIGATION: Toggle sprint visibility
+   * ============================================
+   */
+  window.toggleSprint = function (sprintId) {
+    const lessons = document.getElementById(`sprint-${sprintId}-lessons`);
+    const chevron = document.getElementById(`chevron-${sprintId}`);
+    if (!lessons || !chevron) return;
+
+    const isHidden = lessons.style.display === 'none';
+    lessons.style.display = isHidden ? 'block' : 'none';
+    chevron.classList.toggle('fa-chevron-right', !isHidden);
+    chevron.classList.toggle('fa-chevron-down', isHidden);
+  };
+
+  /**
+   * ============================================
+   * COMPLETION DATA LAYER: LocalStorage operations
+   * ============================================
+   */
+  function getCompletionData() {
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      return stored ? JSON.parse(stored) : {};
+    } catch (e) {
+      console.error('Error reading completion data:', e);
+      return {};
+    }
+  }
+
+  function saveCompletionData(data) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    } catch (e) {
+      console.error('Error saving completion data:', e);
+    }
+  }
+
+  /**
+   * ============================================
+   * COMPLETION TOGGLING: Toggle lesson status
+   * ============================================
+   */
+  window.toggleComplete = function () {
+    const completionData = getCompletionData();
+    const isCompleted = completionData[CURRENT_LESSON_ID] || false;
+    completionData[CURRENT_LESSON_ID] = !isCompleted;
+    saveCompletionData(completionData);
+
+    syncCompletionUI();
+    window.dispatchEvent(new CustomEvent('completionChanged', {
+      detail: { itemId: CURRENT_LESSON_ID, completed: !isCompleted }
+    }));
+  };
+
+  /**
+   * ============================================
+   * UI UPDATES: Individual responsibility functions
+   * ============================================
+   */
+  function updateCompleteButton(isCompleted) {
+    const updateButton = (iconId, textId) => {
+      const icon = document.getElementById(iconId);
+      const text = document.getElementById(textId);
+      if (!icon || !text) return;
+      
+      icon.classList.toggle('fa-circle', !isCompleted);
+      icon.classList.toggle('fa-circle-check', isCompleted);
+      text.textContent = isCompleted ? 'Completed' : 'Burndown';
+    };
+    
+    updateButton('complete-icon', 'complete-text');
+    updateButton('complete-icon-topbar', 'complete-text-topbar');
+  }
+
+  function updateLessonItems(completionData) {
+    let completed = 0;
+    const lessonItems = document.querySelectorAll('.lesson-item');
+    
+    lessonItems.forEach(item => {
+      const lessonId = item.dataset.lessonId;
+      const icon = item.querySelector('.lesson-status-icon');
+      const isCompleted = completionData[lessonId] || false;
+      
+      if (icon) {
+        icon.classList.toggle('fa-circle', !isCompleted);
+        icon.classList.toggle('fa-circle-check', isCompleted);
+        icon.classList.toggle('incomplete', !isCompleted);
+        icon.classList.toggle('completed', isCompleted);
+      }
+      
+      if (isCompleted) completed++;
+    });
+    
+    return { total: lessonItems.length, completed };
+  }
+
+  function updateProgressBars(completionData) {
+    const lessonItems = Array.from(document.querySelectorAll('.lesson-item'));
+    const stats = updateLessonItems(completionData);
+    
+    const sidebarProgress = document.getElementById('sidebar-progress');
+    if (sidebarProgress) {
+      const sidebarPercent = stats.total > 0 ? (stats.completed / stats.total) * 100 : 0;
+      sidebarProgress.style.width = `${sidebarPercent}%`;
+    }
+    
+    const progressCount = document.getElementById('progress-count');
+    if (progressCount) {
+      progressCount.textContent = `${stats.completed}/${stats.total}`;
+    }
+    
+    const lessonProgress = document.getElementById('lesson-progress');
+    if (lessonProgress) {
+      const currentIndex = lessonItems.findIndex(item => item.classList.contains('active'));
+      const lessonPercent = stats.total > 0 ? ((currentIndex + 1) / stats.total) * 100 : 0;
+      lessonProgress.style.width = `${lessonPercent}%`;
+    }
+  }
+
+  function syncCompletionUI() {
+    const completionData = getCompletionData();
+    const isCompleted = completionData[CURRENT_LESSON_ID] || false;
+    updateCompleteButton(isCompleted);
+    updateProgressBars(completionData);
+  }
+
+  /**
+   * ============================================
+   * LESSON NAVIGATION: Move between lessons
+   * ============================================
+   */
+  window.prevLesson = function () {
+    const lessonItems = Array.from(document.querySelectorAll('.lesson-item'));
+    const currentIndex = lessonItems.findIndex(item => item.classList.contains('active'));
+    if (currentIndex > 0) {
+      window.location.href = lessonItems[currentIndex - 1].href;
+    } else {
+      alert('You are on the first lesson!');
+    }
+  };
+
+  window.nextLesson = function () {
+    const lessonItems = Array.from(document.querySelectorAll('.lesson-item'));
+    const currentIndex = lessonItems.findIndex(item => item.classList.contains('active'));
+    if (currentIndex >= 0 && currentIndex < lessonItems.length - 1) {
+      window.location.href = lessonItems[currentIndex + 1].href;
+    } else {
+      alert('You\'ve reached the last lesson!');
+    }
+  };
+
+  /**
+   * ============================================
+   * INITIALIZATION: Player setup
+   * ============================================
+   */
+  function initLessonPlayer() {
+    if (document.querySelector('.lesson-player')) {
+      document.body.style.margin = '0';
+      document.body.style.padding = '0';
+    }
+  }
+
+  function expandCurrentSprint() {
+    const activeLesson = document.querySelector('.lesson-item.active');
+    if (!activeLesson) return;
+    
+    const sprintSection = activeLesson.closest('.sprint-section');
+    if (sprintSection) {
+      const sprintToggle = sprintSection.querySelector('.sprint-toggle');
+      if (sprintToggle) sprintToggle.click();
+    }
+  }
+
+  /**
+   * ============================================
+   * CROSS-TAB SYNC: Listen for changes
+   * ============================================
+   */
+  function setupSyncListeners() {
+    window.addEventListener('focus', () => {
+      if (document.querySelector('.lesson-player')) syncCompletionUI();
+    });
+
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden && document.querySelector('.lesson-player')) syncCompletionUI();
+    });
+
+    window.addEventListener('storage', (e) => {
+      if (e.key === STORAGE_KEY && document.querySelector('.lesson-player')) {
+        syncCompletionUI();
+      }
+    });
+
+    window.addEventListener('completionChanged', () => {
+      if (document.querySelector('.lesson-player')) syncCompletionUI();
+    });
+  }
+
+  /**
+   * ============================================
+   * TIMELINE MODAL: Mobile navigation
+   * ============================================
+   */
+  function buildTimelineModal() {
+    const completionData = getCompletionData();
+    const lessonItems = document.querySelectorAll('.lesson-item');
+    const sprintGroups = {};
+
+    lessonItems.forEach(item => {
+      const sprintSection = item.closest('.sprint-section');
+      if (!sprintSection) return;
+      
+      const sprintTitle = sprintSection.querySelector('.sprint-title').textContent;
+      if (!sprintGroups[sprintTitle]) sprintGroups[sprintTitle] = [];
+      
+      sprintGroups[sprintTitle].push({
+        id: item.dataset.lessonId,
+        title: item.querySelector('.lesson-title').textContent,
+        url: item.href,
+        completed: completionData[item.dataset.lessonId] || false,
+        active: item.classList.contains('active')
+      });
+    });
+
+    return sprintGroups;
+  }
+
+  function renderTimelineModal(sprintGroups) {
+    const modalContent = document.getElementById('timeline-modal-content');
+    if (!modalContent) return;
+
+    modalContent.innerHTML = Object.entries(sprintGroups).map(([sprintTitle, lessons]) => {
+      const sprintId = sprintTitle.replace(/\s+/g, '-').toLowerCase();
+      const lessonHTML = lessons.map(lesson => `
+        <a href="${lesson.url}" class="modal-lesson-item ${lesson.active ? 'active' : ''}">
+          <i class="fas ${lesson.completed ? 'fa-circle-check' : 'fa-circle'} modal-lesson-status ${lesson.completed ? 'completed' : 'incomplete'}"></i>
+          <span class="modal-lesson-title">${lesson.title}</span>
+        </a>
+      `).join('');
+      
+      return `
+        <div class="modal-sprint-card">
+          <div class="modal-sprint-header">
+            <h3 class="modal-sprint-title">${sprintTitle}</h3>
+            <button class="modal-sprint-toggle" onclick="toggleModalSprint('${sprintId}')">
+              <i class="fas fa-chevron-down"></i> View Lessons
+            </button>
+          </div>
+          <div class="modal-lessons" id="modal-${sprintId}">
+            ${lessonHTML}
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    // Auto-expand active sprint
+    const sprintGroups_arr = Object.values(sprintGroups);
+    const activeSprintIndex = sprintGroups_arr.findIndex(lessons => 
+      lessons.some(l => l.active)
+    );
+    
+    if (activeSprintIndex !== -1) {
+      const activeSprintTitle = Object.keys(sprintGroups)[activeSprintIndex];
+      const sprintId = activeSprintTitle.replace(/\s+/g, '-').toLowerCase();
+      setTimeout(() => {
+        window.toggleModalSprint(sprintId);
+      }, 0);
+    }
+  }
+
+  window.toggleModalSprint = function (sprintId) {
+    const lessonsContainer = document.getElementById(`modal-${sprintId}`);
+    const toggleBtn = document.querySelector(`[onclick="toggleModalSprint('${sprintId}')"] i`);
+    if (!lessonsContainer || !toggleBtn) return;
+
+    lessonsContainer.classList.toggle('expanded');
+    toggleBtn.classList.toggle('fa-chevron-down', !lessonsContainer.classList.contains('expanded'));
+    toggleBtn.classList.toggle('fa-chevron-up', lessonsContainer.classList.contains('expanded'));
+  };
+
+  function setupMobileModal() {
+    const floatingBtn = document.getElementById('floating-menu-btn');
+    const timelineModal = document.getElementById('timeline-modal');
+    const overlay = document.getElementById('timeline-modal-overlay');
+    const closeBtn = document.getElementById('timeline-close-btn');
+    const modalContent = document.getElementById('timeline-modal-content');
+
+    if (window.innerWidth > 768) {
+      if (floatingBtn) floatingBtn.style.display = 'none';
+      return;
+    }
+
+    if (floatingBtn) floatingBtn.style.display = 'flex';
+
+    const sprintGroups = buildTimelineModal();
+    renderTimelineModal(sprintGroups);
+
+    const openModal = () => {
+      timelineModal.classList.add('open');
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeModal = () => {
+      timelineModal.classList.remove('open');
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    };
+
+    if (floatingBtn) floatingBtn.addEventListener('click', openModal);
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (overlay) overlay.addEventListener('click', closeModal);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && timelineModal.classList.contains('open')) closeModal();
+    });
+
+    if (modalContent) {
+      modalContent.addEventListener('click', (e) => {
+        if (e.target.closest('.modal-lesson-item')) closeModal();
+      });
+    }
+  }
+
+  /**
+   * ============================================
+   * ASSIGNMENT SUBMISSION: API operations
+   * ============================================
+   */
+  async function resolveCurrentUser() {
+    const uidRes = await fetch(`${pythonURI}/api/id`, fetchOptions);
+    if (!uidRes.ok) throw new Error('Not authenticated. Please log in.');
+    const { uid } = await uidRes.json();
+    const personRes = await fetch(`${javaURI}/api/person/uid/${encodeURIComponent(uid)}`, fetchOptions);
+    if (!personRes.ok) throw new Error('Could not resolve your account in the gradebook.');
+    const person = await personRes.json();
+    return { uid, personId: person.id };
+  }
+
+  async function resolveAssignmentName() {
+    if (typeof ASSIGNMENT_NAME === 'string' && ASSIGNMENT_NAME) return ASSIGNMENT_NAME;
+    const res = await fetch(`${javaURI}/api/assignments/${ASSIGNMENT_ID}`, fetchOptions);
+    if (!res.ok) throw new Error('Assignment not found on server.');
+    return await res.text();
+  }
+
+  async function submitLinkToBackend(link, description) {
+    if (!ASSIGNMENT_ID) throw new Error("Assignment ID not configured. Add assignment_id to this page's frontmatter.");
+    const { uid, personId } = await resolveCurrentUser();
+    const content = { type: 'link', url: link, notes: description };
+    const res = await fetch(`${javaURI}/api/submissions/${ASSIGNMENT_ID}`, {
+      ...fetchOptions,
+      method: 'POST',
+      body: JSON.stringify({
+        assignmentId: ASSIGNMENT_ID,
+        submitterId: personId,
+        isGroupSubmission: false,
+        content,
+        comment: description,
+        isLate: false
+      })
+    });
+    if (!res.ok) {
+      const e = await res.json().catch(() => ({}));
+      throw new Error(e.error || res.statusText);
+    }
+    // Dual-write to EshikaP1's grades system
+    const assignmentLabel = (typeof ASSIGNMENT_NAME === 'string' && ASSIGNMENT_NAME) ? ASSIGNMENT_NAME : String(ASSIGNMENT_ID);
+    await fetch(`${javaURI}/api/grades`, {
+      ...fetchOptions,
+      method: 'POST',
+      body: JSON.stringify({ uid, assignment: assignmentLabel, score: null, submission: content, submittedAt: new Date().toISOString() })
+    }).catch(() => {}); // non-blocking — don't fail submission if grades write fails
+  }
+
+  async function submitFilesToBackend(files, notes) {
+    if (!ASSIGNMENT_ID) throw new Error("Assignment ID not configured. Add assignment_id to this page's frontmatter.");
+    const { uid, personId } = await resolveCurrentUser();
+    const assignmentName = await resolveAssignmentName();
+    for (const file of files) {
+      const content = { type: 'file', filename: file.name, notes: notes || '' };
+      const fd = new FormData();
+      fd.append('assignmentName', assignmentName);
+      fd.append('userId', personId);
+      fd.append('username', uid);
+      fd.append('file', file);
+      if (notes) fd.append('notes', notes);
+      const r = await fetch(`${javaURI}/api/assignment-submissions/upload`, {
+        method: 'POST',
+        mode: fetchOptions.mode,
+        credentials: fetchOptions.credentials,
+        headers: { 'X-Origin': 'client' },
+        body: fd
+      });
+      if (!r.ok) {
+        const e = await r.json().catch(() => ({}));
+        throw new Error(`Upload failed for ${file.name}: ` + (e.error || r.statusText));
+      }
+      // Dual-write to EshikaP1's grades system
+      const assignmentLabel = (typeof ASSIGNMENT_NAME === 'string' && ASSIGNMENT_NAME) ? ASSIGNMENT_NAME : String(ASSIGNMENT_ID);
+      await fetch(`${javaURI}/api/grades`, {
+        ...fetchOptions,
+        method: 'POST',
+        body: JSON.stringify({ uid, assignment: assignmentLabel, score: null, submission: content, submittedAt: new Date().toISOString() })
+      }).catch(() => {}); // non-blocking
+    }
+  }
+
+  /**
+   * ============================================
+   * FILE HANDLING: File operations
+   * ============================================
+   */
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        let encoded = reader.result.toString().replace(/^data:(.*,)?/, '');
+        if ((encoded.length % 4) > 0) {
+          encoded += '='.repeat(4 - (encoded.length % 4));
+        }
+        resolve(encoded);
+      };
+      reader.onerror = error => reject(error);
+    });
+  }
+
+  function formatFileSize(bytes) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+  }
+
+  /**
+   * ============================================
+   * STATUS MESSAGES: Display feedback
+   * ============================================
+   */
+  function showStatus(type, message) {
+    const status = document.getElementById('submission-status');
+    if (!status) return;
+    const icon = type === 'success' ? 'check-circle' : type === 'loading' ? 'spinner fa-spin' : 'exclamation-circle';
+    status.className = `submission-status ${type}`;
+    status.innerHTML = `<i class="fas fa-${icon}"></i> ${message}`;
+    status.style.display = 'block';
+    if (type !== 'loading') {
+      setTimeout(() => {
+        status.style.display = 'none';
+      }, STATUS_AUTO_HIDE_MS);
+    }
+  }
+
+  /**
+   * ============================================
+   * SUBMISSION STORAGE: Local persistence
+   * ============================================
+   */
+  function saveSubmissionLocally(type, data) {
+    const submissions = JSON.parse(localStorage.getItem('assignment-submissions') || '{}');
+    const lessonId = window.location.pathname;
+    if (!submissions[lessonId]) submissions[lessonId] = [];
+    submissions[lessonId].push({ type, data, timestamp: new Date().toISOString() });
+    localStorage.setItem('assignment-submissions', JSON.stringify(submissions));
+  }
+
+  /**
+   * ============================================
+   * SUBMISSION UI: Tab switching & file display
+   * ============================================
+   */
+  window.switchSubmissionType = function (type) {
+    document.querySelectorAll('.submission-tab').forEach(tab => tab.classList.remove('active'));
+    event.target.closest('.submission-tab').classList.add('active');
+    
+    document.querySelectorAll('.submission-form').forEach(form => form.classList.remove('active'));
+    document.getElementById(`${type}-form`).classList.add('active');
+    
+    const status = document.getElementById('submission-status');
+    if (status) status.style.display = 'none';
+  };
+
+  window.removeFile = function (index) {
+    const fileInput = document.getElementById('file-input');
+    const fileList = document.getElementById('file-list');
+    if (!fileInput || !fileList) return;
+    
+    const dt = new DataTransfer();
+    Array.from(fileInput.files).forEach((file, i) => {
+      if (i !== index) dt.items.add(file);
+    });
+    fileInput.files = dt.files;
+    updateFileListDisplay();
+  };
+
+  /**
+   * ============================================
+   * FILE DISPLAY: Render file list
+   * ============================================
+   */
+  function updateFileListDisplay() {
+    const fileInput = document.getElementById('file-input');
+    const fileList = document.getElementById('file-list');
+    const fileSubmitBtn = document.getElementById('file-submit-btn');
+    
+    if (!fileList) return;
+    
+    fileList.innerHTML = Array.from(fileInput.files).map((file, index) => `
+      <div class="file-item">
+        <div class="file-info">
+          <i class="fas fa-file"></i>
+          <div>
+            <div class="file-name">${file.name}</div>
+            <div class="file-size">${formatFileSize(file.size)}</div>
+          </div>
+        </div>
+        <button type="button" class="remove-file" onclick="removeFile(${index})">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    `).join('');
+    
+    if (fileSubmitBtn) fileSubmitBtn.disabled = fileInput.files.length === 0;
+  }
+
+  /**
+   * ============================================
+   * FORM SUBMISSION: Handle submissions
+   * ============================================
+   */
+  function setupSubmissionForms() {
+    const linkForm = document.getElementById('link-form');
+    if (linkForm) {
+      linkForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const link = document.getElementById('submission-link').value.trim();
+        const description = document.getElementById('link-description').value.trim();
+        const submitBtn = linkForm.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        showStatus('loading', 'Submitting...');
+        try {
+          await submitLinkToBackend(link, description);
+          saveSubmissionLocally('link', { link, description });
+          showStatus('success', 'Link submitted successfully!');
+          this.reset();
+        } catch (err) {
+          showStatus('error', err.message);
+        } finally {
+          submitBtn.disabled = false;
+        }
+      });
+    }
+
+    const fileForm = document.getElementById('file-form');
+    if (fileForm) {
+      fileForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const fileInput = document.getElementById('file-input');
+        const notes = document.getElementById('file-notes')?.value?.trim() || '';
+        const submitBtn = fileForm.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        showStatus('loading', 'Uploading...');
+        try {
+          for (const file of fileInput.files) {
+            if (file.size > FILE_SIZE_LIMIT_MB * 1024 * 1024) {
+              throw new Error(`${file.name} exceeds ${FILE_SIZE_LIMIT_MB}MB limit.`);
+            }
+          }
+          await submitFilesToBackend(Array.from(fileInput.files), notes);
+          saveSubmissionLocally('file', { files: Array.from(fileInput.files).map(f => f.name), notes });
+          showStatus('success', `${fileInput.files.length} file(s) submitted successfully!`);
+          fileInput.value = '';
+          updateFileListDisplay();
+          this.reset();
+        } catch (err) {
+          showStatus('error', err.message);
+        } finally {
+          submitBtn.disabled = false;
+        }
+      });
+    }
+  }
+
+  /**
+   * ============================================
+   * MASTER INITIALIZATION
+   * ============================================
+   */
+  function initializePage() {
+    // Lesson player setup
+    initLessonPlayer();
+    expandCurrentSprint();
+    syncCompletionUI();
+    setupSyncListeners();
+    
+    // Mobile enhancements
+    setupMobileModal();
+    window.addEventListener('resize', () => setupMobileModal());
+    
+    // Assignment submission
+    setupSubmissionForms();
+    
+    // File upload handling
+    const fileUploadArea = document.getElementById('file-upload-area');
+    const fileInput = document.getElementById('file-input');
+    if (fileUploadArea && fileInput) {
+      fileUploadArea.addEventListener('click', () => fileInput.click());
+      fileUploadArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        fileUploadArea.classList.add('dragover');
+      });
+      fileUploadArea.addEventListener('dragleave', () => {
+        fileUploadArea.classList.remove('dragover');
+      });
+      fileUploadArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        fileUploadArea.classList.remove('dragover');
+        fileInput.files = e.dataTransfer.files;
+        updateFileListDisplay();
+      });
+      fileInput.addEventListener('change', () => updateFileListDisplay());
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', initializePage);
+</script>
+
+
+                                </div>
+            </div>
+        </main><footer id="masterFooter" class="site-footer h-card">
+    <data class="u-url" href="/portfolio1/"></data>
+
+    <!-- <div class="wrapper">
+
+        <div class="social-links"><ul class="social-media-list"><li>
+    <a rel="me" href="" target="_blank" title="">
+      <span class="grey fa-brands fa- fa-lg"></span>
+    </a>
+  </li><li>
+    <a rel="me" href="" target="_blank" title="">
+      <span class="grey fa-brands fa- fa-lg"></span>
+    </a>
+  </li><li>
+    <a rel="me" href="" target="_blank" title="">
+      <span class="grey fa-brands fa- fa-lg"></span>
+    </a>
+  </li>
+  <li>
+    <a href="/portfolio1/feed.xml" target="_blank" title="Subscribe to syndication feed">
+      <svg class="svg-icon grey" viewbox="0 0 16 16">
+        <path d="M12.8 16C12.8 8.978 7.022 3.2 0 3.2V0c8.777 0 16 7.223 16 16h-3.2zM2.194
+          11.61c1.21 0 2.195.985 2.195 2.196 0 1.21-.99 2.194-2.2 2.194C.98 16 0 15.017 0
+          13.806c0-1.21.983-2.195 2.194-2.195zM10.606
+          16h-3.11c0-4.113-3.383-7.497-7.496-7.497v-3.11c5.818 0 10.606 4.79 10.606 10.607z"
+        />
+      </svg>
+    </a>
+  </li>
+</ul>
+</div>
+
+    </div> -->
+
+    <!--<p style="font-style: italic;">aesthetihawkc v3.0rc1.1</p>-->
+
+    <div class="footer-links">
+        <div class="footer-previous">
+            
+        </div>
+
+        <div class="footer-home">
+            
+        </div>
+
+        <div class="footer-next">
+            
+        </div>
+    </div>
+
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const style = getComputedStyle(document.documentElement);
+        const theme = style.getPropertyValue('--theme').trim() || "dark";
+        const panel = style.getPropertyValue('--panel-mid').trim() || "#0b1220";
+        const text = style.getPropertyValue('--pref-text-color').trim() || "#e6eef8";
+        const accent = style.getPropertyValue('--pref-accent-color').trim() || "#3b82f6";
+        const fontFamily = style.getPropertyValue('--pref-font-family').trim() || "Arial, sans-serif";
+        mermaid.initialize({ 
+            startOnLoad: false,
+            theme: theme,
+            securityLevel: 'loose',
+            themeVariables: {
+                background: panel,
+                primaryColor: panel,
+                primaryTextColor: text,
+                primaryBorderColor: accent,
+                lineColor: text,
+                arrowheadColor: text,
+                fontFamily: fontFamily
+            }
+        });
+        
+        // Convert fenced code blocks to mermaid divs
+        document.querySelectorAll('pre code.language-mermaid').forEach((block, index) => {
+            const content = block.textContent;
+            const wrapper = document.createElement('div');
+            wrapper.className = 'mermaid';
+            wrapper.id = 'mermaid-' + index;
+            wrapper.textContent = content;
+            block.parentElement.parentNode.replaceChild(wrapper, block.parentElement);
+        });
+        
+        mermaid.run();
+    });
+</script></body>
+</html>

@@ -1,0 +1,1692 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>Code Runner - Examples | Open Coding</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Code Runner - Examples" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Build a lesson using multiple code runners on a page. This modular approach allows you to create interactive lessons, more code – less words." />
+<meta name="twitter:description" property="og:description" content="Build a lesson using multiple code runners on a page. This modular approach allows you to create interactive lessons, more code – less words." />
+<meta property="og:site_name" content="Open Coding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-01-03T00:00:00-08:00" />
+<meta property="article:modified_time" content="2026-01-03T00:00:00-08:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Code Runner - Examples" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-01-03T00:00:00-08:00","datePublished":"2026-01-03T00:00:00-08:00","description":"Build a lesson using multiple code runners on a page. This modular approach allows you to create interactive lessons, more code – less words.","headline":"Code Runner - Examples","mainEntityOfPage":{"@type":"WebPage","@id":"/portfolio1/code"},"url":"/portfolio1/code"}</script>
+<!-- End Jekyll SEO tag -->
+<link id="main-stylesheet" rel="stylesheet" href="/portfolio1/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="/portfolio1/feed.xml" title="Open Coding" />
+<!-- Minima start custom head snippets -->
+<!-- Favicon for browser tabs and bookmarks -->
+<link rel="icon" href="/portfolio1/favicon.ico" type="image/x-icon">
+
+<!-- Support for Apple devices (iPhone/iPad homescreen icon) -->
+<link rel="apple-touch-icon" sizes="180x180" href="/portfolio1/apple-touch-icon.png">
+
+<!-- Support for modern browsers and pinned tabs -->
+<link rel="icon" type="image/png" sizes="32x32" href="/portfolio1/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/portfolio1/favicon-16x16.png">
+
+<!-- Google Fonts - commonly used across the site -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Open+Sans:wght@400;600&family=Lato:wght@400;700&family=Montserrat:wght@400;600&family=Noto+Sans:wght@400;700&family=Merriweather:wght@400;700&family=Source+Code+Pro:wght@400;700&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet"><!-- CodeMirror CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/darcula.min.css">
+<!-- CodeMirror JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/clike/clike.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script><link rel="stylesheet" href="/portfolio1/assets/css/style.css">
+<script src="/portfolio1/assets/js/user-preferences.js"></script>
+<!-- Set up javaURI globally for OCS Analytics Tracker -->
+<script>
+    if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+        window.javaURI = "http://localhost:8585";
+    } else {
+        window.javaURI = "https://spring.opencodingsociety.com";
+    }
+</script>
+<!-- OCS Analytics Tracking Script (loaded on every page) -->
+<script src="/portfolio1/assets/js/ocs-analytics-tracker.js" defer></script><!-- Keyboard Shortcuts (Alt+Shift+key navigation, loaded on every page) -->
+<script>window.baseurl = "/portfolio1";</script>
+<script src="/portfolio1/assets/js/keyboard-shortcuts.js" defer></script>
+
+<!-- AI A/B Test Engine SDK (passes site.baseurl for asset resolution) -->
+<script src="http://localhost:3000/sdk.js"
+  data-site-baseurl="/portfolio1"
+  data-project-id="cmnfour780000f63gu69kg2v8"></script>
+<script type="importmap">
+{
+  "imports": {
+    "@assets/": "/portfolio1/assets/"
+  }
+}
+</script>
+<!-- Minima end custom head snippets -->
+ </head>
+<body>    <header class="site-header">
+        <div class="wrapper"><a class="site-title" rel="author" href="/portfolio1/" data-value="Open Coding">
+                <img id="site-logo" src="/portfolio1/images/logo.png" alt="Logo">
+            </a><nav class="site-nav">
+                <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+                <label for="nav-trigger">
+                    <span class="menu-icon">
+                        <svg viewBox="0 0 18 15" width="18px" height="15px">
+                            <path
+                                d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z" />
+                        </svg>
+                    </span>
+                </label>
+
+                <div class="trigger"><a class="page-link" href="/portfolio1/blogs/">Blogs</a><a class="page-link" href="/portfolio1/search/">Search</a><a class="page-link" href="/portfolio1/about/">About</a><a id="loginArea" class="page-link" href="/portfolio1/login">Login</a>
+                </div>
+            </nav></div>
+    </header>
+
+    <script type="module" src="/portfolio1/assets/js/api/login.js"></script>    
+
+
+        
+
+        
+
+        <main class="page-content" aria-label="Content">
+            <div class="wrapper">
+                                <div class="opencs_root">
+                                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<div class="lesson-player">
+  <!-- LEFT SIDEBAR -->
+  <!-- LESSON PLAYER SIDEBAR NAVIGATION -->
+
+
+<div class="lesson-sidebar">
+  <div class="sidebar-header">
+    
+      <h2>Computer Science Principles</h2>
+    
+
+    <div class="course-progress-section">
+      <div class="progress-label">
+        <span>Course Progress</span>
+        <span id="progress-count">0/0</span>
+      </div>
+      <div class="progress-bar-sidebar">
+        <div class="progress-bar-sidebar-fill" id="sidebar-progress" style="width: 0%"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sprint-nav">
+    
+    
+      
+      
+
+      
+    
+      
+      
+
+      
+    
+      
+      
+
+      
+    
+      
+      
+
+      
+    
+      
+      
+
+      
+    
+      
+      
+
+      
+    
+      
+      
+
+      
+    
+      
+      
+
+      
+    
+      
+      
+
+      
+    
+  </div>
+</div>
+
+
+  <!-- MAIN CONTENT -->
+  <div class="lesson-main">
+    <!-- Top Bar -->
+    <!-- LESSON PLAYER TOP BAR - Navigation and progress -->
+
+
+<div class="topbar-lesson">
+  <div class="topbar-left">
+    <div class="breadcrumbs">
+      <a href="/portfolio1/navigation/courses/csp" title="Back to course">
+        <i class="fas fa-home"></i>
+      </a>
+      <i class="fas fa-chevron-right"></i>
+      <span>Week 17</span>
+      <i class="fas fa-chevron-right"></i>
+      <span class="current">Code Runner - Examples</span>
+      <button id="topbar-complete-btn" onclick="toggleComplete()" type="button" title="Mark lesson complete">
+        <i class="fas fa-circle" id="complete-icon-topbar"></i>
+        <span id="complete-text-topbar">Burndown</span>
+      </button>
+    </div>
+  </div>
+  <div class="topbar-progress">
+    <div class="topbar-progress-fill" id="lesson-progress"></div>
+  </div>
+</div>
+
+
+    <!-- Lesson Content -->
+    <div class="lesson-content">
+      <div class="lesson-content-inner">
+        <div class="lesson-header">
+          <h1>Code Runner - Examples</h1>
+          <div class="lesson-meta"><span><i class="fas fa-clock"></i> <span class="read-time" title="Estimated read time">
+    
+     2 min read  </span></span>
+          </div>
+        </div>
+
+        <div class="lesson-body"><h2 id="python-lesson-fix-the-syntax-error">Python Lesson: Fix the Syntax Error</h2>
+
+<!-- Reusable Code Runner Component -->
+<div class="code-runner-container" id="runner-exercise1" data-runner-id="exercise1" data-default-code="&quot;\nprint(&#39;Hello World&#39;\n&quot;" data-storage-key="_code_exercise1">
+  
+  
+<div class="challenge-box">
+  <h3>Code Runner Challenge </h3>
+  <p>
+Fix the syntax error. Run the code to get a hint!
+</p>
+</div>
+
+
+  
+
+  
+  
+  <div class="editor-container">
+  
+  <div class="control-panel">
+    
+      <button type="button" class="runBtn" title="Run">▶</button>
+      <button type="button" class="copyBtn" title="Copy Code">⎘</button>
+      <button type="button" class="saveBtn" title="Save Code">💾</button>
+      <button type="button" class="clearStorageBtn" title="Clear Storage">🗑</button>
+      <select class="languageSelect">
+        <option value="python">Python</option>
+        <option value="java">Java</option>
+        <option value="javascript">JavaScript</option>
+      </select>
+      <select class="fontSizeSelect">
+        <option value="14">14px</option>
+        <option value="16">16px</option>
+        <option value="18">18px</option>
+        <option value="20">20px</option>
+      </select>
+  
+  </div>
+  
+
+  <textarea class="editor-textarea"></textarea>
+
+  
+  <div class="control-panel">
+    
+    <span class="lineCount">Lines: 1</span>
+<span class="charCount">Characters: 0</span>
+
+
+  
+  </div>
+  
+</div>
+
+
+  <div class="output-container">
+    <div class="control-panel">
+      <span>Output</span>
+      <button type="button" class="copyOutputBtn" title="Copy Output">⎘</button>
+    </div>
+    <div class="output-content">Click "Run" in code control panel to see output ...</div>
+    <div class="control-panel">
+      <span class="execTime"></span>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { BaseRunner, CodeExecutor } from '/portfolio1/assets/js/pages/runners/index.js';
+import { pythonURI, javaURI, fetchOptions } from '/portfolio1/assets/js/api/config.js';
+
+(function() {
+  const container = document.getElementById('runner-exercise1');
+  if (!container) return;
+  
+  const initialLang = "python";
+  const defaultCode = JSON.parse(container.dataset.defaultCode || "\"\"");
+  const editorHeight = "";
+  const storageKey = container.dataset.storageKey;
+  const runner = new BaseRunner(container, { storageKey });
+
+  const editor = runner.initializeEditor({
+    defaultCode,
+    editorHeight,
+    fallbackCode: "print('Hello, world!')",
+    codeMirrorOptions: {
+      lineNumbers: true,
+      mode: initialLang === "java" ? "text/x-java" : (initialLang || "python"),
+      theme: "darcula",
+      indentUnit: 4,
+      tabSize: 4
+    }
+  });
+
+  const langSelect = container.querySelector('.languageSelect');
+  const fontSizeSelect = container.querySelector('.fontSizeSelect');
+  const outputDiv = container.querySelector('.output-content');
+  const execTimeSpan = container.querySelector('.execTime');
+  const codeExecutor = new CodeExecutor({
+    editor,
+    outputElement: outputDiv,
+    execTimeElement: execTimeSpan,
+    languageSelect: langSelect,
+    pythonURI,
+    javaURI,
+    fetchOptions,
+  });
+
+  // Set initial language selection
+  if (initialLang) {
+    langSelect.value = initialLang;
+  }
+
+  runner.bindEditorButtons({
+    resetValue: defaultCode || "print('Hello, world!')",
+    onClear: () => {
+      outputDiv.textContent = 'Storage cleared. Code reset to default.';
+      execTimeSpan.textContent = '';
+    }
+  });
+
+  // Font size changer
+  fontSizeSelect.addEventListener("change", () => {
+    const size = fontSizeSelect.value;
+    container.querySelector('.CodeMirror').style.fontSize = size + 'px';
+    editor.refresh();
+  });
+
+  // Language switcher
+  langSelect.addEventListener("change", () => {
+    const lang = langSelect.value;
+    if (lang === "python") {
+      editor.setOption("mode", "python");
+    } else if (lang === "java") {
+      editor.setOption("mode", "text/x-java");
+    } else if (lang === "javascript") {
+      editor.setOption("mode", "javascript");
+    }
+  });
+
+  codeExecutor.bindCopyOutput(container.querySelector('.copyOutputBtn'));
+
+  // Run button logic
+  function runCode() {
+    return codeExecutor.run();
+  }
+
+  runner.bindButton('.runBtn', runCode);
+
+  // Keyboard shortcut
+  runner.bindShortcut(runCode);
+})();
+</script>
+
+<hr />
+
+<h2 id="python-lesson-complete-the-function">Python Lesson: Complete the Function</h2>
+
+<!-- Reusable Code Runner Component -->
+<div class="code-runner-container" id="runner-exercise2" data-runner-id="exercise2" data-default-code="&quot;\ndef calculate_area(length, width):\n    # Replace ??? with the correct formula\n    area = ???\n    return area\n&#39;&#39;&#39; Test calculate area function &#39;&#39;&#39;\nprint(calculate_area(5, 3))\nprint(calculate_area(10, 2))\n&quot;" data-storage-key="_code_exercise2">
+  
+  
+<div class="challenge-box">
+  <h3>Code Runner Challenge </h3>
+  <p>
+Complete the function to calculate the area of a rectangle. Replace the ??? with the correct calculation.
+</p>
+</div>
+
+
+  
+
+  
+  
+  <div class="editor-container">
+  
+  <div class="control-panel">
+    
+      <button type="button" class="runBtn" title="Run">▶</button>
+      <button type="button" class="copyBtn" title="Copy Code">⎘</button>
+      <button type="button" class="saveBtn" title="Save Code">💾</button>
+      <button type="button" class="clearStorageBtn" title="Clear Storage">🗑</button>
+      <select class="languageSelect">
+        <option value="python">Python</option>
+        <option value="java">Java</option>
+        <option value="javascript">JavaScript</option>
+      </select>
+      <select class="fontSizeSelect">
+        <option value="14">14px</option>
+        <option value="16">16px</option>
+        <option value="18">18px</option>
+        <option value="20">20px</option>
+      </select>
+  
+  </div>
+  
+
+  <textarea class="editor-textarea"></textarea>
+
+  
+  <div class="control-panel">
+    
+    <span class="lineCount">Lines: 1</span>
+<span class="charCount">Characters: 0</span>
+
+
+  
+  </div>
+  
+</div>
+
+
+  <div class="output-container">
+    <div class="control-panel">
+      <span>Output</span>
+      <button type="button" class="copyOutputBtn" title="Copy Output">⎘</button>
+    </div>
+    <div class="output-content">Click "Run" in code control panel to see output ...</div>
+    <div class="control-panel">
+      <span class="execTime"></span>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { BaseRunner, CodeExecutor } from '/portfolio1/assets/js/pages/runners/index.js';
+import { pythonURI, javaURI, fetchOptions } from '/portfolio1/assets/js/api/config.js';
+
+(function() {
+  const container = document.getElementById('runner-exercise2');
+  if (!container) return;
+  
+  const initialLang = "python";
+  const defaultCode = JSON.parse(container.dataset.defaultCode || "\"\"");
+  const editorHeight = "350px";
+  const storageKey = container.dataset.storageKey;
+  const runner = new BaseRunner(container, { storageKey });
+
+  const editor = runner.initializeEditor({
+    defaultCode,
+    editorHeight,
+    fallbackCode: "print('Hello, world!')",
+    codeMirrorOptions: {
+      lineNumbers: true,
+      mode: initialLang === "java" ? "text/x-java" : (initialLang || "python"),
+      theme: "darcula",
+      indentUnit: 4,
+      tabSize: 4
+    }
+  });
+
+  const langSelect = container.querySelector('.languageSelect');
+  const fontSizeSelect = container.querySelector('.fontSizeSelect');
+  const outputDiv = container.querySelector('.output-content');
+  const execTimeSpan = container.querySelector('.execTime');
+  const codeExecutor = new CodeExecutor({
+    editor,
+    outputElement: outputDiv,
+    execTimeElement: execTimeSpan,
+    languageSelect: langSelect,
+    pythonURI,
+    javaURI,
+    fetchOptions,
+  });
+
+  // Set initial language selection
+  if (initialLang) {
+    langSelect.value = initialLang;
+  }
+
+  runner.bindEditorButtons({
+    resetValue: defaultCode || "print('Hello, world!')",
+    onClear: () => {
+      outputDiv.textContent = 'Storage cleared. Code reset to default.';
+      execTimeSpan.textContent = '';
+    }
+  });
+
+  // Font size changer
+  fontSizeSelect.addEventListener("change", () => {
+    const size = fontSizeSelect.value;
+    container.querySelector('.CodeMirror').style.fontSize = size + 'px';
+    editor.refresh();
+  });
+
+  // Language switcher
+  langSelect.addEventListener("change", () => {
+    const lang = langSelect.value;
+    if (lang === "python") {
+      editor.setOption("mode", "python");
+    } else if (lang === "java") {
+      editor.setOption("mode", "text/x-java");
+    } else if (lang === "javascript") {
+      editor.setOption("mode", "javascript");
+    }
+  });
+
+  codeExecutor.bindCopyOutput(container.querySelector('.copyOutputBtn'));
+
+  // Run button logic
+  function runCode() {
+    return codeExecutor.run();
+  }
+
+  runner.bindButton('.runBtn', runCode);
+
+  // Keyboard shortcut
+  runner.bindShortcut(runCode);
+})();
+</script>
+
+<hr />
+
+<h2 id="java-lesson-fix-the-compilation-error">Java Lesson: Fix the Compilation Error</h2>
+
+<!-- Reusable Code Runner Component -->
+<div class="code-runner-container" id="runner-exercise3" data-runner-id="exercise3" data-default-code="&quot;\npublic class Main {\n  public static void main(String[] args) {\n    System.out.println(\&quot;Hello, Java\&quot;)\n  }\n}\n&quot;" data-storage-key="_code_exercise3">
+  
+  
+<div class="challenge-box">
+  <h3>Code Runner Challenge </h3>
+  <p>
+The code has a compilation error. Fix it!
+</p>
+</div>
+
+
+  
+
+  
+  
+  <div class="editor-container">
+  
+  <div class="control-panel">
+    
+      <button type="button" class="runBtn" title="Run">▶</button>
+      <button type="button" class="copyBtn" title="Copy Code">⎘</button>
+      <button type="button" class="saveBtn" title="Save Code">💾</button>
+      <button type="button" class="clearStorageBtn" title="Clear Storage">🗑</button>
+      <select class="languageSelect">
+        <option value="python">Python</option>
+        <option value="java">Java</option>
+        <option value="javascript">JavaScript</option>
+      </select>
+      <select class="fontSizeSelect">
+        <option value="14">14px</option>
+        <option value="16">16px</option>
+        <option value="18">18px</option>
+        <option value="20">20px</option>
+      </select>
+  
+  </div>
+  
+
+  <textarea class="editor-textarea"></textarea>
+
+  
+  <div class="control-panel">
+    
+    <span class="lineCount">Lines: 1</span>
+<span class="charCount">Characters: 0</span>
+
+
+  
+  </div>
+  
+</div>
+
+
+  <div class="output-container">
+    <div class="control-panel">
+      <span>Output</span>
+      <button type="button" class="copyOutputBtn" title="Copy Output">⎘</button>
+    </div>
+    <div class="output-content">Click "Run" in code control panel to see output ...</div>
+    <div class="control-panel">
+      <span class="execTime"></span>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { BaseRunner, CodeExecutor } from '/portfolio1/assets/js/pages/runners/index.js';
+import { pythonURI, javaURI, fetchOptions } from '/portfolio1/assets/js/api/config.js';
+
+(function() {
+  const container = document.getElementById('runner-exercise3');
+  if (!container) return;
+  
+  const initialLang = "java";
+  const defaultCode = JSON.parse(container.dataset.defaultCode || "\"\"");
+  const editorHeight = "";
+  const storageKey = container.dataset.storageKey;
+  const runner = new BaseRunner(container, { storageKey });
+
+  const editor = runner.initializeEditor({
+    defaultCode,
+    editorHeight,
+    fallbackCode: "print('Hello, world!')",
+    codeMirrorOptions: {
+      lineNumbers: true,
+      mode: initialLang === "java" ? "text/x-java" : (initialLang || "python"),
+      theme: "darcula",
+      indentUnit: 4,
+      tabSize: 4
+    }
+  });
+
+  const langSelect = container.querySelector('.languageSelect');
+  const fontSizeSelect = container.querySelector('.fontSizeSelect');
+  const outputDiv = container.querySelector('.output-content');
+  const execTimeSpan = container.querySelector('.execTime');
+  const codeExecutor = new CodeExecutor({
+    editor,
+    outputElement: outputDiv,
+    execTimeElement: execTimeSpan,
+    languageSelect: langSelect,
+    pythonURI,
+    javaURI,
+    fetchOptions,
+  });
+
+  // Set initial language selection
+  if (initialLang) {
+    langSelect.value = initialLang;
+  }
+
+  runner.bindEditorButtons({
+    resetValue: defaultCode || "print('Hello, world!')",
+    onClear: () => {
+      outputDiv.textContent = 'Storage cleared. Code reset to default.';
+      execTimeSpan.textContent = '';
+    }
+  });
+
+  // Font size changer
+  fontSizeSelect.addEventListener("change", () => {
+    const size = fontSizeSelect.value;
+    container.querySelector('.CodeMirror').style.fontSize = size + 'px';
+    editor.refresh();
+  });
+
+  // Language switcher
+  langSelect.addEventListener("change", () => {
+    const lang = langSelect.value;
+    if (lang === "python") {
+      editor.setOption("mode", "python");
+    } else if (lang === "java") {
+      editor.setOption("mode", "text/x-java");
+    } else if (lang === "javascript") {
+      editor.setOption("mode", "javascript");
+    }
+  });
+
+  codeExecutor.bindCopyOutput(container.querySelector('.copyOutputBtn'));
+
+  // Run button logic
+  function runCode() {
+    return codeExecutor.run();
+  }
+
+  runner.bindButton('.runBtn', runCode);
+
+  // Keyboard shortcut
+  runner.bindShortcut(runCode);
+})();
+</script>
+
+<hr />
+
+<h2 id="javascript-lesson-complete-the-loop">JavaScript Lesson: Complete the Loop</h2>
+
+<!-- Reusable Code Runner Component -->
+<div class="code-runner-container" id="runner-exercise4" data-runner-id="exercise4" data-default-code="&quot;\n// Complete the for loop\nfor (let i = ???; i &lt;= ???; i++) {\n  console.log(i);\n}\n&quot;" data-storage-key="_code_exercise4">
+  
+  
+<div class="challenge-box">
+  <h3>Code Runner Challenge </h3>
+  <p>
+Complete the for loop to print numbers 1 through 5. Fill in the missing parts of the loop.
+</p>
+</div>
+
+
+  
+
+  
+  
+  <div class="editor-container">
+  
+  <div class="control-panel">
+    
+      <button type="button" class="runBtn" title="Run">▶</button>
+      <button type="button" class="copyBtn" title="Copy Code">⎘</button>
+      <button type="button" class="saveBtn" title="Save Code">💾</button>
+      <button type="button" class="clearStorageBtn" title="Clear Storage">🗑</button>
+      <select class="languageSelect">
+        <option value="python">Python</option>
+        <option value="java">Java</option>
+        <option value="javascript">JavaScript</option>
+      </select>
+      <select class="fontSizeSelect">
+        <option value="14">14px</option>
+        <option value="16">16px</option>
+        <option value="18">18px</option>
+        <option value="20">20px</option>
+      </select>
+  
+  </div>
+  
+
+  <textarea class="editor-textarea"></textarea>
+
+  
+  <div class="control-panel">
+    
+    <span class="lineCount">Lines: 1</span>
+<span class="charCount">Characters: 0</span>
+
+
+  
+  </div>
+  
+</div>
+
+
+  <div class="output-container">
+    <div class="control-panel">
+      <span>Output</span>
+      <button type="button" class="copyOutputBtn" title="Copy Output">⎘</button>
+    </div>
+    <div class="output-content">Click "Run" in code control panel to see output ...</div>
+    <div class="control-panel">
+      <span class="execTime"></span>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { BaseRunner, CodeExecutor } from '/portfolio1/assets/js/pages/runners/index.js';
+import { pythonURI, javaURI, fetchOptions } from '/portfolio1/assets/js/api/config.js';
+
+(function() {
+  const container = document.getElementById('runner-exercise4');
+  if (!container) return;
+  
+  const initialLang = "javascript";
+  const defaultCode = JSON.parse(container.dataset.defaultCode || "\"\"");
+  const editorHeight = "";
+  const storageKey = container.dataset.storageKey;
+  const runner = new BaseRunner(container, { storageKey });
+
+  const editor = runner.initializeEditor({
+    defaultCode,
+    editorHeight,
+    fallbackCode: "print('Hello, world!')",
+    codeMirrorOptions: {
+      lineNumbers: true,
+      mode: initialLang === "java" ? "text/x-java" : (initialLang || "python"),
+      theme: "darcula",
+      indentUnit: 4,
+      tabSize: 4
+    }
+  });
+
+  const langSelect = container.querySelector('.languageSelect');
+  const fontSizeSelect = container.querySelector('.fontSizeSelect');
+  const outputDiv = container.querySelector('.output-content');
+  const execTimeSpan = container.querySelector('.execTime');
+  const codeExecutor = new CodeExecutor({
+    editor,
+    outputElement: outputDiv,
+    execTimeElement: execTimeSpan,
+    languageSelect: langSelect,
+    pythonURI,
+    javaURI,
+    fetchOptions,
+  });
+
+  // Set initial language selection
+  if (initialLang) {
+    langSelect.value = initialLang;
+  }
+
+  runner.bindEditorButtons({
+    resetValue: defaultCode || "print('Hello, world!')",
+    onClear: () => {
+      outputDiv.textContent = 'Storage cleared. Code reset to default.';
+      execTimeSpan.textContent = '';
+    }
+  });
+
+  // Font size changer
+  fontSizeSelect.addEventListener("change", () => {
+    const size = fontSizeSelect.value;
+    container.querySelector('.CodeMirror').style.fontSize = size + 'px';
+    editor.refresh();
+  });
+
+  // Language switcher
+  langSelect.addEventListener("change", () => {
+    const lang = langSelect.value;
+    if (lang === "python") {
+      editor.setOption("mode", "python");
+    } else if (lang === "java") {
+      editor.setOption("mode", "text/x-java");
+    } else if (lang === "javascript") {
+      editor.setOption("mode", "javascript");
+    }
+  });
+
+  codeExecutor.bindCopyOutput(container.querySelector('.copyOutputBtn'));
+
+  // Run button logic
+  function runCode() {
+    return codeExecutor.run();
+  }
+
+  runner.bindButton('.runBtn', runCode);
+
+  // Keyboard shortcut
+  runner.bindShortcut(runCode);
+})();
+</script>
+
+<hr />
+
+<h2 id="code-runner-reference">Code Runner Reference</h2>
+
+<p>Code runner requires defining and passing liquid variables for <strong>challenge</strong> and <strong>code</strong> to the include file <code class="language-plaintext highlighter-rouge">runners/code.html</code>. Study the source of this markdown file to see how the liquid variables are defined for each example above.</p>
+
+<h3 id="parameters">Parameters</h3>
+
+<ul>
+  <li><strong>runner_id</strong> (required): Unique ID for each runner on the page (e.g., “exercise1”, “exercise2”)</li>
+  <li><strong>language</strong> (optional): “python”, “java”, or “javascript” (defaults to “python”)</li>
+  <li><strong>challenge</strong>: Variable containing the challenge/instruction text</li>
+  <li><strong>code</strong>: Variable containing the starter code</li>
+  <li><strong>height</strong> (optional): Editor height (defaults to “300px”)</li>
+</ul>
+
+<h3 id="code-runner-architecture">Code Runner Architecture</h3>
+
+<h4 id="html-component">HTML Component</h4>
+
+<ul>
+  <li>File: <code class="language-plaintext highlighter-rouge">_includes/runners/code.html</code></li>
+  <li>Reusable component with parameters for customization</li>
+  <li>Uses CodeMirror for syntax highlighting</li>
+</ul>
+
+<h4 id="scss-styling">SCSS Styling</h4>
+
+<ul>
+  <li>Main file: <code class="language-plaintext highlighter-rouge">_sass/open-coding/forms/code-runner.scss</code></li>
+  <li>Uses mixins for consistent styling across lessons:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">@mixin control-panel</code> - Top/bottom toolbars with buttons</li>
+      <li><code class="language-plaintext highlighter-rouge">@mixin sub-container</code> - Groups editor/output sections</li>
+      <li><code class="language-plaintext highlighter-rouge">@mixin info-panel</code> - Challenge box styling</li>
+      <li><code class="language-plaintext highlighter-rouge">@mixin output-panel</code> - Code output display</li>
+      <li><code class="language-plaintext highlighter-rouge">@mixin icon-button</code> - Consistent button styling</li>
+      <li><code class="language-plaintext highlighter-rouge">@mixin select-control</code> - Dropdown menus</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="color-variables">Color Variables</h4>
+
+<ul>
+  <li>File: <code class="language-plaintext highlighter-rouge">_sass/open-coding/user-preferences.scss</code></li>
+  <li>
+    <p>Uses colors that correspond to user preferences</p>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">--pref-bg-color</code> - Background color</li>
+  <li><code class="language-plaintext highlighter-rouge">--pref-text-color</code> - Text color</li>
+  <li><code class="language-plaintext highlighter-rouge">--pref-accent-color</code> - Accent/emphasis color</li>
+  <li><code class="language-plaintext highlighter-rouge">--ui-border</code> - Border color</li>
+  <li><code class="language-plaintext highlighter-rouge">--panel</code> - Panel background</li>
+</ul>
+
+<hr />
+
+
+          
+
+          
+        </div></div>
+    </div>
+</div>
+
+
+
+<!-- Modals for lesson player -->
+<!-- LESSON PLAYER MODALS -->
+
+<!-- Floating hamburger menu (mobile only) -->
+<button class="floating-menu-btn" id="floating-menu-btn" style="display: none;">
+  <i class="fas fa-bars"></i>
+</button>
+
+<!-- Timeline modal overlay -->
+<div class="timeline-modal-overlay" id="timeline-modal-overlay"></div>
+
+<!-- Timeline modal (mobile only) -->
+<div class="timeline-modal" id="timeline-modal">
+  <div class="timeline-modal-header">
+    <h3>Course Timeline</h3>
+    <button class="timeline-close-btn" id="timeline-close-btn" type="button">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <div class="timeline-modal-content" id="timeline-modal-content">
+    <!-- Sprint cards will be populated by JavaScript -->
+  </div>
+</div>
+
+
+
+<script type="module">
+  import { pythonURI, fetchOptions, javaURI } from '/portfolio1/assets/js/api/config.js';
+
+  /**
+   * ============================================
+   * CONFIGURATION & CONSTANTS
+   * ============================================
+   */
+  const COURSE = 'csp';
+  const WEEK = '17';
+  const PAGE_TITLE = "Code Runner - Examples";
+  const CURRENT_LESSON_ID = '/code';
+  const STORAGE_KEY = `${COURSE}-lesson-completion`;
+  const STATUS_AUTO_HIDE_MS = 5000;
+  const FILE_SIZE_LIMIT_MB = 10;
+  const ASSIGNMENT_ID = null;
+  const ASSIGNMENT_NAME = "null";
+
+  /**
+   * ============================================
+   * SPRINT NAVIGATION: Toggle sprint visibility
+   * ============================================
+   */
+  window.toggleSprint = function (sprintId) {
+    const lessons = document.getElementById(`sprint-${sprintId}-lessons`);
+    const chevron = document.getElementById(`chevron-${sprintId}`);
+    if (!lessons || !chevron) return;
+
+    const isHidden = lessons.style.display === 'none';
+    lessons.style.display = isHidden ? 'block' : 'none';
+    chevron.classList.toggle('fa-chevron-right', !isHidden);
+    chevron.classList.toggle('fa-chevron-down', isHidden);
+  };
+
+  /**
+   * ============================================
+   * COMPLETION DATA LAYER: LocalStorage operations
+   * ============================================
+   */
+  function getCompletionData() {
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      return stored ? JSON.parse(stored) : {};
+    } catch (e) {
+      console.error('Error reading completion data:', e);
+      return {};
+    }
+  }
+
+  function saveCompletionData(data) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    } catch (e) {
+      console.error('Error saving completion data:', e);
+    }
+  }
+
+  /**
+   * ============================================
+   * COMPLETION TOGGLING: Toggle lesson status
+   * ============================================
+   */
+  window.toggleComplete = function () {
+    const completionData = getCompletionData();
+    const isCompleted = completionData[CURRENT_LESSON_ID] || false;
+    completionData[CURRENT_LESSON_ID] = !isCompleted;
+    saveCompletionData(completionData);
+
+    syncCompletionUI();
+    window.dispatchEvent(new CustomEvent('completionChanged', {
+      detail: { itemId: CURRENT_LESSON_ID, completed: !isCompleted }
+    }));
+  };
+
+  /**
+   * ============================================
+   * UI UPDATES: Individual responsibility functions
+   * ============================================
+   */
+  function updateCompleteButton(isCompleted) {
+    const updateButton = (iconId, textId) => {
+      const icon = document.getElementById(iconId);
+      const text = document.getElementById(textId);
+      if (!icon || !text) return;
+      
+      icon.classList.toggle('fa-circle', !isCompleted);
+      icon.classList.toggle('fa-circle-check', isCompleted);
+      text.textContent = isCompleted ? 'Completed' : 'Burndown';
+    };
+    
+    updateButton('complete-icon', 'complete-text');
+    updateButton('complete-icon-topbar', 'complete-text-topbar');
+  }
+
+  function updateLessonItems(completionData) {
+    let completed = 0;
+    const lessonItems = document.querySelectorAll('.lesson-item');
+    
+    lessonItems.forEach(item => {
+      const lessonId = item.dataset.lessonId;
+      const icon = item.querySelector('.lesson-status-icon');
+      const isCompleted = completionData[lessonId] || false;
+      
+      if (icon) {
+        icon.classList.toggle('fa-circle', !isCompleted);
+        icon.classList.toggle('fa-circle-check', isCompleted);
+        icon.classList.toggle('incomplete', !isCompleted);
+        icon.classList.toggle('completed', isCompleted);
+      }
+      
+      if (isCompleted) completed++;
+    });
+    
+    return { total: lessonItems.length, completed };
+  }
+
+  function updateProgressBars(completionData) {
+    const lessonItems = Array.from(document.querySelectorAll('.lesson-item'));
+    const stats = updateLessonItems(completionData);
+    
+    const sidebarProgress = document.getElementById('sidebar-progress');
+    if (sidebarProgress) {
+      const sidebarPercent = stats.total > 0 ? (stats.completed / stats.total) * 100 : 0;
+      sidebarProgress.style.width = `${sidebarPercent}%`;
+    }
+    
+    const progressCount = document.getElementById('progress-count');
+    if (progressCount) {
+      progressCount.textContent = `${stats.completed}/${stats.total}`;
+    }
+    
+    const lessonProgress = document.getElementById('lesson-progress');
+    if (lessonProgress) {
+      const currentIndex = lessonItems.findIndex(item => item.classList.contains('active'));
+      const lessonPercent = stats.total > 0 ? ((currentIndex + 1) / stats.total) * 100 : 0;
+      lessonProgress.style.width = `${lessonPercent}%`;
+    }
+  }
+
+  function syncCompletionUI() {
+    const completionData = getCompletionData();
+    const isCompleted = completionData[CURRENT_LESSON_ID] || false;
+    updateCompleteButton(isCompleted);
+    updateProgressBars(completionData);
+  }
+
+  /**
+   * ============================================
+   * LESSON NAVIGATION: Move between lessons
+   * ============================================
+   */
+  window.prevLesson = function () {
+    const lessonItems = Array.from(document.querySelectorAll('.lesson-item'));
+    const currentIndex = lessonItems.findIndex(item => item.classList.contains('active'));
+    if (currentIndex > 0) {
+      window.location.href = lessonItems[currentIndex - 1].href;
+    } else {
+      alert('You are on the first lesson!');
+    }
+  };
+
+  window.nextLesson = function () {
+    const lessonItems = Array.from(document.querySelectorAll('.lesson-item'));
+    const currentIndex = lessonItems.findIndex(item => item.classList.contains('active'));
+    if (currentIndex >= 0 && currentIndex < lessonItems.length - 1) {
+      window.location.href = lessonItems[currentIndex + 1].href;
+    } else {
+      alert('You\'ve reached the last lesson!');
+    }
+  };
+
+  /**
+   * ============================================
+   * INITIALIZATION: Player setup
+   * ============================================
+   */
+  function initLessonPlayer() {
+    if (document.querySelector('.lesson-player')) {
+      document.body.style.margin = '0';
+      document.body.style.padding = '0';
+    }
+  }
+
+  function expandCurrentSprint() {
+    const activeLesson = document.querySelector('.lesson-item.active');
+    if (!activeLesson) return;
+    
+    const sprintSection = activeLesson.closest('.sprint-section');
+    if (sprintSection) {
+      const sprintToggle = sprintSection.querySelector('.sprint-toggle');
+      if (sprintToggle) sprintToggle.click();
+    }
+  }
+
+  /**
+   * ============================================
+   * CROSS-TAB SYNC: Listen for changes
+   * ============================================
+   */
+  function setupSyncListeners() {
+    window.addEventListener('focus', () => {
+      if (document.querySelector('.lesson-player')) syncCompletionUI();
+    });
+
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden && document.querySelector('.lesson-player')) syncCompletionUI();
+    });
+
+    window.addEventListener('storage', (e) => {
+      if (e.key === STORAGE_KEY && document.querySelector('.lesson-player')) {
+        syncCompletionUI();
+      }
+    });
+
+    window.addEventListener('completionChanged', () => {
+      if (document.querySelector('.lesson-player')) syncCompletionUI();
+    });
+  }
+
+  /**
+   * ============================================
+   * TIMELINE MODAL: Mobile navigation
+   * ============================================
+   */
+  function buildTimelineModal() {
+    const completionData = getCompletionData();
+    const lessonItems = document.querySelectorAll('.lesson-item');
+    const sprintGroups = {};
+
+    lessonItems.forEach(item => {
+      const sprintSection = item.closest('.sprint-section');
+      if (!sprintSection) return;
+      
+      const sprintTitle = sprintSection.querySelector('.sprint-title').textContent;
+      if (!sprintGroups[sprintTitle]) sprintGroups[sprintTitle] = [];
+      
+      sprintGroups[sprintTitle].push({
+        id: item.dataset.lessonId,
+        title: item.querySelector('.lesson-title').textContent,
+        url: item.href,
+        completed: completionData[item.dataset.lessonId] || false,
+        active: item.classList.contains('active')
+      });
+    });
+
+    return sprintGroups;
+  }
+
+  function renderTimelineModal(sprintGroups) {
+    const modalContent = document.getElementById('timeline-modal-content');
+    if (!modalContent) return;
+
+    modalContent.innerHTML = Object.entries(sprintGroups).map(([sprintTitle, lessons]) => {
+      const sprintId = sprintTitle.replace(/\s+/g, '-').toLowerCase();
+      const lessonHTML = lessons.map(lesson => `
+        <a href="${lesson.url}" class="modal-lesson-item ${lesson.active ? 'active' : ''}">
+          <i class="fas ${lesson.completed ? 'fa-circle-check' : 'fa-circle'} modal-lesson-status ${lesson.completed ? 'completed' : 'incomplete'}"></i>
+          <span class="modal-lesson-title">${lesson.title}</span>
+        </a>
+      `).join('');
+      
+      return `
+        <div class="modal-sprint-card">
+          <div class="modal-sprint-header">
+            <h3 class="modal-sprint-title">${sprintTitle}</h3>
+            <button class="modal-sprint-toggle" onclick="toggleModalSprint('${sprintId}')">
+              <i class="fas fa-chevron-down"></i> View Lessons
+            </button>
+          </div>
+          <div class="modal-lessons" id="modal-${sprintId}">
+            ${lessonHTML}
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    // Auto-expand active sprint
+    const sprintGroups_arr = Object.values(sprintGroups);
+    const activeSprintIndex = sprintGroups_arr.findIndex(lessons => 
+      lessons.some(l => l.active)
+    );
+    
+    if (activeSprintIndex !== -1) {
+      const activeSprintTitle = Object.keys(sprintGroups)[activeSprintIndex];
+      const sprintId = activeSprintTitle.replace(/\s+/g, '-').toLowerCase();
+      setTimeout(() => {
+        window.toggleModalSprint(sprintId);
+      }, 0);
+    }
+  }
+
+  window.toggleModalSprint = function (sprintId) {
+    const lessonsContainer = document.getElementById(`modal-${sprintId}`);
+    const toggleBtn = document.querySelector(`[onclick="toggleModalSprint('${sprintId}')"] i`);
+    if (!lessonsContainer || !toggleBtn) return;
+
+    lessonsContainer.classList.toggle('expanded');
+    toggleBtn.classList.toggle('fa-chevron-down', !lessonsContainer.classList.contains('expanded'));
+    toggleBtn.classList.toggle('fa-chevron-up', lessonsContainer.classList.contains('expanded'));
+  };
+
+  function setupMobileModal() {
+    const floatingBtn = document.getElementById('floating-menu-btn');
+    const timelineModal = document.getElementById('timeline-modal');
+    const overlay = document.getElementById('timeline-modal-overlay');
+    const closeBtn = document.getElementById('timeline-close-btn');
+    const modalContent = document.getElementById('timeline-modal-content');
+
+    if (window.innerWidth > 768) {
+      if (floatingBtn) floatingBtn.style.display = 'none';
+      return;
+    }
+
+    if (floatingBtn) floatingBtn.style.display = 'flex';
+
+    const sprintGroups = buildTimelineModal();
+    renderTimelineModal(sprintGroups);
+
+    const openModal = () => {
+      timelineModal.classList.add('open');
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeModal = () => {
+      timelineModal.classList.remove('open');
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    };
+
+    if (floatingBtn) floatingBtn.addEventListener('click', openModal);
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (overlay) overlay.addEventListener('click', closeModal);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && timelineModal.classList.contains('open')) closeModal();
+    });
+
+    if (modalContent) {
+      modalContent.addEventListener('click', (e) => {
+        if (e.target.closest('.modal-lesson-item')) closeModal();
+      });
+    }
+  }
+
+  /**
+   * ============================================
+   * ASSIGNMENT SUBMISSION: API operations
+   * ============================================
+   */
+  async function resolveCurrentUser() {
+    const uidRes = await fetch(`${pythonURI}/api/id`, fetchOptions);
+    if (!uidRes.ok) throw new Error('Not authenticated. Please log in.');
+    const { uid } = await uidRes.json();
+    const personRes = await fetch(`${javaURI}/api/person/uid/${encodeURIComponent(uid)}`, fetchOptions);
+    if (!personRes.ok) throw new Error('Could not resolve your account in the gradebook.');
+    const person = await personRes.json();
+    return { uid, personId: person.id };
+  }
+
+  async function resolveAssignmentName() {
+    if (typeof ASSIGNMENT_NAME === 'string' && ASSIGNMENT_NAME) return ASSIGNMENT_NAME;
+    const res = await fetch(`${javaURI}/api/assignments/${ASSIGNMENT_ID}`, fetchOptions);
+    if (!res.ok) throw new Error('Assignment not found on server.');
+    return await res.text();
+  }
+
+  async function submitLinkToBackend(link, description) {
+    if (!ASSIGNMENT_ID) throw new Error("Assignment ID not configured. Add assignment_id to this page's frontmatter.");
+    const { uid, personId } = await resolveCurrentUser();
+    const content = { type: 'link', url: link, notes: description };
+    const res = await fetch(`${javaURI}/api/submissions/${ASSIGNMENT_ID}`, {
+      ...fetchOptions,
+      method: 'POST',
+      body: JSON.stringify({
+        assignmentId: ASSIGNMENT_ID,
+        submitterId: personId,
+        isGroupSubmission: false,
+        content,
+        comment: description,
+        isLate: false
+      })
+    });
+    if (!res.ok) {
+      const e = await res.json().catch(() => ({}));
+      throw new Error(e.error || res.statusText);
+    }
+    // Dual-write to EshikaP1's grades system
+    const assignmentLabel = (typeof ASSIGNMENT_NAME === 'string' && ASSIGNMENT_NAME) ? ASSIGNMENT_NAME : String(ASSIGNMENT_ID);
+    await fetch(`${javaURI}/api/grades`, {
+      ...fetchOptions,
+      method: 'POST',
+      body: JSON.stringify({ uid, assignment: assignmentLabel, score: null, submission: content, submittedAt: new Date().toISOString() })
+    }).catch(() => {}); // non-blocking — don't fail submission if grades write fails
+  }
+
+  async function submitFilesToBackend(files, notes) {
+    if (!ASSIGNMENT_ID) throw new Error("Assignment ID not configured. Add assignment_id to this page's frontmatter.");
+    const { uid, personId } = await resolveCurrentUser();
+    const assignmentName = await resolveAssignmentName();
+    for (const file of files) {
+      const content = { type: 'file', filename: file.name, notes: notes || '' };
+      const fd = new FormData();
+      fd.append('assignmentName', assignmentName);
+      fd.append('userId', personId);
+      fd.append('username', uid);
+      fd.append('file', file);
+      if (notes) fd.append('notes', notes);
+      const r = await fetch(`${javaURI}/api/assignment-submissions/upload`, {
+        method: 'POST',
+        mode: fetchOptions.mode,
+        credentials: fetchOptions.credentials,
+        headers: { 'X-Origin': 'client' },
+        body: fd
+      });
+      if (!r.ok) {
+        const e = await r.json().catch(() => ({}));
+        throw new Error(`Upload failed for ${file.name}: ` + (e.error || r.statusText));
+      }
+      // Dual-write to EshikaP1's grades system
+      const assignmentLabel = (typeof ASSIGNMENT_NAME === 'string' && ASSIGNMENT_NAME) ? ASSIGNMENT_NAME : String(ASSIGNMENT_ID);
+      await fetch(`${javaURI}/api/grades`, {
+        ...fetchOptions,
+        method: 'POST',
+        body: JSON.stringify({ uid, assignment: assignmentLabel, score: null, submission: content, submittedAt: new Date().toISOString() })
+      }).catch(() => {}); // non-blocking
+    }
+  }
+
+  /**
+   * ============================================
+   * FILE HANDLING: File operations
+   * ============================================
+   */
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        let encoded = reader.result.toString().replace(/^data:(.*,)?/, '');
+        if ((encoded.length % 4) > 0) {
+          encoded += '='.repeat(4 - (encoded.length % 4));
+        }
+        resolve(encoded);
+      };
+      reader.onerror = error => reject(error);
+    });
+  }
+
+  function formatFileSize(bytes) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+  }
+
+  /**
+   * ============================================
+   * STATUS MESSAGES: Display feedback
+   * ============================================
+   */
+  function showStatus(type, message) {
+    const status = document.getElementById('submission-status');
+    if (!status) return;
+    const icon = type === 'success' ? 'check-circle' : type === 'loading' ? 'spinner fa-spin' : 'exclamation-circle';
+    status.className = `submission-status ${type}`;
+    status.innerHTML = `<i class="fas fa-${icon}"></i> ${message}`;
+    status.style.display = 'block';
+    if (type !== 'loading') {
+      setTimeout(() => {
+        status.style.display = 'none';
+      }, STATUS_AUTO_HIDE_MS);
+    }
+  }
+
+  /**
+   * ============================================
+   * SUBMISSION STORAGE: Local persistence
+   * ============================================
+   */
+  function saveSubmissionLocally(type, data) {
+    const submissions = JSON.parse(localStorage.getItem('assignment-submissions') || '{}');
+    const lessonId = window.location.pathname;
+    if (!submissions[lessonId]) submissions[lessonId] = [];
+    submissions[lessonId].push({ type, data, timestamp: new Date().toISOString() });
+    localStorage.setItem('assignment-submissions', JSON.stringify(submissions));
+  }
+
+  /**
+   * ============================================
+   * SUBMISSION UI: Tab switching & file display
+   * ============================================
+   */
+  window.switchSubmissionType = function (type) {
+    document.querySelectorAll('.submission-tab').forEach(tab => tab.classList.remove('active'));
+    event.target.closest('.submission-tab').classList.add('active');
+    
+    document.querySelectorAll('.submission-form').forEach(form => form.classList.remove('active'));
+    document.getElementById(`${type}-form`).classList.add('active');
+    
+    const status = document.getElementById('submission-status');
+    if (status) status.style.display = 'none';
+  };
+
+  window.removeFile = function (index) {
+    const fileInput = document.getElementById('file-input');
+    const fileList = document.getElementById('file-list');
+    if (!fileInput || !fileList) return;
+    
+    const dt = new DataTransfer();
+    Array.from(fileInput.files).forEach((file, i) => {
+      if (i !== index) dt.items.add(file);
+    });
+    fileInput.files = dt.files;
+    updateFileListDisplay();
+  };
+
+  /**
+   * ============================================
+   * FILE DISPLAY: Render file list
+   * ============================================
+   */
+  function updateFileListDisplay() {
+    const fileInput = document.getElementById('file-input');
+    const fileList = document.getElementById('file-list');
+    const fileSubmitBtn = document.getElementById('file-submit-btn');
+    
+    if (!fileList) return;
+    
+    fileList.innerHTML = Array.from(fileInput.files).map((file, index) => `
+      <div class="file-item">
+        <div class="file-info">
+          <i class="fas fa-file"></i>
+          <div>
+            <div class="file-name">${file.name}</div>
+            <div class="file-size">${formatFileSize(file.size)}</div>
+          </div>
+        </div>
+        <button type="button" class="remove-file" onclick="removeFile(${index})">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    `).join('');
+    
+    if (fileSubmitBtn) fileSubmitBtn.disabled = fileInput.files.length === 0;
+  }
+
+  /**
+   * ============================================
+   * FORM SUBMISSION: Handle submissions
+   * ============================================
+   */
+  function setupSubmissionForms() {
+    const linkForm = document.getElementById('link-form');
+    if (linkForm) {
+      linkForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const link = document.getElementById('submission-link').value.trim();
+        const description = document.getElementById('link-description').value.trim();
+        const submitBtn = linkForm.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        showStatus('loading', 'Submitting...');
+        try {
+          await submitLinkToBackend(link, description);
+          saveSubmissionLocally('link', { link, description });
+          showStatus('success', 'Link submitted successfully!');
+          this.reset();
+        } catch (err) {
+          showStatus('error', err.message);
+        } finally {
+          submitBtn.disabled = false;
+        }
+      });
+    }
+
+    const fileForm = document.getElementById('file-form');
+    if (fileForm) {
+      fileForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const fileInput = document.getElementById('file-input');
+        const notes = document.getElementById('file-notes')?.value?.trim() || '';
+        const submitBtn = fileForm.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        showStatus('loading', 'Uploading...');
+        try {
+          for (const file of fileInput.files) {
+            if (file.size > FILE_SIZE_LIMIT_MB * 1024 * 1024) {
+              throw new Error(`${file.name} exceeds ${FILE_SIZE_LIMIT_MB}MB limit.`);
+            }
+          }
+          await submitFilesToBackend(Array.from(fileInput.files), notes);
+          saveSubmissionLocally('file', { files: Array.from(fileInput.files).map(f => f.name), notes });
+          showStatus('success', `${fileInput.files.length} file(s) submitted successfully!`);
+          fileInput.value = '';
+          updateFileListDisplay();
+          this.reset();
+        } catch (err) {
+          showStatus('error', err.message);
+        } finally {
+          submitBtn.disabled = false;
+        }
+      });
+    }
+  }
+
+  /**
+   * ============================================
+   * MASTER INITIALIZATION
+   * ============================================
+   */
+  function initializePage() {
+    // Lesson player setup
+    initLessonPlayer();
+    expandCurrentSprint();
+    syncCompletionUI();
+    setupSyncListeners();
+    
+    // Mobile enhancements
+    setupMobileModal();
+    window.addEventListener('resize', () => setupMobileModal());
+    
+    // Assignment submission
+    setupSubmissionForms();
+    
+    // File upload handling
+    const fileUploadArea = document.getElementById('file-upload-area');
+    const fileInput = document.getElementById('file-input');
+    if (fileUploadArea && fileInput) {
+      fileUploadArea.addEventListener('click', () => fileInput.click());
+      fileUploadArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        fileUploadArea.classList.add('dragover');
+      });
+      fileUploadArea.addEventListener('dragleave', () => {
+        fileUploadArea.classList.remove('dragover');
+      });
+      fileUploadArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        fileUploadArea.classList.remove('dragover');
+        fileInput.files = e.dataTransfer.files;
+        updateFileListDisplay();
+      });
+      fileInput.addEventListener('change', () => updateFileListDisplay());
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', initializePage);
+</script>
+
+
+                                </div>
+            </div>
+        </main><footer id="masterFooter" class="site-footer h-card">
+    <data class="u-url" href="/portfolio1/"></data>
+
+    <!-- <div class="wrapper">
+
+        <div class="social-links"><ul class="social-media-list"><li>
+    <a rel="me" href="" target="_blank" title="">
+      <span class="grey fa-brands fa- fa-lg"></span>
+    </a>
+  </li><li>
+    <a rel="me" href="" target="_blank" title="">
+      <span class="grey fa-brands fa- fa-lg"></span>
+    </a>
+  </li><li>
+    <a rel="me" href="" target="_blank" title="">
+      <span class="grey fa-brands fa- fa-lg"></span>
+    </a>
+  </li>
+  <li>
+    <a href="/portfolio1/feed.xml" target="_blank" title="Subscribe to syndication feed">
+      <svg class="svg-icon grey" viewbox="0 0 16 16">
+        <path d="M12.8 16C12.8 8.978 7.022 3.2 0 3.2V0c8.777 0 16 7.223 16 16h-3.2zM2.194
+          11.61c1.21 0 2.195.985 2.195 2.196 0 1.21-.99 2.194-2.2 2.194C.98 16 0 15.017 0
+          13.806c0-1.21.983-2.195 2.194-2.195zM10.606
+          16h-3.11c0-4.113-3.383-7.497-7.496-7.497v-3.11c5.818 0 10.606 4.79 10.606 10.607z"
+        />
+      </svg>
+    </a>
+  </li>
+</ul>
+</div>
+
+    </div> -->
+
+    <!--<p style="font-style: italic;">aesthetihawkc v3.0rc1.1</p>-->
+
+    <div class="footer-links">
+        <div class="footer-previous">
+            
+        </div>
+
+        <div class="footer-home">
+            
+        </div>
+
+        <div class="footer-next">
+            
+        </div>
+    </div>
+
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const style = getComputedStyle(document.documentElement);
+        const theme = style.getPropertyValue('--theme').trim() || "dark";
+        const panel = style.getPropertyValue('--panel-mid').trim() || "#0b1220";
+        const text = style.getPropertyValue('--pref-text-color').trim() || "#e6eef8";
+        const accent = style.getPropertyValue('--pref-accent-color').trim() || "#3b82f6";
+        const fontFamily = style.getPropertyValue('--pref-font-family').trim() || "Arial, sans-serif";
+        mermaid.initialize({ 
+            startOnLoad: false,
+            theme: theme,
+            securityLevel: 'loose',
+            themeVariables: {
+                background: panel,
+                primaryColor: panel,
+                primaryTextColor: text,
+                primaryBorderColor: accent,
+                lineColor: text,
+                arrowheadColor: text,
+                fontFamily: fontFamily
+            }
+        });
+        
+        // Convert fenced code blocks to mermaid divs
+        document.querySelectorAll('pre code.language-mermaid').forEach((block, index) => {
+            const content = block.textContent;
+            const wrapper = document.createElement('div');
+            wrapper.className = 'mermaid';
+            wrapper.id = 'mermaid-' + index;
+            wrapper.textContent = content;
+            block.parentElement.parentNode.replaceChild(wrapper, block.parentElement);
+        });
+        
+        mermaid.run();
+    });
+</script></body>
+</html>

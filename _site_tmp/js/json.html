@@ -1,0 +1,2271 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.9.0 -->
+<title>JSON and JavaScript Objects | Open Coding</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="JSON and JavaScript Objects" />
+<meta name="author" content="Finn Dyess, Matteo" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="JSON Structures using Code Runner" />
+<meta name="twitter:description" property="og:description" content="JSON Structures using Code Runner" />
+<meta property="og:site_name" content="Open Coding" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-01-16T00:00:00-08:00" />
+<meta property="article:modified_time" content="2026-01-16T00:00:00-08:00" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="JSON and JavaScript Objects" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Finn Dyess, Matteo"},"dateModified":"2026-01-16T00:00:00-08:00","datePublished":"2026-01-16T00:00:00-08:00","description":"JSON Structures using Code Runner","headline":"JSON and JavaScript Objects","mainEntityOfPage":{"@type":"WebPage","@id":"/portfolio1/js/json"},"url":"/portfolio1/js/json"}</script>
+<!-- End Jekyll SEO tag -->
+<link id="main-stylesheet" rel="stylesheet" href="/portfolio1/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="/portfolio1/feed.xml" title="Open Coding" />
+<!-- Minima start custom head snippets -->
+<!-- Favicon for browser tabs and bookmarks -->
+<link rel="icon" href="/portfolio1/favicon.ico" type="image/x-icon">
+
+<!-- Support for Apple devices (iPhone/iPad homescreen icon) -->
+<link rel="apple-touch-icon" sizes="180x180" href="/portfolio1/apple-touch-icon.png">
+
+<!-- Support for modern browsers and pinned tabs -->
+<link rel="icon" type="image/png" sizes="32x32" href="/portfolio1/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/portfolio1/favicon-16x16.png">
+
+<!-- Google Fonts - commonly used across the site -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto:wght@400;500;700&family=Open+Sans:wght@400;600&family=Lato:wght@400;700&family=Montserrat:wght@400;600&family=Noto+Sans:wght@400;700&family=Merriweather:wght@400;700&family=Source+Code+Pro:wght@400;700&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet"><!-- CodeMirror CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/darcula.min.css">
+<!-- CodeMirror JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/clike/clike.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script><link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script><link rel="stylesheet" href="/portfolio1/assets/css/style.css">
+<script src="/portfolio1/assets/js/user-preferences.js"></script>
+<!-- Set up javaURI globally for OCS Analytics Tracker -->
+<script>
+    if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+        window.javaURI = "http://localhost:8585";
+    } else {
+        window.javaURI = "https://spring.opencodingsociety.com";
+    }
+</script>
+<!-- OCS Analytics Tracking Script (loaded on every page) -->
+<script src="/portfolio1/assets/js/ocs-analytics-tracker.js" defer></script><!-- Keyboard Shortcuts (Alt+Shift+key navigation, loaded on every page) -->
+<script>window.baseurl = "/portfolio1";</script>
+<script src="/portfolio1/assets/js/keyboard-shortcuts.js" defer></script>
+
+<!-- AI A/B Test Engine SDK (passes site.baseurl for asset resolution) -->
+<script src="http://localhost:3000/sdk.js"
+  data-site-baseurl="/portfolio1"
+  data-project-id="cmnfour780000f63gu69kg2v8"></script>
+<script type="importmap">
+{
+  "imports": {
+    "@assets/": "/portfolio1/assets/"
+  }
+}
+</script>
+<!-- Minima end custom head snippets -->
+ </head>
+<body>    <header class="site-header">
+        <div class="wrapper"><a class="site-title" rel="author" href="/portfolio1/" data-value="Open Coding">
+                <img id="site-logo" src="/portfolio1/images/logo.png" alt="Logo">
+            </a><nav class="site-nav">
+                <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+                <label for="nav-trigger">
+                    <span class="menu-icon">
+                        <svg viewBox="0 0 18 15" width="18px" height="15px">
+                            <path
+                                d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z" />
+                        </svg>
+                    </span>
+                </label>
+
+                <div class="trigger"><a class="page-link" href="/portfolio1/blogs/">Blogs</a><a class="page-link" href="/portfolio1/search/">Search</a><a class="page-link" href="/portfolio1/about/">About</a><a id="loginArea" class="page-link" href="/portfolio1/login">Login</a>
+                </div>
+            </nav></div>
+    </header>
+
+    <script type="module" src="/portfolio1/assets/js/api/login.js"></script>    
+
+          <div class="micro-actions-wrapper">
+            <!-- Floating Microblog Button (upper right, below header) -->
+<button id="microblog-toggle-btn" class="microblog-fab microblog-fab-top" aria-label="Open Microblog">💬 Microblog</button>
+
+<!-- Microblog Side Panel -->
+<aside id="microblog-panel" class="microblog-panel" tabindex="-1" aria-label="Microblog panel">
+  <div class="microblog-panel-header">
+    <button id="microblog-close-btn" class="microblog-close-btn" aria-label="Close Microblog">&times;</button>
+    <h2 class="microblog-panel-title">Microblog</h2>
+    <button id="guest-signup-toggle" class="guest-signup-toggle-btn">Guest Signup</button>
+  </div>
+
+  <!-- Guest Signup Form (initially hidden) -->
+  <div id="guest-signup-form" class="guest-signup-container" style="display: none;">
+    <h3 class="guest-signup-title">Quick Guest Signup</h3>
+    <form id="guest-form" onsubmit="handleGuestSignup(event);">
+      <div class="guest-form-group">
+        <input type="text" id="guest-username" placeholder="Username" required>
+      </div>
+      <div class="guest-form-group">
+        <input type="password" id="guest-password" placeholder="Password" required>
+      </div>
+      <p>
+        <button type="submit" class="guest-submit-btn">Sign Up & Login</button>
+      </p>
+      <p id="guest-status-message" class="guest-status"></p>
+    </form>
+  </div>
+
+  <div class="microblog-panel-content">
+    <!-- MicroBlog Container -->
+    <div id="microblog-playground">
+      <em>Loading microblog posts...</em>
+    </div>
+  </div>
+</aside>
+
+<script type="module">
+// Import required functions from config
+import { pythonURI, javaURI, fetchOptions } from '/portfolio1/assets/js/api/config.js';
+
+// Microblog panel open/close logic
+const microblogPanel = document.getElementById('microblog-panel');
+const microblogFab = document.getElementById('microblog-toggle-btn');
+const microblogCloseBtn = document.getElementById('microblog-close-btn');
+
+function openMicroblogPanel() {
+  microblogPanel.classList.add('open');
+  microblogFab.style.display = 'none';
+}
+function closeMicroblogPanel() {
+  microblogPanel.classList.remove('open');
+  microblogFab.style.display = '';
+}
+microblogFab.onclick = openMicroblogPanel;
+microblogCloseBtn.onclick = closeMicroblogPanel;
+
+// Guest signup toggle logic
+const guestSignupToggle = document.getElementById('guest-signup-toggle');
+const guestSignupForm = document.getElementById('guest-signup-form');
+
+guestSignupToggle.onclick = function() {
+  if (guestSignupForm.style.display === 'none') {
+    guestSignupForm.style.display = 'block';
+  } else {
+    guestSignupForm.style.display = 'none';
+  }
+};
+
+// Guest signup handler with auto-login
+window.handleGuestSignup = async function(event) {
+  event.preventDefault();
+
+  const username = document.getElementById('guest-username').value;
+  const password = document.getElementById('guest-password').value;
+  const statusMessage = document.getElementById('guest-status-message');
+  const submitButton = document.querySelector('.guest-submit-btn');
+
+  // Disable button and show loading state
+  submitButton.disabled = true;
+  submitButton.textContent = 'Creating Account...';
+  statusMessage.textContent = '';
+  statusMessage.style.color = '#666';
+
+  const signupData = {
+    uid: username,
+    password: password
+  };
+
+  try {
+    let accountExists = false;
+
+    // Step 1: Try to create guest account using Flask backend
+    statusMessage.textContent = 'Creating guest account...';
+    const signupResponse = await fetch(`${pythonURI}/api/user/guest`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(signupData)
+    });
+
+    if (!signupResponse.ok) {
+      // Account might already exist, so we'll try to login instead
+      accountExists = true;
+      statusMessage.textContent = 'Account exists, logging in...';
+    } else {
+      await signupResponse.json();
+      statusMessage.textContent = 'Account created! Logging in...';
+    }
+
+    // Step 2: Login with the credentials (whether account was just created or already existed)
+    const loginResponse = await fetch(`${pythonURI}/authenticate`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify(signupData)
+    });
+
+    if (!loginResponse.ok) {
+      throw new Error('Login failed - please check your credentials');
+    }
+
+    await loginResponse.json();
+
+    // Success - stay on current page
+    statusMessage.textContent = 'Success! You are now logged in.';
+    statusMessage.style.color = 'green';
+
+    // Hide the form after successful signup/login
+    setTimeout(() => {
+      guestSignupForm.style.display = 'none';
+      // Reset form
+      document.getElementById('guest-username').value = '';
+      document.getElementById('guest-password').value = '';
+      submitButton.disabled = false;
+      submitButton.textContent = 'Sign Up & Login';
+    }, 2000);
+
+  } catch (error) {
+    console.error('Guest signup error:', error);
+    statusMessage.textContent = `Error: ${error.message}`;
+    statusMessage.style.color = 'red';
+    submitButton.disabled = false;
+    submitButton.textContent = 'Sign Up & Login';
+  }
+};
+</script>
+
+<!-- Create/Edit Modal Overlay using Tailwind -->
+<div id="microblog-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
+  <div class="microblog-modal-panel">
+    <div class="microblog-modal-header">
+      <button id="modal-close" class="microblog-modal-close" aria-label="Close Modal">&times;</button>
+      <h2 id="modal-title" class="microblog-modal-title">Create Microblog Post</h2>
+    </div>
+    <form id="microblog-form" class="space-y-4">
+      <input type="hidden" id="post-id" name="id">
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Topic</label>
+        <input id="topic-id" name="topicId" type="text" class="mt-1 block w-full border border-gray-300 rounded-md p-2" readonly>
+      </div>
+      <div class="microblog-form-group">
+        <label for="content" class="microblog-form-label">Content <span class="required">*</span></label>
+        <textarea id="content" name="content" required class=""></textarea>
+      </div>
+      <div class="flex justify-end space-x-2">
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Reply Modal -->
+<div id="reply-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden">
+  <div class="microblog-modal-panel">
+    <div class="microblog-modal-header">
+      <button id="reply-modal-close" class="microblog-modal-close" aria-label="Close Reply Modal">&times;</button>
+      <h2 id="reply-modal-title" class="microblog-modal-title">Reply to Post</h2>
+    </div>
+    <form id="reply-form" class="space-y-4">
+      <input type="hidden" id="reply-post-id" name="postId">
+      <div class="microblog-form-group">
+        <label for="reply-content" class="microblog-form-label">Content <span class="required">*</span></label>
+        <textarea id="reply-content" name="content" required class=""></textarea>
+      </div>
+      <div class="flex justify-end space-x-2">
+        <button type="button" id="reply-cancel-btn" class="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500">Cancel</button>
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Reply</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!--JavaScript Logic for MicroBlog -->
+<script type="module">
+// Imports for APIs used on this page
+import { fetchPosts, createPost, updatePost, createReply, fetchReplies } from '/assets/js/api/microblog.js';
+
+// Default Key for New MicroBlog Posts
+const pagePermalink = '/js/json';
+
+// Create/Edit Modal Functions
+function openModal({ mode, post = {} }) {
+  document.getElementById('microblog-modal').classList.remove('hidden');
+  document.getElementById('modal-title').textContent = mode === 'edit' ? 'Edit Microblog Post' : 'Create Microblog Post';
+  document.getElementById('post-id').value = post.id || '';
+  document.getElementById('topic-id').value = post.topicPath || pagePermalink;
+  document.getElementById('content').value = post.content || '';
+}
+function closeModal() {
+  document.getElementById('microblog-modal').classList.add('hidden');
+}
+document.getElementById('modal-close').onclick = closeModal;
+document.getElementById('microblog-modal').onclick = function(e) {
+  if (e.target === this) closeModal();
+};
+
+// Reply Modal Functions
+function openReplyModal(postId) {
+  document.getElementById('reply-modal').classList.remove('hidden');
+  document.getElementById('reply-post-id').value = postId;
+  document.getElementById('reply-content').value = '';
+}
+function closeReplyModal() {
+  document.getElementById('reply-modal').classList.add('hidden');
+  document.getElementById('reply-post-id').value = '';
+  document.getElementById('reply-content').value = '';
+}
+document.getElementById('reply-modal-close').onclick = closeReplyModal;
+document.getElementById('reply-cancel-btn').onclick = closeReplyModal;
+document.getElementById('reply-modal').onclick = function(e) {
+  if (e.target === this) closeReplyModal();
+};
+
+// Reply Form Submission
+document.getElementById('reply-form').onsubmit = async function(e) {
+  e.preventDefault();
+  const postId = document.getElementById('reply-post-id').value;
+  const content = document.getElementById('reply-content').value;
+  const topicPath = pagePermalink || (window.location ? window.location.pathname : 'default');
+  
+  try {
+    await createReply({ postId, content, topicPath });
+    closeReplyModal();
+    renderMicroblogTable(); // Refresh to show new reply
+  } catch (err) {
+    alert('Error posting reply: ' + err.message);
+  }
+};
+
+// Load replies for a specific post
+async function loadRepliesForPost(postId) {
+  try {
+    const repliesData = await fetchReplies(postId);
+    const replies = repliesData.replies || repliesData || [];
+    if (replies.length > 0) {
+      // Find the row for this post
+      const postRow = document.querySelector(`#post-row-${postId}`);
+      if (postRow) {
+        // Check if replies section already exists
+        let repliesRow = document.querySelector(`#replies-row-${postId}`);
+        if (!repliesRow) {
+          // Create a new row for replies
+          repliesRow = document.createElement('tr');
+          repliesRow.id = `replies-row-${postId}`;
+          repliesRow.className = 'replies-row';
+          postRow.insertAdjacentElement('afterend', repliesRow);
+        }
+        
+        // Format replies HTML
+        const repliesHtml = replies.map(reply => {
+          const replyDate = reply.timestamp ? new Date(reply.timestamp).toLocaleString() : '';
+          return `
+            <div class="reply-item ml-4 mt-2 p-2 rounded border-l-4 border-green-500">
+              <div class="text-sm text-gray-600">
+                ${reply.userName || 'Anonymous'} - ${replyDate}
+              </div>
+              <div class="mt-1">${escapeHtml(reply.content || '')}</div>
+            </div>
+          `;
+        }).join('');
+        
+        repliesRow.innerHTML = `
+          <td colspan="2" class="text-left p-2">
+            <div class="replies-container">
+              <strong class="text-sm text-gray-600">Replies (${replies.length}):</strong>
+              ${repliesHtml}
+            </div>
+          </td>
+        `;
+      }
+    }
+  } catch (error) {
+    console.error(`Error loading replies for post ${postId}:`, error);
+  }
+}
+
+// Utility function to escape HTML
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+// Save Button Listner for Update and Create
+document.getElementById('microblog-form').onsubmit = async function(e) {
+  e.preventDefault();
+  const id = document.getElementById('post-id').value;
+  const topicPath = document.getElementById('topic-id').value;
+  const content = document.getElementById('content').value;
+  try {
+    // API calls to Update and Create Posts
+    if (id) {
+      await updatePost({ id, content, topicPath });
+    } else {
+      await createPost({ content, topicPath });
+    }
+    closeModal();
+    renderMicroblogTable();
+  } catch (err) {
+    alert('Error saving post: ' + err.message);
+  }
+};
+
+// MicroBlog Table Manager
+async function renderMicroblogTable() {
+    const container = document.getElementById('microblog-playground');
+    try {
+        // Determine filter mode and pass page if needed
+        let pageArg = undefined;
+        if (window.__microblogFilterMode === undefined || window.__microblogFilterMode === 'page') {
+          // Use current page as filter; fallback to location.pathname or a default string
+          pageArg = window.location ? window.location.pathname : 'default';
+        }
+        // API call to Read former Posts
+        const data = await fetchPosts(pageArg);
+        // SVG icons for Create (+) and Edit (pencil)
+        const createIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="microblog-filter-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>`;
+        const editIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="microblog-filter-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="18" height="18"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536M9 13l6.586-6.586a2 2 0 112.828 2.828L11.828 15.828a4 4 0 01-2.828 1.172H7v-2a4 4 0 011.172-2.828z" /></svg>`;
+        const replyIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="microblog-filter-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="18" height="18"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" /></svg>`;
+        // Single page icon (default)
+        const pageIcon = `<span class="microblog-filter-icon microblog-filter-page" id="page-icon" title="Show this page only"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><rect x="6" y="4" width="12" height="16" rx="2" fill="white" stroke="white" stroke-width="1.5"/><rect x="8" y="6" width="8" height="12" rx="1" fill="#9333ea" stroke="white" stroke-width="1.5"/></svg></span>`;
+        // Many pages icon (secondary option)
+        const manyPagesIcon = `<span class="microblog-filter-icon microblog-filter-many" id="many-pages-icon" title="Show all pages"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><g><rect x="7" y="15" width="10" height="6" rx="2" fill="#60a5fa" stroke="white" stroke-width="1.2"/><rect x="5" y="11" width="12" height="6" rx="2" fill="#2563eb" stroke="white" stroke-width="1.2"/><rect x="3" y="7" width="12" height="6" rx="2" fill="#1e40af" stroke="white" stroke-width="1.2"/></g></svg></span>`;
+        // Create and Page Icons
+        const controlsInfo = `
+          <span id="filter-icons" class="microblog-filter-controls">
+            <button id="create-btn" class="microblog-btn microblog-btn-create" title="Create Post">${createIcon}</button>
+            ${pageIcon}
+            ${manyPagesIcon}
+          </span>
+        `;
+
+        // Table: Keys and Special Formatting
+        const analytics = [
+          { key: 'userName' },
+          { key: 'timestamp', format: ts => {
+              if (!ts) return '';
+              const d = new Date(ts);
+              if (isNaN(d)) return ts;
+              return d.toLocaleString();
+            }
+          },
+          { key: 'characterCount', format: v => `Count: ${v}` }
+        ];
+        const message = [
+          { key: 'topicPath', format: v => `Topic: ${v}` },
+          { key: 'content' }
+        ];
+
+        // Table: columns
+        let head = `
+            <thead>
+                <tr>
+                    <th style="width:30%">Analytics</th>
+                    <th>Message</th>
+                </tr>
+            </thead>
+        `;
+
+        // Table: rows; generated from microblog data
+        let genBody = '';
+        (data.microblogs || []).forEach(post => {
+            const analyticsCell = analytics.map(f => {
+              let value = post[f.key] ?? '';
+              if (f.format) value = f.format(value);
+              return `<div>${value}</div>`;
+            }).join('');
+            // Edit and Reply buttons inline with Topic
+            const messageCell = message.map(f => {
+              let value = post[f.key] ?? '';
+              if (f.key === 'topicPath') {
+                value = (f.format ? f.format(value) : value) +
+                  ` <button class='edit-btn ml-2' data-id='${post.id}' title='Edit'>${editIcon}</button>` +
+                  ` <button class='reply-btn ml-2' data-id='${post.id}' title='Reply'>${replyIcon}</button>`;
+              } else if (f.format) {
+                value = f.format(value);
+              }
+              return `<div>${value}</div>`;
+            }).join('');
+            genBody += `<tr id="post-row-${post.id}"><td class="text-left">${analyticsCell}</td><td class="text-left">${messageCell}</td></tr>`;
+        });
+
+        // Table: body
+        let body = `
+        <tbody>
+            ${genBody}
+        </tbody>
+        `;
+
+
+        // Table: set container with scrollable wrapper
+        container.innerHTML = `
+        <div class="max-h-[45vh] sm:max-h-[60vh] lg:max-h-[70vh] overflow-y-auto" style="max-height:70vh;">
+          <table id="microblog-table" border="1" style="border-collapse:collapse; margin-top:1em; width:100%;">
+              ${head}
+              ${body}
+          </table>
+        </div>
+        `;
+
+        // Wait for DOM update, then initialize DataTables
+        setTimeout(async () => {
+        // JQuery micro-table Bottom and Top control updates
+        if (window.jQuery && $('#microblog-table').length) {
+            $('#microblog-table').DataTable({
+                initComplete: function() {
+                    // Top controls (Show entries)
+                    const lengthDiv = document.querySelector('.dataTables_length');
+                    if (lengthDiv) {
+                      lengthDiv.style.display = 'flex';
+                      lengthDiv.style.alignItems = 'center';
+                      lengthDiv.insertAdjacentHTML('afterbegin', controlsInfo);
+                      lengthDiv.querySelectorAll('*').forEach(el => {
+                        el.style.marginTop = '0';
+                        el.style.marginBottom = '0';
+                      });
+                      const createBtn = document.getElementById('create-btn');
+                      if (createBtn) createBtn.onclick = () => openModal({ mode: 'create' });
+                    }
+                    // Bottom controls (prefix to info)
+                    const infoDiv = document.querySelector('.dataTables_info');
+                    if (infoDiv) {
+                      infoDiv.style.display = 'flex';
+                      infoDiv.style.alignItems = 'center';
+                      infoDiv.innerHTML = controlsInfo + infoDiv.innerHTML;
+                      // Only bind if not already bound (avoid duplicate IDs)
+                      const btns = infoDiv.querySelectorAll('#create-btn');
+                      btns.forEach(btn => btn.onclick = () => openModal({ mode: 'create' }));
+                    }
+                    // Filter mode logic (default: page, people = all)
+                    window.__microblogFilterMode = 'page';
+                    function setFilterMode(mode) {
+                      window.__microblogFilterMode = mode;
+                      // Update icon backgrounds for visual feedback
+                      const pageIconEl = document.getElementById('page-icon');
+                      const manyPagesIconEl = document.getElementById('many-pages-icon');
+                      if (pageIconEl && manyPagesIconEl) {
+                        if (mode === 'page') {
+                          pageIconEl.style.background = '#9333ea'; // purple
+                          manyPagesIconEl.style.background = '#2563eb'; // blue
+                          pageIconEl.style.opacity = '1';
+                          manyPagesIconEl.style.opacity = '0.5';
+                        } else {
+                          manyPagesIconEl.style.background = '#2563eb';
+                          pageIconEl.style.background = '#9333ea';
+                          manyPagesIconEl.style.opacity = '1';
+                          pageIconEl.style.opacity = '0.5';
+                        }
+                      }
+                      // Re-render table with new filter
+                      renderMicroblogTable();
+                    }
+                    setTimeout(() => {
+                      // Bind ALL filter icons (top and bottom)
+                      document.querySelectorAll('#page-icon').forEach(el => {
+                        el.onclick = () => setFilterMode('page');
+                      });
+                      document.querySelectorAll('#many-pages-icon').forEach(el => {
+                        el.onclick = () => setFilterMode('people');
+                      });
+                      // Only set default filter if not already set
+                      if (!window.__microblogFilterModeInitialized) {
+                        window.__microblogFilterModeInitialized = true;
+                        setFilterMode('page');
+                      }
+                    }, 0);
+                }
+            });
+            // Bind edit buttons using event delegation so it works on all pages
+            $('#microblog-table').off('click', '.edit-btn').on('click', '.edit-btn', function() {
+              const id = $(this).data('id');
+              const post = (data.microblogs || []).find(p => p.id == id);
+              openModal({ mode: 'edit', post });
+            });
+            // Bind reply buttons
+            $('#microblog-table').off('click', '.reply-btn').on('click', '.reply-btn', async function() {
+              const postId = $(this).data('id');
+              openReplyModal(postId);
+            });
+            
+            // Load and display replies for each post
+            for (const post of (data.microblogs || [])) {
+              await loadRepliesForPost(post.id);
+            }
+        }
+        }, 0);
+    } catch (error) {
+        container.innerHTML = `<div style="color:red;">Failed to load microblog posts: ${error.message}</div>`;
+    }
+}
+renderMicroblogTable();
+</script>
+            <!-- Small Inbox Button (appears to the left of the microblog FAB) -->
+<button id="inbox-toggle-btn" class="inbox-fab" aria-label="Open Inbox">
+  📥
+  <div id="inbox-badge" class="inbox-badge hidden" title="Unread announcements">!</div>
+</button>
+
+<!-- Compact Inbox Panel (opened by the small inbox FAB) -->
+<aside id="inbox-panel" class="microblog-panel inbox-panel--compact" tabindex="-1" aria-label="Inbox panel">
+  <div class="microblog-panel-header">
+    <button id="inbox-close-btn" class="microblog-close-btn" aria-label="Close Inbox">&times;</button>
+    <h2 class="microblog-panel-title">Inbox</h2>
+  </div>
+  <div class="microblog-panel-content">
+    <div class="inbox-tabs" style="display:flex; gap:0.5rem; padding:0.5rem;">
+      <button id="tab-announcements" class="inbox-tab" style="padding:0.35rem 0.6rem; background:transparent; border-radius:6px;">Announcements</button>
+    </div>
+
+    <div id="announcements-content">
+      <div id="inbox-app" class="inbox-app">
+      <!-- Admin-only form - hidden by default, shown via JS for admins -->
+      <form id="inbox-form" class="microblog-form" aria-label="Inbox announcement form" style="display:none;">
+        <div class="microblog-form-group">
+          <label class="microblog-form-label" for="inbox-title">Title <span class="required">*</span></label>
+          <input id="inbox-title" name="title" type="text" required class="microblog-input" style="width:100%;" />
+        </div>
+        <div class="microblog-form-group">
+          <label class="microblog-form-label" for="inbox-content">Content <span class="required">*</span></label>
+          <textarea id="inbox-content" name="content" required class="microblog-textarea"></textarea>
+        </div>
+        <div class="microblog-form-group" id="links-area">
+          <label class="microblog-form-label">Links (optional)</label>
+          <div id="inbox-links-container"></div>
+          <p style="margin-top:0.5rem;"><button id="add-link-btn" type="button" class="microblog-btn">Add link</button></p>
+        </div>
+        <div class="microblog-form-actions">
+          <button type="submit" class="microblog-btn">Post to Inbox</button>
+          <button type="button" id="inbox-clear-btn" class="microblog-btn-cancel">Clear</button>
+        </div>
+      </form>
+
+      <hr id="inbox-form-divider" style="border-color: rgba(255,255,255,0.08); margin:0.75rem 0; display:none;" />
+
+      <div id="inbox-messages" class="inbox-messages">
+        <em style="color:var(--white); padding:0.5rem; display:block;">No announcements yet.</em>
+      </div>
+      </div>
+
+  </div>
+</aside>
+
+<script type="module">
+import { pythonURI, fetchOptions } from '/portfolio1/assets/js/api/config.js';
+
+// Store admin status globally for use in message rendering
+window.inboxUserIsAdmin = false;
+
+// Check if user is Admin and show inbox form
+async function checkInboxAdminAccess() {
+  try {
+    const res = await fetch(`${pythonURI}/api/id`, fetchOptions);
+    if (!res.ok) return;
+    
+    const user = await res.json();
+    const isAdmin = user.role === "Admin";
+    window.inboxUserIsAdmin = isAdmin;
+    
+    if (isAdmin) {
+      const inboxForm = document.getElementById('inbox-form');
+      const inboxDivider = document.getElementById('inbox-form-divider');
+      
+      if (inboxForm) inboxForm.style.display = 'block';
+      if (inboxDivider) inboxDivider.style.display = 'block';
+      
+      // Show admin controls on existing messages
+      document.querySelectorAll('.inbox-admin-controls').forEach(ctrl => {
+        ctrl.style.display = 'flex';
+      });
+    }
+  } catch (err) {
+    console.error("Error checking inbox admin access:", err);
+  }
+}
+
+// Run admin check on load
+checkInboxAdminAccess();
+
+// Inbox toggle (small FAB)
+const inboxToggle = document.getElementById('inbox-toggle-btn');
+const inboxPanel = document.getElementById('inbox-panel');
+const inboxCloseBtn = document.getElementById('inbox-close-btn');
+
+function openInboxPanel() {
+  inboxPanel.classList.add('open');
+}
+function closeInboxPanel() {
+  inboxPanel.classList.remove('open');
+}
+if (inboxToggle) {
+  inboxToggle.onclick = function(e) {
+    e.stopPropagation();
+    // toggle the compact inbox panel
+    if (inboxPanel.classList.contains('open')) closeInboxPanel(); else openInboxPanel();
+  };
+}
+if (inboxCloseBtn) inboxCloseBtn.onclick = closeInboxPanel;
+
+// Close inbox when clicking outside the panel
+document.addEventListener('click', (e) => {
+  if (!inboxPanel) return;
+  if (!inboxPanel.classList.contains('open')) return;
+  if (e.target === inboxPanel || inboxPanel.contains(e.target)) return;
+  if (inboxToggle && e.target === inboxToggle) return;
+  closeInboxPanel();
+});
+</script>
+
+<script>
+// Inbox form behavior (no persistence)
+;(function(){
+  const form = document.getElementById('inbox-form');
+  const linksContainer = document.getElementById('inbox-links-container');
+  const addLinkBtn = document.getElementById('add-link-btn');
+  const messagesEl = document.getElementById('inbox-messages');
+  const clearBtn = document.getElementById('inbox-clear-btn');
+  const badge = document.getElementById('inbox-badge');
+
+  // Update badge visibility based on unread messages
+  function updateBadge() {
+    const unreadMessages = messagesEl.querySelectorAll('.inbox-message.unread');
+    const unreadCount = unreadMessages.length;
+    
+    if (unreadCount > 0) {
+      badge.textContent = unreadCount > 9 ? '!' : unreadCount;
+      badge.classList.remove('hidden');
+    } else {
+      badge.classList.add('hidden');
+    }
+  }
+
+  function createLinkRow(url='', label=''){
+    const row = document.createElement('div');
+    row.className = 'inbox-link-row';
+    row.style.display = 'flex';
+    row.style.gap = '0.5rem';
+    row.style.marginTop = '0.25rem';
+
+    const urlInput = document.createElement('input');
+    urlInput.type = 'url';
+    urlInput.placeholder = 'https://example.com';
+    urlInput.value = url;
+    urlInput.style.flex = '1';
+    urlInput.className = 'microblog-input';
+
+    const labelInput = document.createElement('input');
+    labelInput.type = 'text';
+    labelInput.placeholder = 'Link label (optional)';
+    labelInput.value = label;
+    labelInput.style.width = '10rem';
+    labelInput.className = 'microblog-input';
+
+    const removeBtn = document.createElement('button');
+    removeBtn.type = 'button';
+    removeBtn.className = 'microblog-btn-cancel';
+    removeBtn.textContent = 'Remove';
+    removeBtn.onclick = () => row.remove();
+
+    row.appendChild(urlInput);
+    row.appendChild(labelInput);
+    row.appendChild(removeBtn);
+    return row;
+  }
+
+  addLinkBtn && addLinkBtn.addEventListener('click', () => {
+    linksContainer.appendChild(createLinkRow());
+  });
+
+  clearBtn && clearBtn.addEventListener('click', () => {
+    form.reset();
+    linksContainer.innerHTML = '';
+  });
+
+  form && form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const title = document.getElementById('inbox-title').value.trim();
+    const content = document.getElementById('inbox-content').value.trim();
+    if (!title || !content) return alert('Please provide title and content.');
+
+    const linkRows = Array.from(linksContainer.querySelectorAll('.inbox-link-row'));
+    const links = linkRows.map(r => {
+      const inputs = r.getElementsByTagName('input');
+      return { url: inputs[0].value.trim(), label: inputs[1].value.trim() };
+    }).filter(l => l.url);
+
+    // Build announcement object
+    const ann = { id: 'ann-' + Date.now() + '-' + Math.floor(Math.random()*1000), title, content, links, unread: true };
+
+    function buildMessageElement(announcement){
+      const el = document.createElement('div');
+      el.className = 'inbox-message' + (announcement.unread ? ' unread' : '');
+      el.dataset.annId = announcement.id;
+      el.dataset.unread = announcement.unread ? 'true' : 'false';
+      el.style.padding = '0.75rem';
+      el.style.border = '1px solid rgba(255,255,255,0.06)';
+      el.style.borderRadius = '6px';
+      el.style.marginBottom = '0.5rem';
+
+      const header = document.createElement('div');
+      header.style.display = 'flex';
+      header.style.justifyContent = 'space-between';
+      header.style.alignItems = 'center';
+
+      const h = document.createElement('div');
+      h.style.fontWeight = '700';
+      h.style.marginBottom = '0.25rem';
+      h.textContent = announcement.title;
+
+      const controls = document.createElement('div');
+      controls.className = 'inbox-admin-controls';
+      controls.style.display = 'none'; // Hidden by default, shown for admins
+      controls.style.gap = '0.5rem';
+      controls.style.alignItems = 'center';
+
+      const editBtn = document.createElement('button');
+      editBtn.type = 'button';
+      editBtn.className = 'microblog-btn';
+      editBtn.textContent = 'Edit';
+      editBtn.onclick = () => {
+        // populate form for editing
+        document.getElementById('inbox-title').value = announcement.title;
+        document.getElementById('inbox-content').value = announcement.content;
+        linksContainer.innerHTML = '';
+        (announcement.links || []).forEach(l => linksContainer.appendChild(createLinkRow(l.url, l.label)));
+        form.dataset.editingId = announcement.id;
+        // change submit label
+        const submitBtn = form.querySelector('button[type=submit]');
+        if (submitBtn) submitBtn.textContent = 'Save changes';
+        // open panel
+        openInboxPanel();
+      };
+
+      const delBtn = document.createElement('button');
+      delBtn.type = 'button';
+      delBtn.className = 'microblog-btn-cancel';
+      delBtn.textContent = 'Delete';
+      delBtn.onclick = () => {
+        if (confirm('Delete this announcement?')) {
+          el.remove();
+          updateBadge();
+        }
+      };
+
+      const markDoneBtn = document.createElement('button');
+      markDoneBtn.type = 'button';
+      markDoneBtn.className = 'microblog-btn-done';
+      markDoneBtn.title = 'Mark as read';
+      markDoneBtn.setAttribute('aria-label', 'Mark as read');
+      markDoneBtn.innerHTML = '&#10003;';
+      markDoneBtn.onclick = () => {
+        // Mark as read: remove unread class and update dataset
+        const wasUnread = el.dataset.unread === 'true';
+        el.classList.remove('unread');
+        el.dataset.unread = 'false';
+        // visual toggle for done state
+        el.classList.toggle('inbox-done');
+        markDoneBtn.classList.toggle('done');
+        // Update badge if there are no more unread messages
+        if (wasUnread) updateBadge();
+      };
+
+      controls.appendChild(editBtn);
+      controls.appendChild(delBtn);
+      controls.appendChild(markDoneBtn);
+      
+      // Show controls if user is admin
+      if (window.inboxUserIsAdmin) {
+        controls.style.display = 'flex';
+      }
+
+      header.appendChild(h);
+      header.appendChild(controls);
+
+      const c = document.createElement('div');
+      c.style.marginBottom = '0.5rem';
+      c.innerHTML = announcement.content.replace(/\n/g, '<br>');
+
+      el.appendChild(header);
+      el.appendChild(c);
+
+      if ((announcement.links || []).length > 0) {
+        const ul = document.createElement('ul');
+        ul.style.margin = '0';
+        ul.style.paddingLeft = '1rem';
+        (announcement.links || []).forEach(l => {
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.href = l.url;
+          a.textContent = l.label || l.url;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          a.style.color = 'var(--white)';
+          a.style.textDecoration = 'underline';
+          li.appendChild(a);
+          ul.appendChild(li);
+        });
+        el.appendChild(ul);
+      }
+
+      return el;
+    }
+
+    // If editing existing announcement, update it
+    const editingId = form.dataset.editingId;
+    if (editingId) {
+      const existing = messagesEl.querySelector(`[data-ann-id="${editingId}"]`);
+      if (existing) {
+        const newEl = buildMessageElement(ann);
+        existing.replaceWith(newEl);
+      }
+      delete form.dataset.editingId;
+      const submitBtn = form.querySelector('button[type=submit]');
+      if (submitBtn) submitBtn.textContent = 'Post to Inbox';
+    } else {
+      // Prepend new message
+      const msgEl = buildMessageElement(ann);
+      if (messagesEl) {
+        const placeholder = messagesEl.querySelector('em');
+        if (placeholder) placeholder.remove();
+        // Prepend to ensure newest announcements appear first
+        if (messagesEl.prepend) messagesEl.prepend(msgEl); else messagesEl.insertBefore(msgEl, messagesEl.firstChild);
+      }
+      // Update badge with new unread count
+      updateBadge();
+    }
+
+    // reset form
+    form.reset();
+    linksContainer.innerHTML = '';
+  });
+
+})();
+</script>
+
+          </div>
+        
+
+        
+
+        
+
+        <main class="page-content" aria-label="Content">
+            <div class="wrapper">
+                                <div class="opencs_root">
+                                    
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+  /* === Post Header === */
+  .post-header h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+
+  .page-description {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 1rem;
+  }
+
+  /* === Meta Info (date, author, reading time) === */
+  .post-meta {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+  }
+
+  .post-meta time {
+    font-weight: 500;
+  }
+
+  /* === Category & Breadcrumb Links === */
+  .category-tags-link {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    margin: 0.1rem;
+    font-size: 0.85rem;
+    background: #f5f5f5;
+    border-radius: 999px;
+    color: #333;
+    text-decoration: none;
+    transition: background 0.2s ease;
+  }
+
+  .category-tags-link:hover {
+    background: #e0e0e0;
+  }
+
+  .post-header {
+    margin-bottom: 1rem;
+  }
+
+  .post-header a.category-tags-link {
+    margin-right: 0.3rem;
+  }
+
+  /* === Main Content Styling === */
+  .post-content {
+    line-height: 1.7;
+    font-size: 1rem;
+  }
+
+  .post-content h2,
+  .post-content h3 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.3rem;
+  }
+
+  /* === Comments Section Separator === */
+  .post-content+div,
+  .post-content+section {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #ddd;
+  }
+
+  /* Assignment Submission Widget */
+  .assignment-submission {
+    margin-top: 48px;
+    padding: 24px;
+    background: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+  }
+
+  .assignment-submission h3 {
+    color: #333;
+    font-size: 1.25rem;
+    margin: 0 0 16px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .assignment-submission-icon {
+    color: #2563eb;
+  }
+
+  .submission-options {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .submission-tab {
+    padding: 8px 16px;
+    background: white;
+    border: 1px solid #d0d0d0;
+    border-radius: 6px;
+    color: #555;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .submission-tab:hover {
+    background: #f0f0f0;
+    color: #333;
+  }
+
+  .submission-tab.active {
+    background: #2563eb;
+    color: white;
+    border-color: #2563eb;
+  }
+
+  .submission-form {
+    display: none;
+  }
+
+  .submission-form.active {
+    display: block;
+  }
+
+  .form-group {
+    margin-bottom: 16px;
+  }
+
+  .form-group label {
+    display: block;
+    color: #333;
+    font-size: 14px;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .form-group input[type="text"],
+  .form-group input[type="url"],
+  .form-group textarea {
+    width: 100%;
+    padding: 10px 12px;
+    background: white;
+    border: 1px solid #d0d0d0;
+    border-radius: 6px;
+    color: #333;
+    font-size: 14px;
+    font-family: inherit;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+  }
+
+  .form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+
+  .file-upload-area {
+    border: 2px dashed #d0d0d0;
+    border-radius: 8px;
+    padding: 32px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: white;
+  }
+
+  .file-upload-area:hover {
+    border-color: #2563eb;
+    background: #f0f7ff;
+  }
+
+  .file-upload-area.dragover {
+    border-color: #2563eb;
+    background: #f0f7ff;
+  }
+
+  .file-upload-icon {
+    font-size: 48px;
+    color: #2563eb;
+    margin-bottom: 12px;
+  }
+
+  .file-upload-text {
+    color: #555;
+    margin-bottom: 8px;
+  }
+
+  .file-upload-hint {
+    color: #999;
+    font-size: 12px;
+  }
+
+  .file-list {
+    margin-top: 16px;
+  }
+
+  .file-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    margin-bottom: 8px;
+  }
+
+  .file-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .file-name {
+    color: #333;
+    font-size: 14px;
+  }
+
+  .file-size {
+    color: #999;
+    font-size: 12px;
+  }
+
+  .remove-file {
+    background: transparent;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .remove-file:hover {
+    background: #fee;
+    color: #dc2626;
+  }
+
+  .submit-btn {
+    padding: 12px 24px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .submit-btn:hover {
+    background: #1d4ed8;
+  }
+
+  .submit-btn:disabled {
+    background: #d0d0d0;
+    color: #999;
+    cursor: not-allowed;
+  }
+
+  .submission-status {
+    margin-top: 16px;
+    padding: 12px;
+    border-radius: 6px;
+    display: none;
+  }
+
+  .submission-status.success {
+    display: block;
+    background: #dbeafe;
+    border: 1px solid #2563eb;
+    color: #1e40af;
+  }
+
+  .submission-status.error {
+    display: block;
+    background: #fee2e2;
+    border: 1px solid #dc2626;
+    color: #991b1b;
+  }
+
+  .submission-status.loading {
+    display: block;
+    background: #dbeafe;
+    border: 1px solid #3b82f6;
+    color: #1d4ed8;
+  }
+</style>
+
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    
+    Categories:
+    <a class="category-tags-link" href="/portfolio1/search/#CSSE JavaScript">CSSE JavaScript</a>
+    
+    
+    
+    
+    <p class="post-meta post-meta-title"><time class="dt-published" datetime="2026-01-16T00:00:00-08:00" itemprop="datePublished">
+        Jan 16, 2026
+      </time>• 
+      <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-author h-card" itemprop="name">Finn Dyess, Matteo</span></span>• <span class="read-time" title="Estimated read time">
+    
+     5 min read  </span></p>
+    <h3>JSON and JavaScript Objects</h3><p class="page-description">JSON Structures using Code Runner</p></header>
+
+  <div class="post-content e-content" itemprop="articleBody"><h1 id="json-and-javascript-objects">JSON and JavaScript Objects</h1>
+
+<h2 id="all-about-json-and-javascript-objects">All About JSON and JavaScript Objects</h2>
+
+<p>Let’s imagine this. You’re in your room, with tons of stuff laid out however you want: clothes on the bed, books stacked on a shelf, maybe a backpack open with notebooks inside. You can walk around, grab things, move them, and even use them right away.</p>
+
+<p>This is what a <strong>JavaScript</strong> object is like. It lives inside your program, and JavaScript can interact with it directly.</p>
+
+<p>Now imagine that you need to ship your stuff to someone else.</p>
+
+<p>You can’t just send your entire room as-is. You have to:</p>
+<ul>
+  <li>Put everything to boxes</li>
+  <li>Label everything clearly</li>
+  <li>Follow shipping rules so nothing breaks</li>
+</ul>
+
+<p>That is what JSON is like. JSON is how we <em>package data</em> so it can be sent, stored, or shared. It is not meant to be used directly, but instead to travel.</p>
+
+<p>In this lesson, we will go over:</p>
+<ul>
+  <li>What JavaScript objects are</li>
+  <li>What JSON is</li>
+  <li>Why they appear similar but have different functions</li>
+  <li>How to convert between the two</li>
+</ul>
+
+<h2 id="section-1-javascript-objects">Section 1: JavaScript Objects</h2>
+<p>A <strong>JavaScript object</strong> is a collection of related information stored in one variable.</p>
+
+<p>JavaScript objects:</p>
+<ul>
+  <li>Live inside JavaScript code</li>
+  <li>Can store different types of data</li>
+  <li>Can include functions</li>
+  <li>Are flexible</li>
+</ul>
+
+<p>Here’s a basic example of a JavaScript object:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%%</span><span class="nx">js</span>
+
+<span class="kd">const</span> <span class="nx">student</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Alex</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">age</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+    <span class="na">enrolled</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="na">greet</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="dl">"</span><span class="s2">Hello!</span><span class="dl">"</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>Notice a few things:</p>
+<ul>
+  <li>The keys <strong>do not</strong> need quotes</li>
+  <li>The object includes a function</li>
+  <li>JavaScript understands this immediately</li>
+</ul>
+
+<p>This only works because JavaScript is running the code.</p>
+
+<h2 id="code-runner-1">Code Runner 1</h2>
+<p>Here’s what to do:</p>
+
+<p>Run the code below, then try changing it.</p>
+
+<!-- Reusable Code Runner Component -->
+<div class="code-runner-container" id="runner-js-json-0" data-runner-id="js-json-0" data-default-code="&quot;\nconst student = {\n    name: \&quot;Bartholomew\&quot;,\n    age: 15,\n    grade: \&quot;9th\&quot;\n};\n\n\nconsole.log(student.name);\nconsole.log(student.age);\n&quot;" data-storage-key="_js_json_js-json-0">
+  
+  
+<div class="challenge-box">
+  <h3>Code Runner Challenge </h3>
+  <p>
+Personalize your student record JSON object
+</p>
+</div>
+
+
+  
+  <details>
+    <summary>View IPYNB Source</summary>
+
+<div>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%%</span><span class="nx">js</span>
+
+<span class="c1">// CODE_RUNNER: Personalize your student record JSON object</span>
+
+<span class="kd">const</span> <span class="nx">student</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Bartholomew</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">age</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="na">grade</span><span class="p">:</span> <span class="dl">"</span><span class="s2">9th</span><span class="dl">"</span>
+<span class="p">};</span>
+
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">student</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">student</span><span class="p">.</span><span class="nx">age</span><span class="p">);</span>
+</code></pre></div>      </div>
+
+    </div>
+
+  </details>
+  
+
+  
+  
+  <div class="editor-container">
+  
+  <div class="control-panel">
+    
+      <button type="button" class="runBtn" title="Run">▶</button>
+      <button type="button" class="copyBtn" title="Copy Code">⎘</button>
+      <button type="button" class="saveBtn" title="Save Code">💾</button>
+      <button type="button" class="clearStorageBtn" title="Clear Storage">🗑</button>
+      <select class="languageSelect">
+        <option value="python">Python</option>
+        <option value="java">Java</option>
+        <option value="javascript">JavaScript</option>
+      </select>
+      <select class="fontSizeSelect">
+        <option value="14">14px</option>
+        <option value="16">16px</option>
+        <option value="18">18px</option>
+        <option value="20">20px</option>
+      </select>
+  
+  </div>
+  
+
+  <textarea class="editor-textarea"></textarea>
+
+  
+  <div class="control-panel">
+    
+    <span class="lineCount">Lines: 1</span>
+<span class="charCount">Characters: 0</span>
+
+
+  
+  </div>
+  
+</div>
+
+
+  <div class="output-container">
+    <div class="control-panel">
+      <span>Output</span>
+      <button type="button" class="copyOutputBtn" title="Copy Output">⎘</button>
+    </div>
+    <div class="output-content">Click "Run" in code control panel to see output ...</div>
+    <div class="control-panel">
+      <span class="execTime"></span>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { BaseRunner, CodeExecutor } from '/portfolio1/assets/js/pages/runners/index.js';
+import { pythonURI, javaURI, fetchOptions } from '/portfolio1/assets/js/api/config.js';
+
+(function() {
+  const container = document.getElementById('runner-js-json-0');
+  if (!container) return;
+  
+  const initialLang = "javascript";
+  const defaultCode = JSON.parse(container.dataset.defaultCode || "\"\"");
+  const editorHeight = "";
+  const storageKey = container.dataset.storageKey;
+  const runner = new BaseRunner(container, { storageKey });
+
+  const editor = runner.initializeEditor({
+    defaultCode,
+    editorHeight,
+    fallbackCode: "print('Hello, world!')",
+    codeMirrorOptions: {
+      lineNumbers: true,
+      mode: initialLang === "java" ? "text/x-java" : (initialLang || "python"),
+      theme: "darcula",
+      indentUnit: 4,
+      tabSize: 4
+    }
+  });
+
+  const langSelect = container.querySelector('.languageSelect');
+  const fontSizeSelect = container.querySelector('.fontSizeSelect');
+  const outputDiv = container.querySelector('.output-content');
+  const execTimeSpan = container.querySelector('.execTime');
+  const codeExecutor = new CodeExecutor({
+    editor,
+    outputElement: outputDiv,
+    execTimeElement: execTimeSpan,
+    languageSelect: langSelect,
+    pythonURI,
+    javaURI,
+    fetchOptions,
+  });
+
+  // Set initial language selection
+  if (initialLang) {
+    langSelect.value = initialLang;
+  }
+
+  runner.bindEditorButtons({
+    resetValue: defaultCode || "print('Hello, world!')",
+    onClear: () => {
+      outputDiv.textContent = 'Storage cleared. Code reset to default.';
+      execTimeSpan.textContent = '';
+    }
+  });
+
+  // Font size changer
+  fontSizeSelect.addEventListener("change", () => {
+    const size = fontSizeSelect.value;
+    container.querySelector('.CodeMirror').style.fontSize = size + 'px';
+    editor.refresh();
+  });
+
+  // Language switcher
+  langSelect.addEventListener("change", () => {
+    const lang = langSelect.value;
+    if (lang === "python") {
+      editor.setOption("mode", "python");
+    } else if (lang === "java") {
+      editor.setOption("mode", "text/x-java");
+    } else if (lang === "javascript") {
+      editor.setOption("mode", "javascript");
+    }
+  });
+
+  codeExecutor.bindCopyOutput(container.querySelector('.copyOutputBtn'));
+
+  // Run button logic
+  function runCode() {
+    return codeExecutor.run();
+  }
+
+  runner.bindButton('.runBtn', runCode);
+
+  // Keyboard shortcut
+  runner.bindShortcut(runCode);
+})();
+</script>
+
+<p>Try the following:</p>
+<ul>
+  <li>Change the student’s name to your own</li>
+  <li>Log the entire object</li>
+</ul>
+
+<p>Now try this:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">console</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="n">student</span><span class="p">.</span><span class="n">school</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>This will print <code class="language-plaintext highlighter-rouge">undefined</code>.
+This isn’t because of an error, but instead because <code class="language-plaintext highlighter-rouge">student.school</code> was never defined. 
+JavaScript objects are flexible. They do not break just because a property is undefined.</p>
+
+<h2 id="section-2-what-is-json">Section 2: What is JSON?</h2>
+
+<p>JSON stands for JavaScript Object Notation.</p>
+
+<p>Even though it has the word <em>JavaScript</em> in the name, JSON is <strong>not JavaScript code.</strong></p>
+
+<p>JSON is:</p>
+<ul>
+  <li>A text format</li>
+  <li>Used to send and store data</li>
+</ul>
+
+<p>Because JSON is meant to be shared, it has <strong>strict rules</strong>.</p>
+
+<h3 id="json-rules">JSON Rules</h3>
+<p>JSON:</p>
+<ul>
+  <li>Required double quotes for all keys</li>
+  <li>Does NOT allow functions</li>
+  <li>Does NOT allow comments</li>
+  <li>Does NOT allow trailing commas</li>
+</ul>
+
+<p>If any rule is broken, then JSON will fail.</p>
+
+<h2 id="code-runner-2">Code Runner 2</h2>
+
+<!-- Reusable Code Runner Component -->
+<div class="code-runner-container" id="runner-js-json-1" data-runner-id="js-json-1" data-default-code="&quot;\nconst jsonData = `\n{\n    \&quot;name\&quot;: \&quot;Finn\&quot;,\n    \&quot;age\&quot;: 15,\n    \&quot;isStudent\&quot;: true\n}\n`;\n\n\nconst parsedData = JSON.parse(jsonData);\nconsole.log(parsedData);\n&quot;" data-storage-key="_js_json_js-json-1">
+  
+  
+<div class="challenge-box">
+  <h3>Code Runner Challenge </h3>
+  <p>
+Personalize your student record again and parse it from JSON
+</p>
+</div>
+
+
+  
+  <details>
+    <summary>View IPYNB Source</summary>
+
+<div>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%%</span><span class="nx">js</span>
+
+<span class="c1">// CODE_RUNNER: Personalize your student record again and parse it from JSON</span>
+
+<span class="kd">const</span> <span class="nx">jsonData</span> <span class="o">=</span> <span class="s2">`
+{
+    "name": "Finn",
+    "age": 15,
+    "isStudent": true
+}
+`</span><span class="p">;</span>
+
+
+<span class="kd">const</span> <span class="nx">parsedData</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">jsonData</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">parsedData</span><span class="p">);</span>
+</code></pre></div>      </div>
+
+    </div>
+
+  </details>
+  
+
+  
+  
+  <div class="editor-container">
+  
+  <div class="control-panel">
+    
+      <button type="button" class="runBtn" title="Run">▶</button>
+      <button type="button" class="copyBtn" title="Copy Code">⎘</button>
+      <button type="button" class="saveBtn" title="Save Code">💾</button>
+      <button type="button" class="clearStorageBtn" title="Clear Storage">🗑</button>
+      <select class="languageSelect">
+        <option value="python">Python</option>
+        <option value="java">Java</option>
+        <option value="javascript">JavaScript</option>
+      </select>
+      <select class="fontSizeSelect">
+        <option value="14">14px</option>
+        <option value="16">16px</option>
+        <option value="18">18px</option>
+        <option value="20">20px</option>
+      </select>
+  
+  </div>
+  
+
+  <textarea class="editor-textarea"></textarea>
+
+  
+  <div class="control-panel">
+    
+    <span class="lineCount">Lines: 1</span>
+<span class="charCount">Characters: 0</span>
+
+
+  
+  </div>
+  
+</div>
+
+
+  <div class="output-container">
+    <div class="control-panel">
+      <span>Output</span>
+      <button type="button" class="copyOutputBtn" title="Copy Output">⎘</button>
+    </div>
+    <div class="output-content">Click "Run" in code control panel to see output ...</div>
+    <div class="control-panel">
+      <span class="execTime"></span>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { BaseRunner, CodeExecutor } from '/portfolio1/assets/js/pages/runners/index.js';
+import { pythonURI, javaURI, fetchOptions } from '/portfolio1/assets/js/api/config.js';
+
+(function() {
+  const container = document.getElementById('runner-js-json-1');
+  if (!container) return;
+  
+  const initialLang = "javascript";
+  const defaultCode = JSON.parse(container.dataset.defaultCode || "\"\"");
+  const editorHeight = "";
+  const storageKey = container.dataset.storageKey;
+  const runner = new BaseRunner(container, { storageKey });
+
+  const editor = runner.initializeEditor({
+    defaultCode,
+    editorHeight,
+    fallbackCode: "print('Hello, world!')",
+    codeMirrorOptions: {
+      lineNumbers: true,
+      mode: initialLang === "java" ? "text/x-java" : (initialLang || "python"),
+      theme: "darcula",
+      indentUnit: 4,
+      tabSize: 4
+    }
+  });
+
+  const langSelect = container.querySelector('.languageSelect');
+  const fontSizeSelect = container.querySelector('.fontSizeSelect');
+  const outputDiv = container.querySelector('.output-content');
+  const execTimeSpan = container.querySelector('.execTime');
+  const codeExecutor = new CodeExecutor({
+    editor,
+    outputElement: outputDiv,
+    execTimeElement: execTimeSpan,
+    languageSelect: langSelect,
+    pythonURI,
+    javaURI,
+    fetchOptions,
+  });
+
+  // Set initial language selection
+  if (initialLang) {
+    langSelect.value = initialLang;
+  }
+
+  runner.bindEditorButtons({
+    resetValue: defaultCode || "print('Hello, world!')",
+    onClear: () => {
+      outputDiv.textContent = 'Storage cleared. Code reset to default.';
+      execTimeSpan.textContent = '';
+    }
+  });
+
+  // Font size changer
+  fontSizeSelect.addEventListener("change", () => {
+    const size = fontSizeSelect.value;
+    container.querySelector('.CodeMirror').style.fontSize = size + 'px';
+    editor.refresh();
+  });
+
+  // Language switcher
+  langSelect.addEventListener("change", () => {
+    const lang = langSelect.value;
+    if (lang === "python") {
+      editor.setOption("mode", "python");
+    } else if (lang === "java") {
+      editor.setOption("mode", "text/x-java");
+    } else if (lang === "javascript") {
+      editor.setOption("mode", "javascript");
+    }
+  });
+
+  codeExecutor.bindCopyOutput(container.querySelector('.copyOutputBtn'));
+
+  // Run button logic
+  function runCode() {
+    return codeExecutor.run();
+  }
+
+  runner.bindButton('.runBtn', runCode);
+
+  // Keyboard shortcut
+  runner.bindShortcut(runCode);
+})();
+</script>
+
+<p>Now, intentionally break it. Try these examples:</p>
+<ul>
+  <li>Remove quotes from a key</li>
+  <li>Add a trailing comma</li>
+  <li>Change <code class="language-plaintext highlighter-rouge">true</code> to <code class="language-plaintext highlighter-rouge">True</code></li>
+  <li>Add a comment</li>
+</ul>
+
+<p>When JSON breaks, JavaScript returns an error.
+This is because JSON must be readable so computers can read it reliably.</p>
+
+<h2 id="section-3-converting-between-json-and-javascript-objects">Section 3: Converting Between JSON and JavaScript Objects</h2>
+
+<!-- Reusable Code Runner Component -->
+<div class="code-runner-container" id="runner-js-json-2" data-runner-id="js-json-2" data-default-code="&quot;\nconst user = {\n    username: \&quot;coder123\&quot;,\n    score: 42,\n    premium: false\n};\n\n\nconst jsonString = JSON.stringify(user);\nconsole.log(jsonString);\n\n\nconst parsedUser = JSON.parse(jsonString);\nconsole.log(parsedUser);\n&quot;" data-storage-key="_js_json_js-json-2">
+  
+  
+<div class="challenge-box">
+  <h3>Code Runner Challenge </h3>
+  <p>
+Converting a JavaScript object to JSON and back (with your own data)
+</p>
+</div>
+
+
+  
+  <details>
+    <summary>View IPYNB Source</summary>
+
+<div>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%%</span><span class="nx">js</span>
+
+<span class="c1">// CODE_RUNNER: Converting a JavaScript object to JSON and back (with your own data)</span>
+
+<span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">username</span><span class="p">:</span> <span class="dl">"</span><span class="s2">coder123</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">score</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span>
+    <span class="na">premium</span><span class="p">:</span> <span class="kc">false</span>
+<span class="p">};</span>
+
+
+<span class="kd">const</span> <span class="nx">jsonString</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">user</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">jsonString</span><span class="p">);</span>
+
+
+<span class="kd">const</span> <span class="nx">parsedUser</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">jsonString</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">parsedUser</span><span class="p">);</span>
+</code></pre></div>      </div>
+
+    </div>
+
+  </details>
+  
+
+  
+  
+  <div class="editor-container">
+  
+  <div class="control-panel">
+    
+      <button type="button" class="runBtn" title="Run">▶</button>
+      <button type="button" class="copyBtn" title="Copy Code">⎘</button>
+      <button type="button" class="saveBtn" title="Save Code">💾</button>
+      <button type="button" class="clearStorageBtn" title="Clear Storage">🗑</button>
+      <select class="languageSelect">
+        <option value="python">Python</option>
+        <option value="java">Java</option>
+        <option value="javascript">JavaScript</option>
+      </select>
+      <select class="fontSizeSelect">
+        <option value="14">14px</option>
+        <option value="16">16px</option>
+        <option value="18">18px</option>
+        <option value="20">20px</option>
+      </select>
+  
+  </div>
+  
+
+  <textarea class="editor-textarea"></textarea>
+
+  
+  <div class="control-panel">
+    
+    <span class="lineCount">Lines: 1</span>
+<span class="charCount">Characters: 0</span>
+
+
+  
+  </div>
+  
+</div>
+
+
+  <div class="output-container">
+    <div class="control-panel">
+      <span>Output</span>
+      <button type="button" class="copyOutputBtn" title="Copy Output">⎘</button>
+    </div>
+    <div class="output-content">Click "Run" in code control panel to see output ...</div>
+    <div class="control-panel">
+      <span class="execTime"></span>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { BaseRunner, CodeExecutor } from '/portfolio1/assets/js/pages/runners/index.js';
+import { pythonURI, javaURI, fetchOptions } from '/portfolio1/assets/js/api/config.js';
+
+(function() {
+  const container = document.getElementById('runner-js-json-2');
+  if (!container) return;
+  
+  const initialLang = "javascript";
+  const defaultCode = JSON.parse(container.dataset.defaultCode || "\"\"");
+  const editorHeight = "";
+  const storageKey = container.dataset.storageKey;
+  const runner = new BaseRunner(container, { storageKey });
+
+  const editor = runner.initializeEditor({
+    defaultCode,
+    editorHeight,
+    fallbackCode: "print('Hello, world!')",
+    codeMirrorOptions: {
+      lineNumbers: true,
+      mode: initialLang === "java" ? "text/x-java" : (initialLang || "python"),
+      theme: "darcula",
+      indentUnit: 4,
+      tabSize: 4
+    }
+  });
+
+  const langSelect = container.querySelector('.languageSelect');
+  const fontSizeSelect = container.querySelector('.fontSizeSelect');
+  const outputDiv = container.querySelector('.output-content');
+  const execTimeSpan = container.querySelector('.execTime');
+  const codeExecutor = new CodeExecutor({
+    editor,
+    outputElement: outputDiv,
+    execTimeElement: execTimeSpan,
+    languageSelect: langSelect,
+    pythonURI,
+    javaURI,
+    fetchOptions,
+  });
+
+  // Set initial language selection
+  if (initialLang) {
+    langSelect.value = initialLang;
+  }
+
+  runner.bindEditorButtons({
+    resetValue: defaultCode || "print('Hello, world!')",
+    onClear: () => {
+      outputDiv.textContent = 'Storage cleared. Code reset to default.';
+      execTimeSpan.textContent = '';
+    }
+  });
+
+  // Font size changer
+  fontSizeSelect.addEventListener("change", () => {
+    const size = fontSizeSelect.value;
+    container.querySelector('.CodeMirror').style.fontSize = size + 'px';
+    editor.refresh();
+  });
+
+  // Language switcher
+  langSelect.addEventListener("change", () => {
+    const lang = langSelect.value;
+    if (lang === "python") {
+      editor.setOption("mode", "python");
+    } else if (lang === "java") {
+      editor.setOption("mode", "text/x-java");
+    } else if (lang === "javascript") {
+      editor.setOption("mode", "javascript");
+    }
+  });
+
+  codeExecutor.bindCopyOutput(container.querySelector('.copyOutputBtn'));
+
+  // Run button logic
+  function runCode() {
+    return codeExecutor.run();
+  }
+
+  runner.bindButton('.runBtn', runCode);
+
+  // Keyboard shortcut
+  runner.bindShortcut(runCode);
+})();
+</script>
+
+<p>Try the following:</p>
+<ul>
+  <li>Add a new property</li>
+  <li>Add an array</li>
+  <li>Add a nested object</li>
+</ul>
+
+<h2 id="json-objects-summary">JSON Objects Summary</h2>
+<ul>
+  <li>Elements are stored in a hash table (key-value)</li>
+  <li>You can edit the hash table</li>
+  <li>Store different data types</li>
+  <li>You can nest objects</li>
+  <li>Purpose: store related data, store/organize more complex data, transfer data in JSON format
+    <h2 id="homework-assignment-json-challenge">Homework Assignment: JSON Challenge</h2>
+    <p>Create a resume containing your personal information, skills, and education and print it as a JSON string.</p>
+  </li>
+</ul>
+
+<!-- Reusable Code Runner Component -->
+<div class="code-runner-container" id="runner-js-json-3" data-runner-id="js-json-3" data-default-code="&quot;\n// 1. Create a JavaScript object named `resume` with the following properties:\nconst resume = {\n    fullName: \&quot;\&quot;, // Add your full name\n    email: \&quot;\&quot;,    // Add your email\n    education: \&quot;\&quot;, // Add your grade\n    address: {     // Nested object\n        city: \&quot;\&quot;,\n        state: \&quot;\&quot;,\n        country: \&quot;\&quot;\n    },\n    skills: []     // Array of strings\n};\n// 2. Access and display properties for full name, email, and city using dot notation. Look at section 1.\n// 3. Convert the `resume` JavaScript object into a JSON string and store it in a variable named `jsonString`, then log the JSON string to the console. Look at Section 3.\n// 4. Parse the JSON string back into a JavaScript object and store it in a variable named `parsedResume`, then log the object to the console. Look at Section 3.\n&quot;" data-storage-key="_js_json_js-json-3">
+  
+  
+<div class="challenge-box">
+  <h3>Code Runner Challenge </h3>
+  <p>
+Create a resume as a JavaScript Object and print to the console as JSON
+</p>
+</div>
+
+
+  
+  <details>
+    <summary>View IPYNB Source</summary>
+
+<div>
+
+      <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%%</span><span class="nx">js</span>
+
+<span class="c1">// CODE_RUNNER: Create a resume as a JavaScript Object and print to the console as JSON</span>
+
+<span class="c1">// 1. Create a JavaScript object named `resume` with the following properties:</span>
+<span class="kd">const</span> <span class="nx">resume</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">fullName</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span> <span class="c1">// Add your full name</span>
+    <span class="na">email</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>    <span class="c1">// Add your email</span>
+    <span class="na">education</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span> <span class="c1">// Add your grade</span>
+    <span class="na">address</span><span class="p">:</span> <span class="p">{</span>     <span class="c1">// Nested object</span>
+        <span class="na">city</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
+        <span class="na">state</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span>
+        <span class="na">country</span><span class="p">:</span> <span class="dl">""</span>
+    <span class="p">},</span>
+    <span class="na">skills</span><span class="p">:</span> <span class="p">[]</span>     <span class="c1">// Array of strings</span>
+<span class="p">};</span>
+<span class="c1">// 2. Access and display properties for full name, email, and city using dot notation. Look at section 1.</span>
+<span class="c1">// 3. Convert the `resume` JavaScript object into a JSON string and store it in a variable named `jsonString`, then log the JSON string to the console. Look at Section 3.</span>
+<span class="c1">// 4. Parse the JSON string back into a JavaScript object and store it in a variable named `parsedResume`, then log the object to the console. Look at Section 3.</span>
+
+
+</code></pre></div>      </div>
+
+    </div>
+
+  </details>
+  
+
+  
+  
+  <div class="editor-container">
+  
+  <div class="control-panel">
+    
+      <button type="button" class="runBtn" title="Run">▶</button>
+      <button type="button" class="copyBtn" title="Copy Code">⎘</button>
+      <button type="button" class="saveBtn" title="Save Code">💾</button>
+      <button type="button" class="clearStorageBtn" title="Clear Storage">🗑</button>
+      <select class="languageSelect">
+        <option value="python">Python</option>
+        <option value="java">Java</option>
+        <option value="javascript">JavaScript</option>
+      </select>
+      <select class="fontSizeSelect">
+        <option value="14">14px</option>
+        <option value="16">16px</option>
+        <option value="18">18px</option>
+        <option value="20">20px</option>
+      </select>
+  
+  </div>
+  
+
+  <textarea class="editor-textarea"></textarea>
+
+  
+  <div class="control-panel">
+    
+    <span class="lineCount">Lines: 1</span>
+<span class="charCount">Characters: 0</span>
+
+
+  
+  </div>
+  
+</div>
+
+
+  <div class="output-container">
+    <div class="control-panel">
+      <span>Output</span>
+      <button type="button" class="copyOutputBtn" title="Copy Output">⎘</button>
+    </div>
+    <div class="output-content">Click "Run" in code control panel to see output ...</div>
+    <div class="control-panel">
+      <span class="execTime"></span>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { BaseRunner, CodeExecutor } from '/portfolio1/assets/js/pages/runners/index.js';
+import { pythonURI, javaURI, fetchOptions } from '/portfolio1/assets/js/api/config.js';
+
+(function() {
+  const container = document.getElementById('runner-js-json-3');
+  if (!container) return;
+  
+  const initialLang = "javascript";
+  const defaultCode = JSON.parse(container.dataset.defaultCode || "\"\"");
+  const editorHeight = "";
+  const storageKey = container.dataset.storageKey;
+  const runner = new BaseRunner(container, { storageKey });
+
+  const editor = runner.initializeEditor({
+    defaultCode,
+    editorHeight,
+    fallbackCode: "print('Hello, world!')",
+    codeMirrorOptions: {
+      lineNumbers: true,
+      mode: initialLang === "java" ? "text/x-java" : (initialLang || "python"),
+      theme: "darcula",
+      indentUnit: 4,
+      tabSize: 4
+    }
+  });
+
+  const langSelect = container.querySelector('.languageSelect');
+  const fontSizeSelect = container.querySelector('.fontSizeSelect');
+  const outputDiv = container.querySelector('.output-content');
+  const execTimeSpan = container.querySelector('.execTime');
+  const codeExecutor = new CodeExecutor({
+    editor,
+    outputElement: outputDiv,
+    execTimeElement: execTimeSpan,
+    languageSelect: langSelect,
+    pythonURI,
+    javaURI,
+    fetchOptions,
+  });
+
+  // Set initial language selection
+  if (initialLang) {
+    langSelect.value = initialLang;
+  }
+
+  runner.bindEditorButtons({
+    resetValue: defaultCode || "print('Hello, world!')",
+    onClear: () => {
+      outputDiv.textContent = 'Storage cleared. Code reset to default.';
+      execTimeSpan.textContent = '';
+    }
+  });
+
+  // Font size changer
+  fontSizeSelect.addEventListener("change", () => {
+    const size = fontSizeSelect.value;
+    container.querySelector('.CodeMirror').style.fontSize = size + 'px';
+    editor.refresh();
+  });
+
+  // Language switcher
+  langSelect.addEventListener("change", () => {
+    const lang = langSelect.value;
+    if (lang === "python") {
+      editor.setOption("mode", "python");
+    } else if (lang === "java") {
+      editor.setOption("mode", "text/x-java");
+    } else if (lang === "javascript") {
+      editor.setOption("mode", "javascript");
+    }
+  });
+
+  codeExecutor.bindCopyOutput(container.querySelector('.copyOutputBtn'));
+
+  // Run button logic
+  function runCode() {
+    return codeExecutor.run();
+  }
+
+  runner.bindButton('.runBtn', runCode);
+
+  // Keyboard shortcut
+  runner.bindShortcut(runCode);
+})();
+</script>
+
+<p>Hint: use above code runners as examples, then edit them</p>
+
+
+    
+  </div><a class="u-url" href="/portfolio1/js/json" hidden></a>
+
+  <!-- Enhanced Analytics Tracking -->
+  <script type="module">
+    import { pythonURI, javaURI, fetchOptions } from '/portfolio1/assets/js/api/config.js';
+    window.pythonURI = pythonURI;
+    window.javaURI = javaURI;
+    window.fetchOptions = fetchOptions;
+  </script>
+  <script src="/portfolio1/assets/js/ocs-analytics-enhanced.js"></script>
+  <script src="/portfolio1/assets/js/code-runner-analytics.js"></script>
+  <script src="/portfolio1/assets/js/lesson-completion.js"></script>
+  <script src="/portfolio1/assets/js/lesson-completion-bigsix.js"></script>
+</article>
+
+
+                                </div>
+            </div>
+        </main><footer id="masterFooter" class="site-footer h-card">
+    <data class="u-url" href="/portfolio1/"></data>
+
+    <!-- <div class="wrapper">
+
+        <div class="social-links"><ul class="social-media-list"><li>
+    <a rel="me" href="" target="_blank" title="">
+      <span class="grey fa-brands fa- fa-lg"></span>
+    </a>
+  </li><li>
+    <a rel="me" href="" target="_blank" title="">
+      <span class="grey fa-brands fa- fa-lg"></span>
+    </a>
+  </li><li>
+    <a rel="me" href="" target="_blank" title="">
+      <span class="grey fa-brands fa- fa-lg"></span>
+    </a>
+  </li>
+  <li>
+    <a href="/portfolio1/feed.xml" target="_blank" title="Subscribe to syndication feed">
+      <svg class="svg-icon grey" viewbox="0 0 16 16">
+        <path d="M12.8 16C12.8 8.978 7.022 3.2 0 3.2V0c8.777 0 16 7.223 16 16h-3.2zM2.194
+          11.61c1.21 0 2.195.985 2.195 2.196 0 1.21-.99 2.194-2.2 2.194C.98 16 0 15.017 0
+          13.806c0-1.21.983-2.195 2.194-2.195zM10.606
+          16h-3.11c0-4.113-3.383-7.497-7.496-7.497v-3.11c5.818 0 10.606 4.79 10.606 10.607z"
+        />
+      </svg>
+    </a>
+  </li>
+</ul>
+</div>
+
+    </div> -->
+
+    <!--<p style="font-style: italic;">aesthetihawkc v3.0rc1.1</p>-->
+
+    <div class="footer-links">
+        <div class="footer-previous">
+            
+        </div>
+
+        <div class="footer-home">
+            
+        </div>
+
+        <div class="footer-next">
+            
+        </div>
+    </div>
+
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const style = getComputedStyle(document.documentElement);
+        const theme = style.getPropertyValue('--theme').trim() || "dark";
+        const panel = style.getPropertyValue('--panel-mid').trim() || "#0b1220";
+        const text = style.getPropertyValue('--pref-text-color').trim() || "#e6eef8";
+        const accent = style.getPropertyValue('--pref-accent-color').trim() || "#3b82f6";
+        const fontFamily = style.getPropertyValue('--pref-font-family').trim() || "Arial, sans-serif";
+        mermaid.initialize({ 
+            startOnLoad: false,
+            theme: theme,
+            securityLevel: 'loose',
+            themeVariables: {
+                background: panel,
+                primaryColor: panel,
+                primaryTextColor: text,
+                primaryBorderColor: accent,
+                lineColor: text,
+                arrowheadColor: text,
+                fontFamily: fontFamily
+            }
+        });
+        
+        // Convert fenced code blocks to mermaid divs
+        document.querySelectorAll('pre code.language-mermaid').forEach((block, index) => {
+            const content = block.textContent;
+            const wrapper = document.createElement('div');
+            wrapper.className = 'mermaid';
+            wrapper.id = 'mermaid-' + index;
+            wrapper.textContent = content;
+            block.parentElement.parentNode.replaceChild(wrapper, block.parentElement);
+        });
+        
+        mermaid.run();
+    });
+</script></body>
+</html>

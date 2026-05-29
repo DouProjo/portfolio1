@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Calendar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <!-- User preferences CSS (must come after Tailwind to override) and JS -->
+    <link rel="stylesheet" href="/portfolio1/assets/css/style.css">
+    <script src="/portfolio1/assets/js/user-preferences.js"></script>
+    <!--Keyboard Shortcuts (Alt+Shift+key navigation)-->
+    <script>window.baseurl = "/portfolio1";</script>
+    <script src="/portfolio1/assets/js/keyboard-shortcuts.js" defer></script>
+</head>
+
+
+<body class="min-h-screen flex flex-col flex-auto flex-shrink-0 transition-colors user-theme-root">
+    <!-- navbar --><head>
+    <title>Site Title</title>
+
+    <style>
+        .site-header {
+            backdrop-filter: blur(30px);
+            border-top: 0px solid;
+            border-bottom: 1px solid #404040;
+            background: rgba(50, 50, 50, 0.5);
+            font-weight: bold;
+            z-index: 999999999;
+        }
+
+        .site-nav {
+            background-color: transparent;
+        }
+
+        .site-nav .page-link:not(:last-child) {
+            margin-right: 0;
+        }
+
+        #loginArea {
+            margin-left: 20px;
+        }
+
+        .site-title,
+        .site-title:visited,
+        .site-nav,
+        .page-link {
+            font-weight: bolder;
+        }
+
+
+
+        /* Define a mixin for common dropdown styles */
+        /* Apply mixin to dropdown menus */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            z-index: 1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+            animation: scaleIn 0.3s ease forwards;
+        }
+
+        .dropdown .dropdown-content {
+            display: none;
+            position: fixed;
+            backdrop-filter: blur(30px);
+            background: rgba(50, 50, 50, 0.5);
+            border-radius: 8px;
+            box-shadow: 0px 8px 16px 0px black;
+            overflow: hidden;
+
+            text-align: left;
+            margin-top: -10px;
+            min-width: 140px;
+        }
+
+        .dropdown .dropdown-content a {
+            position: relative;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            color: #ecf0f1;
+            transition: color 0.3s ease, background-color 0.3s ease;
+            border-radius: 8px;
+
+            font-size: 14px;
+            margin-top: -18px;
+            text-align: left;
+        }
+
+        .dropdown .dropdown-content a::after {
+            position: absolute;
+            content: "";
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.5);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+            bottom: 0;
+        }
+
+        .dropdown .dropdown-content a:hover {
+            color: #95a5a6;
+            background-color: transparent;
+            border-radius: 8px;
+        }
+
+        .dropdown .dropdown-content a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .dropdownp1 {
+            position: relative;
+            display: inline-block;
+            z-index: 1;
+        }
+
+        .dropdownp1:hover .dropdown-content {
+            display: block;
+            animation: scaleIn 0.3s ease forwards;
+        }
+
+        .dropdownp1 .dropdown-content {
+            display: none;
+            position: fixed;
+            backdrop-filter: blur(30px);
+            background: rgba(50, 50, 50, 0.5);
+            border-radius: 8px;
+            box-shadow: 0px 8px 16px 0px black;
+            overflow: hidden;
+        }
+
+        .dropdownp1 .dropdown-content a {
+            position: relative;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            color: #ecf0f1;
+            transition: color 0.3s ease, background-color 0.3s ease;
+            border-radius: 8px;
+        }
+
+        .dropdownp1 .dropdown-content a::after {
+            position: absolute;
+            content: "";
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.5);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+            bottom: 0;
+        }
+
+        .dropdownp1 .dropdown-content a:hover {
+            color: #95a5a6;
+            background-color: transparent;
+            border-radius: 8px;
+        }
+
+        .dropdownp1 .dropdown-content a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .dropdownp2 {
+            position: relative;
+            display: inline-block;
+            z-index: 1;
+        }
+
+        .dropdownp2:hover .dropdown-content {
+            display: block;
+            animation: scaleIn 0.3s ease forwards;
+        }
+
+        .dropdownp2 .dropdown-content {
+            display: none;
+            position: fixed;
+            backdrop-filter: blur(30px);
+            background: rgba(50, 50, 50, 0.5);
+            border-radius: 8px;
+            box-shadow: 0px 8px 16px 0px black;
+            overflow: hidden;
+        }
+
+        .dropdownp2 .dropdown-content a {
+            position: relative;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            color: #ecf0f1;
+            transition: color 0.3s ease, background-color 0.3s ease;
+            border-radius: 8px;
+        }
+
+        .dropdownp2 .dropdown-content a::after {
+            position: absolute;
+            content: "";
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.5);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+            bottom: 0;
+        }
+
+        .dropdownp2 .dropdown-content a:hover {
+            color: #95a5a6;
+            background-color: transparent;
+            border-radius: 8px;
+        }
+
+        .dropdownp2 .dropdown-content a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .dropdownp3 {
+            position: relative;
+            display: inline-block;
+            z-index: 1;
+        }
+
+        .dropdownp3:hover .dropdown-content {
+            display: block;
+            animation: scaleIn 0.3s ease forwards;
+        }
+
+        .dropdownp3 .dropdown-content {
+            display: none;
+            position: fixed;
+            backdrop-filter: blur(30px);
+            background: rgba(50, 50, 50, 0.5);
+            border-radius: 8px;
+            box-shadow: 0px 8px 16px 0px black;
+            overflow: hidden;
+        }
+
+        .dropdownp3 .dropdown-content a {
+            position: relative;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            color: #ecf0f1;
+            transition: color 0.3s ease, background-color 0.3s ease;
+            border-radius: 8px;
+        }
+
+        .dropdownp3 .dropdown-content a::after {
+            position: absolute;
+            content: "";
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.5);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+            bottom: 0;
+        }
+
+        .dropdownp3 .dropdown-content a:hover {
+            color: #95a5a6;
+            background-color: transparent;
+            border-radius: 8px;
+        }
+
+        .dropdownp3 .dropdown-content a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .dropdownp4 {
+            position: relative;
+            display: inline-block;
+            z-index: 1;
+        }
+
+        .dropdownp4:hover .dropdown-content {
+            display: block;
+            animation: scaleIn 0.3s ease forwards;
+        }
+
+        .dropdownp4 .dropdown-content {
+            display: none;
+            position: fixed;
+            backdrop-filter: blur(30px);
+            background: rgba(50, 50, 50, 0.5);
+            border-radius: 8px;
+            box-shadow: 0px 8px 16px 0px black;
+            overflow: hidden;
+        }
+
+        .dropdownp4 .dropdown-content a {
+            position: relative;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            color: #ecf0f1;
+            transition: color 0.3s ease, background-color 0.3s ease;
+            border-radius: 8px;
+        }
+
+        .dropdownp4 .dropdown-content a::after {
+            position: absolute;
+            content: "";
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.5);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+            bottom: 0;
+        }
+
+        .dropdownp4 .dropdown-content a:hover {
+            color: #95a5a6;
+            background-color: transparent;
+            border-radius: 8px;
+        }
+
+        .dropdownp4 .dropdown-content a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        @keyframes scaleIn {
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .dropbtn {
+            text-decoration: underline;
+            font-weight: bold;
+        }
+
+
+        .wrapper {
+            max-width: calc(1000px - (30px));
+            margin-right: auto;
+            margin-left: auto;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+
+        #loginArea>a {
+            text-decoration: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .site-header {
+            border-bottom: 1px solid #404040;
+            min-height: 55.95px;
+            line-height: 54px;
+            position: fixed;
+            width: 100%;
+            top: 0px;
+        }
+
+        .site-title {
+            font-size: 1.625rem;
+            /* font-weight: 300; */
+            letter-spacing: -1px;
+            margin-bottom: 0;
+            float: left;
+            font-weight: bold;
+        }
+
+        @media screen and (max-width: fit-content) {
+            .site-title {
+                padding-right: 45px;
+            }
+        }
+
+        .site-header .wrapper {
+            max-width: fit-content !important;
+        }
+
+        .site-title,
+        .site-title:visited {
+            color: white;
+        }
+
+        .site-nav {
+            position: absolute;
+            top: 9px;
+            right: 15px;
+            background-color: #181818;
+            border: 1px solid #404040;
+            border-radius: 5px;
+            text-align: right;
+        }
+
+        .site-nav .nav-trigger {
+            display: none;
+        }
+
+        .site-nav .menu-icon {
+            float: right;
+            width: 36px;
+            height: 26px;
+            line-height: 0;
+            padding-top: 10px;
+            text-align: center;
+        }
+
+        .site-nav .menu-icon>svg path {
+            fill: #999999;
+        }
+
+        .site-nav label[for="nav-trigger"] {
+            display: block;
+            float: right;
+            width: 36px;
+            height: 36px;
+            z-index: 2;
+            cursor: pointer;
+        }
+
+        .site-nav input~.trigger {
+            clear: both;
+            display: none;
+        }
+
+        .site-nav input:checked~.trigger {
+            display: block;
+            padding-bottom: 5px;
+        }
+
+        .site-nav .page-link {
+            line-height: 1.5;
+            display: block;
+            padding: 5px 10px;
+            margin-left: 20px;
+        }
+
+        .site-nav .page-link:not(:last-child) {
+            margin-right: 0;
+        }
+
+        @media screen and (min-width: 1000px) {
+            .site-nav {
+                position: static;
+                float: right;
+                border: none;
+                background-color: inherit;
+            }
+
+            .site-nav label[for="nav-trigger"] {
+                display: none;
+            }
+
+            .site-nav .menu-icon {
+                display: none;
+            }
+
+            .site-nav input~.trigger {
+                display: block;
+            }
+
+            .site-nav .page-link {
+                display: inline;
+                padding: 0;
+                margin-left: auto;
+            }
+
+            .site-nav .page-link:not(:last-child) {
+                margin-left: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="wrapper"><a class="site-title" rel="author" href="/portfolio1/" data-value="Open Coding">
+                <img src="/portfolio1/images/logo.png" alt="Logo" style="height: 40px; vertical-align: middle; margin-right: 10px;">
+            </a><nav class="site-nav">
+                <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+                <label for="nav-trigger">
+                    <span class="menu-icon">
+                        <svg viewBox="0 0 18 15" width="18px" height="15px">
+                            <path
+                                d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z" />
+                        </svg>
+                    </span>
+                </label>
+
+                <div class="trigger"><a class="page-link" href="/portfolio1/blogs/">Blogs</a><a class="page-link" href="/portfolio1/search/">Search</a><a class="page-link" href="/portfolio1/about/">About</a><a id="loginArea" href="/portfolio1/login">Login</a>
+                </div>
+            </nav></div>
+    </header>
+
+    <script type="module" src="/portfolio1/assets/js/api/login.js"></script>
+</body><div class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased mt-[53px] theme-inner">
+
+        <!-- Sidebar -->
+        <div class="fixed left-0 top-[53px] w-64 h-full border-r flex flex-col lesson-sidebar">
+
+            <!-- welcome section 
+            <div class="p-6 flex flex-col items-center bg-neutral-800">
+                <h2 class="text-lg font-semibold text-center mb-6" id="sidebarWelcome">Welcome. Please log in.</h2>
+            </div>
+            -->
+
+            <!-- Scrollable menu section -->
+            <div class="overflow-y-auto flex-grow">
+                <!-- sidebar menu --><ul class="flex flex-col py-4 space-y-1">
+  
+    <li class="px-5">
+      <div class="flex flex-row items-center h-8">
+        <div class="text-sm font-light tracking-wide text-neutral-500">Menu</div>
+      </div>
+    </li>
+
+    
+    
+      
+      <li>
+        <a id="sidebar-profile" href="/portfolio1/profile"
+           class="nav-item relative flex flex-row items-center h-11 focus:outline-none pr-6 border-l-4
+           
+             text-neutral-600 border-transparent hover:text-neutral-50 hover:border-indigo-500
+           ">
+          <span class="inline-flex justify-center items-center ml-4">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                 xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+      d="M10 19H5a1 1 0 0 1-1-1v-1a3 3 0 0 1 3-3h2m10 1a3 3 0 0 1-3 3m3-3a3 3 0 0 0-3-3m3 3h1m-4 3a3 3 0 0 1-3-3m3 3v1m-3-4a3 3 0 0 1 3-3m-3 3h-1m4-3v-1m-2.121 1.879-.707-.707m5.656 5.656-.707-.707m-4.242 0-.707.707m5.656-5.656-.707.707M12 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+
+            </svg>
+          </span>
+          <span class="ml-2 text-sm tracking-wide truncate">Profile</span>
+        </a>
+      </li>
+    
+      
+      <li>
+        <a id="sidebar-dashboard" href="/portfolio1/dashboard"
+           class="nav-item relative flex flex-row items-center h-11 focus:outline-none pr-6 border-l-4
+           
+             text-neutral-600 border-transparent hover:text-neutral-50 hover:border-indigo-500
+           ">
+          <span class="inline-flex justify-center items-center ml-4">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                 xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+      d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+
+            </svg>
+          </span>
+          <span class="ml-2 text-sm tracking-wide truncate">Dashboard/Preferences</span>
+        </a>
+      </li>
+    
+      
+      <li>
+        <a id="sidebar-analytics" href="/portfolio1/analytics-dashboard"
+           class="nav-item relative flex flex-row items-center h-11 focus:outline-none pr-6 border-l-4
+           
+             text-neutral-600 border-transparent hover:text-neutral-50 hover:border-indigo-500
+           ">
+          <span class="inline-flex justify-center items-center ml-4">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                 xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+      d="M9 19v-6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2zm0 0V9a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v10m-6 0a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2m0 0V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2z"/>
+            </svg>
+          </span>
+          <span class="ml-2 text-sm tracking-wide truncate">Analytics Dashboard</span>
+        </a>
+      </li>
+    
+  
+</ul>
+</div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="ml-64 p-8 lesson-main">
+            <div class="flex justify-between items-center mb-8">
+                <h1 class="text-2xl font-bold">Calendar</h1>
+            </div>
+
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css" />
+
+<!-- Tailwind CSS CDN -->
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+
+<!-- FullCalendar Container -->
+<div id="calendar" class="box-border z-0"></div>
+<!-- Modal -->
+<div id="eventModal" class="fixed z-[99999] inset-0 flex items-center justify-center bg-black bg-opacity-70 backdrop-blur-sm pt-12 hidden">
+    <div class="relative bg-gray-900 mx-auto my-12 p-8 rounded-2xl shadow-2xl max-w-xl min-h-fit w-full text-white font-sans modal-content">
+        <span class="text-gray-400 absolute right-8 top-6 text-3xl font-bold cursor-pointer transition-colors duration-300 hover:text-red-600" id="closeModal">&times;</span>
+        <div class="modal-body">
+            <h2 id="eventTitle" class="text-white text-4xl font-bold mb-6"></h2>
+            <label for="editDate" class="block mt-2 mb-1 text-lg font-semibold">Date:</label>
+            <p id="editDateDisplay" contenteditable="false" class="w-full p-3 rounded-xl border border-gray-700 text-base bg-gray-800 text-white box-border mb-4"></p>
+            <input type="date" id="editDate" style="display: none;" class="w-full p-3 rounded-xl border border-gray-700 text-base bg-gray-800 text-white box-border mb-4" />
+            <label for="editTitle" class="block mt-2 mb-1 text-lg font-semibold">Title:</label>
+            <p id="editTitle" contenteditable="false" class="w-full p-3 rounded-xl border border-gray-700 text-base bg-gray-800 text-white box-border mb-4"></p>
+            <label for="editDescription" class="block mt-2 mb-1 text-lg font-semibold">Description:</label>
+            <p id="editDescription" contenteditable="false" class="w-full p-3 rounded-xl border border-gray-700 text-base bg-gray-800 text-white box-border mb-4 whitespace-pre-wrap"></p>
+        <div class="modal-actions">
+            <button id="saveButton" class="w-full p-3 bg-red-700 text-white rounded-xl text-base font-bold cursor-pointer transition duration-200 hover:bg-red-900 mt-2 hidden">Save Changes</button>
+            <button id="deleteButton" class="w-full p-3 bg-red-700 text-white rounded-xl text-base font-bold cursor-pointer transition duration-200 hover:bg-red-900 mt-2">Delete Event</button>
+            <button id="editButton" class="w-full p-3 bg-red-700 text-white rounded-xl text-base font-bold cursor-pointer transition duration-200 hover:bg-red-900 mt-2">Edit Event</button>
+        </div>
+    </div>
+</div>
+<!-- FullCalendar JS -->
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>
+<script type="module">
+    import { javaURI, fetchOptions } from '/portfolio1/assets/js/api/config.js';
+    let allEvents = []; // Global array to store all events
+    let currentFilter = null; // Track the current filter
+    document.addEventListener("DOMContentLoaded", function () {
+        let currentEvent = null;
+        let isAddingNewEvent = false;
+        let calendar;
+        function request() {
+            return fetch(`${javaURI}/api/calendar/events`, fetchOptions)
+                .then(response => {
+                    if (response.status !== 200) {
+                        console.error("HTTP status code: " + response.status);
+                        return null;
+                    }
+                    return response.json();
+                })
+                .catch(error => {
+                    console.error("Fetch error: ", error);
+                    return null;
+                });
+        }
+        function getAssignments() {
+            return fetch(`${javaURI}/api/assignments/`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .catch(error => {
+                    console.error("Error fetching assignments:", error);
+                    return null;
+                });
+        }
+        function handleRequest() {
+            Promise.all([request(), getAssignments()])
+                .then(([calendarEvents, assignments]) => {
+                    allEvents = []; // Reset allEvents
+                    if (calendarEvents !== null) {
+                        calendarEvents.forEach(event => {
+                            try {
+                                let color = "#808080";
+                                if (event.class == "CSP") {
+                                    color = "#3788d8";
+                                } else if (event.class == "CSSE") {
+                                    color = "#008000";
+                                }
+                                allEvents.push({
+                                    id: event.id,
+                                    period: event.period,
+                                    //type: event.type,
+                                    title: event.title.replace(/\(P[13]\)/gi, ""),
+                                    description: event.description,
+                                    start: event.date,
+                                    color: color
+                                });
+                            } catch (err) {
+                                console.error("Error loading calendar event:", event, err);
+                            }
+                        });
+                    }
+                    if (assignments !== null) {
+                        assignments.forEach(assignment => {
+                            try {
+                                const [month, day, year] = assignment.dueDate.split('/');
+                                const dueDate = new Date(year, month - 1, day).getTime();
+                                allEvents.push({
+                                    id: assignment.id,
+                                    title: assignment.name,
+                                    description: assignment.description,
+                                    start: formatDate(dueDate),
+                                    color: "#FFA500"
+                                });
+                            } catch (err) {
+                                console.error("Error loading assignment:", assignment, err);
+                            }
+                        });
+                    }
+                    displayCalendar(filterEventsByClass(currentFilter)); // Display filtered events
+                });
+        }
+        function displayCalendar(events) {
+            const calendarEl = document.getElementById('calendar');
+            if (calendar) {
+                calendar.destroy(); // Destroy the existing calendar instance
+            }
+            calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: 'prev,next today allButton,csaButton,cspButton,csseButton',
+                    center: 'title',
+                    right: 'dayGridMonth,dayGridWeek,dayGridDay'
+                },
+                customButtons: {
+                    allButton: {
+                        text: 'All',
+                        click: function () {
+                            currentFilter = null;
+                            displayCalendar(filterEventsByClass(currentFilter));
+                        }
+                    },
+                    csaButton: {
+                        text: 'CSA',
+                        click: function () {
+                            currentFilter = "CSA";
+                            displayCalendar(filterEventsByClass(currentFilter));
+                        }
+                    },
+                    cspButton: {
+                        text: 'CSP',
+                        click: function () {
+                            currentFilter = "CSP";
+                            displayCalendar(filterEventsByClass(currentFilter));
+                        }
+                    },
+                    csseButton: {
+                        text: 'CSSE',
+                        click: function () {
+                            currentFilter = "CSSE";
+                            displayCalendar(filterEventsByClass(currentFilter));
+                        }
+                    }
+                },
+                views: {
+                    dayGridMonth: { buttonText: 'Month' },
+                    dayGridWeek: { buttonText: 'Week' },
+                    dayGridDay: { buttonText: 'Day' }
+                },
+                events: events,
+                eventClick: function (info) {
+                    document.getElementById("saveButton").style.display = "none";
+                    currentEvent = info.event;
+                    document.getElementById('eventTitle').textContent = currentEvent.title;
+                    document.getElementById('editTitle').innerHTML = currentEvent.title;
+                    document.getElementById('editDescription').innerHTML = slackToHtml(currentEvent.extendedProps.description || "");
+                    document.getElementById('editDateDisplay').textContent = formatDisplayDate(currentEvent.start);
+                    document.getElementById('editDate').value = formatDate(currentEvent.start);
+                    document.getElementById("eventModal").style.display = "block";
+                    document.getElementById("deleteButton").style.display = "inline-block";
+                    document.getElementById("editButton").style.display = "inline-block";
+                },
+                dateClick: function (info) {
+                    isAddingNewEvent = true;
+                    document.getElementById("eventTitle").textContent = "Add New Event";
+                    document.getElementById("editTitle").innerHTML = "";
+                    document.getElementById("editDescription").innerHTML = "";
+                    document.getElementById("editDescription").contentEditable = true;
+                    document.getElementById("editTitle").contentEditable = true;
+                    document.getElementById('editDateDisplay').textContent = formatDisplayDate(info.date);
+                    document.getElementById('editDate').value = formatDate(info.date);
+                    document.getElementById("eventModal").style.display = "block";
+                    document.getElementById("deleteButton").style.display = "none";
+                    document.getElementById("editButton").style.display = "none";
+                    document.getElementById("saveButton").style.display = "inline-block";
+                    document.getElementById("saveButton").onclick = function () {
+                        const updatedTitle = document.getElementById("editTitle").innerHTML.trim();
+                        const updatedDescription = document.getElementById("editDescription").innerHTML;
+                        const updatedDate = document.getElementById("editDate").value;
+                        if (!updatedTitle || !updatedDescription || !updatedDate) {
+                            alert("Title, Description, and Date cannot be empty!");
+                            return;
+                        }
+                        const newEventPayload = {
+                            title: updatedTitle,
+                            description: updatedDescription,
+                            date: updatedDate,
+                            period: currentFilter, // Event class (CSA, CSP, CSSE)
+                        };
+                        const newEvent = {
+                            id: Date.now().toString(), // Generate a unique ID
+                            title: updatedTitle,
+                            description: updatedDescription,
+                            start: updatedDate,
+                            period: currentFilter, // Assign the current filter (CSA, CSP, CSSE)
+                            color: "#808080"
+                        };
+                        allEvents.push(newEvent); // Add to allEvents
+                        displayCalendar(filterEventsByClass(currentFilter)); // Refresh calendar
+                        document.getElementById("eventModal").style.display = "none";
+                        fetch(`${javaURI}/api/calendar/add_event`, {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify(newEventPayload),
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(`Failed to add new event: ${response.status} ${response.statusText}`);
+                            }
+                            return response.json();
+                        })
+                        .then(() => {
+                            // Re-fetch events from the backend to ensure the calendar is up-to-date
+                            handleRequest();
+                            document.getElementById("eventModal").style.display = "none";
+                        })
+                        .catch(error => {
+                            console.error("Error adding event:", error);
+                        });
+                    };
+                },
+                eventMouseEnter: function (info) {
+                    const tooltip = document.createElement('div');
+                    tooltip.className = 'event-tooltip';
+                    tooltip.innerHTML = `<strong>${info.event.title}</strong><br>${info.event.extendedProps.description || ''}`;
+                    document.body.appendChild(tooltip);
+                    tooltip.style.left = info.jsEvent.pageX + 'px';
+                    tooltip.style.top = info.jsEvent.pageY + 'px';
+                },
+                eventMouseLeave: function () {
+                    const tooltips = document.querySelectorAll('.event-tooltip');
+                    tooltips.forEach(tooltip => tooltip.remove());
+                }
+            });
+            calendar.render();
+        }
+        function filterEventsByClass(className) {
+            if (!className) return allEvents; // If no filter is applied, return all events
+            return allEvents.filter(event => event.period === className);
+        }
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toISOString().split("T")[0];
+        }
+        document.getElementById("closeModal").onclick = function () {
+            document.getElementById('editDateDisplay').style.display = 'block';
+            document.getElementById('editDateDisplay').style.display = 'block';
+            document.getElementById('editDate').style.display = 'none';
+            document.getElementById("saveButton").style.display = "none";
+            document.getElementById("eventModal").style.display = "none";
+            document.getElementById("editTitle").contentEditable = false;
+            document.getElementById("editDescription").contentEditable = false;
+            document.getElementById("eventModal").style.display = "none";
+        };
+        document.getElementById("saveButton").onclick = function () {
+            const updatedTitle = document.getElementById("editTitle").innerHTML.trim();
+            const updatedDescription = document.getElementById("editDescription").innerHTML;
+            const updatedDate = document.getElementById("editDate").value;
+            document.getElementById("saveButton").style.display = "none";
+            document.getElementById('editDateDisplay').style.display = 'block';
+            document.getElementById('editDate').style.display = 'none';
+            document.getElementById('editDateDisplay').textContent = formatDisplayDate(new Date(updatedDate));
+            document.getElementById("editDescription").contentEditable = false;
+            if (!updatedTitle || !updatedDescription || !updatedDate) {
+                alert("Title, Description, and Date cannot be empty!");
+                return;
+            }
+            if (isAddingNewEvent) {
+                const newEventPayload = {
+                    title: updatedTitle,
+                    description: updatedDescription,
+                    date: updatedDate,
+                    period: currentFilter, // Event class (CSA, CSP, CSSE)
+                };
+                fetch(`${javaURI}/api/calendar/add_event`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(newEventPayload),
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Failed to add new event: ${response.status} ${response.statusText}`);
+                    }
+                    return response.json(); // Parse the response JSON if needed
+                })
+                .then(newEvent => {
+                    calendar.addEvent({
+                        id: newEvent.id,
+                        title: newEvent.title,
+                        start: newEvent.date,
+                        description: newEvent.description,
+                        color: newEvent.color || "#808080",
+                    });
+                    document.getElementById("eventModal").style.display = "none";
+                })
+                .catch(error => {
+                    console.warn("Error adding event to Slack:", error);
+                    alert("This event has been added to the calendar but could not be updated in Slack.");
+                    calendar.addEvent({
+                        title: updatedTitle,
+                        start: updatedDate,
+                        description: updatedDescription,
+                        color: "#808080"
+                    });
+                    document.getElementById("eventModal").style.display = "none";
+                });
+            } else {
+                const payload = { newTitle: updatedTitle, description: updatedDescription, date: updatedDate };
+                const id = currentEvent.id;
+                fetch(`${javaURI}/api/calendar/edit/${id}`, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload),
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Failed to update event: ${response.status} ${response.statusText}`);
+                    }
+                    return response.text();
+                })
+                .then(() => {
+                    currentEvent.setProp("title", updatedTitle);
+                    currentEvent.setExtendedProp("description", updatedDescription);
+                    currentEvent.setStart(updatedDate);
+                    document.getElementById("eventModal").style.display = "none";
+                })
+                .catch(error => {
+                    console.warn("Error updating event in Slack:", error);
+                    alert("This event has been updated in the calendar but could not be updated in Slack.");
+                    currentEvent.setProp("title", updatedTitle);
+                    currentEvent.setExtendedProp("description", updatedDescription);
+                    currentEvent.setStart(updatedDate);
+                    document.getElementById("eventModal").style.display = "none";
+                });
+            }
+        };
+        document.getElementById("editButton").onclick = function () {
+            document.getElementById('editDateDisplay').style.display = 'none';
+            document.getElementById('editDate').style.display = 'block';
+            document.getElementById("deleteButton").style.display = 'none';
+            document.getElementById("saveButton").style.display = 'inline-block';
+            document.getElementById("editDescription").contentEditable = true;
+            document.getElementById("editTitle").contentEditable = true;
+            console.log(currentEvent.extendedProps.description || "");
+            document.getElementById("editDescription").innerHTML = currentEvent.extendedProps.description || "";
+        };
+        document.getElementById("deleteButton").onclick = function () {
+            if (!currentEvent) return;
+            const id = currentEvent.id;
+            const confirmation = confirm(`Are you sure you want to delete "${currentEvent.title}"?`);
+            if (!confirmation) return;
+            fetch(`${javaURI}/api/calendar/delete/${id}`, {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Failed to delete event: ${response.status} ${response.statusText}`);
+                }
+                return response.text();
+            })
+            .then(() => {
+                currentEvent.remove();
+                document.getElementById("eventModal").style.display = "none";
+            })
+            .catch(error => {
+                console.error("Error deleting event:", error);
+                alert("This event has been removed from the calendar but could not be deleted from Slack.");
+                currentEvent.remove();
+                document.getElementById("eventModal").style.display = "none";
+            });
+        };
+        handleRequest();
+    });
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+            document.getElementById('editDateDisplay').style.display = 'block';
+            document.getElementById('editDate').style.display = 'none';
+            document.getElementById("saveButton").style.display = "none";
+            document.getElementById("eventModal").style.display = "none";
+            document.getElementById("editTitle").contentEditable = false;
+            document.getElementById("editDescription").contentEditable = false;
+        }
+    });
+    window.onclick = function (event) {
+        const modal = document.getElementById("eventModal");
+        if (event.target === modal) {
+            document.getElementById('editDateDisplay').style.display = 'block';
+            document.getElementById('editDate').style.display = 'none';
+            document.getElementById("saveButton").style.display = "none";
+            document.getElementById("eventModal").style.display = "none";
+            document.getElementById("editTitle").contentEditable = false;
+            document.getElementById("editDescription").contentEditable = false;
+            modal.style.display = "none";
+        }
+    };
+    function slackToHtml(text) {
+        if (!text) return '';
+        // First pass - handle code blocks to prevent their content from being processed
+        let processed = text;
+        const codeBlocks = [];
+        processed = processed.replace(/```([\s\S]*?)```/g, (match, content) => {
+            codeBlocks.push(content);
+            return `%%CODEBLOCK${codeBlocks.length-1}%%`;
+        });
+        // Second pass - handle inline code
+        const inlineCodes = [];
+        processed = processed.replace(/`([^`]+)`/g, (match, content) => {
+            inlineCodes.push(content);
+            return `%%INLINECODE${inlineCodes.length-1}%%`;
+        })
+        // Third pass - handle links
+        const links = [];
+        processed = processed.replace(/<((https?|ftp|mailto):[^|>]+)(?:\|([^>]+))?>/g, (match, url, protocol, text) => {
+            const linkText = text || url;
+            links.push({url, linkText});
+            return `%%LINK${links.length-1}%%`;
+        });
+        // Process formatting (bold, italic, strikethrough) with nesting support
+        processed = processed
+            .replace(/(\*)([^*]+)\1/g, '<strong>$2</strong>')
+            .replace(/(_)([^_]+)\1/g, '<em>$2</em>')
+            .replace(/(~)([^~]+)\1/g, '<del>$2</del>');
+        // Restore code blocks
+        processed = processed.replace(/%%CODEBLOCK(\d+)%%/g, (match, index) => {
+            return `<pre><code>${escapeHtml(codeBlocks[index])}</code></pre>`;
+        });
+        // Restore inline code
+        processed = processed.replace(/%%INLINECODE(\d+)%%/g, (match, index) => {
+            return `<code>${escapeHtml(inlineCodes[index])}</code>`;
+        });
+        // Restore links
+        processed = processed.replace(/%%LINK(\d+)%%/g, (match, index) => {
+            const {url, linkText} = links[index];
+            return `<a href="${escapeHtml(url)}" target="_blank" rel="noopener">${escapeHtml(linkText)}</a>`;
+        });
+        // Convert newlines to <br> and preserve multiple newlines
+        processed = processed.replace(/\n/g, '<br>');
+        return processed;
+    }
+    // Helper function to escape HTML special characters
+    function escapeHtml(unsafe) {
+        if (!unsafe) return '';
+        return unsafe
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+    function formatDisplayDate(dateString) {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('en-US', { 
+            weekday: 'long', 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+        });
+    }
+</script>
+</div>
+
+        </div>
+    </div>
+</body>
+
+</html>
+
+
+<!-- set active sidebar tab -->
+<script type="module">
+    // tmport handlelogout from external file and attach to window for onclick usage
+    import { handleLogout } from '/portfolio1/assets/js/api/logout.js';
+    window.handleLogout = handleLogout;
+</script>
