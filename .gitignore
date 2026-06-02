@@ -88,5 +88,5 @@ _notebooks/**/*_content.md
 # Allow tracking of specific project notebooks that are hand-edited
 #! By default `_notebooks/projects/` is ignored (auto-generated).
 #! Add explicit exceptions for instructor-edited project notebooks below.
-!_notebooks/projects/CS111 Review/
-!_notebooks/projects/CS111 Review/CS111-Interactive-Demo.md
+ !_notebooks/projects/CSSE111 Review/
+ !_notebooks/projects/CSSE111 Review/CS111-Interactive-Demo.md
